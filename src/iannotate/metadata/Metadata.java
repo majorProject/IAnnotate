@@ -4,10 +4,15 @@
  */
 package iannotate.metadata;
 
+import com.drew.imaging.ImageProcessingException;
+import com.drew.metadata.MetadataException;
+import java.io.File;
+import java.io.IOException;
+
 /**
  *
  * @author susan
  */
-public class Metadata {
+public class Metadata{ 
     
 }

@@ -129,6 +129,7 @@ public class EXIFMetadataExtractor {
     /**
      * This returns the image digitized time of creation
      * @return original digitized time of image
+     * @throws MetadataException 
      */
     public String getImageDigitizedTime() throws MetadataException{
         String dateTime = directory.getDescription(ExifSubIFDDirectory.TAG_DATETIME_DIGITIZED);
