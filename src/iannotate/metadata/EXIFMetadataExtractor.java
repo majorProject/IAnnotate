@@ -26,7 +26,7 @@ public class EXIFMetadataExtractor {
     private ExifSubIFDDirectory directory = null;
     
     //constructor without any parameter
-    EXIFMetadataExtractor(){
+    public EXIFMetadataExtractor(){
     }
     
     //constructor with parameter
@@ -36,7 +36,7 @@ public class EXIFMetadataExtractor {
      * @throws ImageProcessingException
      * @throws IOException 
      */
-   EXIFMetadataExtractor(File jpegFile) throws ImageProcessingException, IOException{
+   public EXIFMetadataExtractor(File jpegFile) throws ImageProcessingException, IOException{
         this.metadata = ImageMetadataReader.readMetadata(jpegFile);
         this.directory = (ExifSubIFDDirectory) metadata.getDirectory(ExifSubIFDDirectory.class);
     }
