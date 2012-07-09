@@ -6,6 +6,9 @@ package iannotate.gui;
 
 import iannotate.database.DbInterface;
 import iannotate.database.SqlQuery;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -13,6 +16,8 @@ import iannotate.database.SqlQuery;
  */
 public class SignUp extends javax.swing.JFrame {
 
+    static public LogInForm log = new LogInForm();
+    static public MainFrame mainF = new MainFrame();
     static public SignUp sign = new SignUp();
     /**
      * Creates new form SignUp
@@ -31,9 +36,6 @@ public class SignUp extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        buttonGroup2 = new javax.swing.ButtonGroup();
-        buttonGroup3 = new javax.swing.ButtonGroup();
-        buttonGroup4 = new javax.swing.ButtonGroup();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         userNameLabel = new javax.swing.JLabel();
         passWordLabel = new javax.swing.JLabel();
@@ -50,7 +52,11 @@ public class SignUp extends javax.swing.JFrame {
         MaleRadioButton = new javax.swing.JRadioButton();
         FemaleRadioButton = new javax.swing.JRadioButton();
         sexLabel = new javax.swing.JLabel();
+        passErrorLabel = new javax.swing.JLabel();
+        userErrorLabel = new javax.swing.JLabel();
         save = new javax.swing.JButton();
+        executeLabel = new javax.swing.JLabel();
+        doneButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -106,10 +112,26 @@ public class SignUp extends javax.swing.JFrame {
         sexLabel.setBounds(0, 280, 100, 30);
         jLayeredPane1.add(sexLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
+        passErrorLabel.setForeground(new java.awt.Color(255, 0, 0));
+        passErrorLabel.setBounds(280, 120, 220, 30);
+        jLayeredPane1.add(passErrorLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        userErrorLabel.setForeground(new java.awt.Color(255, 0, 0));
+        userErrorLabel.setBounds(270, 40, 220, 30);
+        jLayeredPane1.add(userErrorLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         save.setText("Save");
         save.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveActionPerformed(evt);
+            }
+        });
+
+        doneButton.setVisible(false);
+        doneButton.setText("Finish");
+        doneButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                doneButtonActionPerformed(evt);
             }
         });
 
@@ -122,19 +144,28 @@ public class SignUp extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(save)
-                        .addGap(0, 313, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addGap(27, 27, 27)
+                        .addComponent(executeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(doneButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(65, Short.MAX_VALUE)
+                .addGap(65, 65, 65)
                 .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(save)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(save, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                        .addComponent(executeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(doneButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -144,11 +175,71 @@ public class SignUp extends javax.swing.JFrame {
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
         // TODO add your handling code here:
         
-         DbInterface[] db = new DbInterface[1];
+         DbInterface[] db = new DbInterface[2];
          db[0] = new SqlQuery("major_project");
          
          
+         String sex;
+         
+         
+         String user = userName.getText().toString();
+        try {
+            if( user.contentEquals(db[0].fetch().getString(2))){
+                      userErrorLabel.setText("*"+user + " is already taken");
+                       
+            }
+//            else
+//                 db[] = new SqlQuery("major_project");
+        } catch (SQLException ex) {
+            Logger.getLogger(SignUp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         
+         char[] pass = passWord.getPassword();
+         String passString = String.valueOf(pass);
+         char[] rePass1 = passWord.getPassword();
+         String rePass1String = String.valueOf(rePass1);
+         if(!passString.contentEquals(rePass1String))
+         {   passErrorLabel.setText("password do not match");
+             System.out.println("pass check");
+         }
+         
+         if(MaleRadioButton.isSelected())             
+             sex = "male";
+         else
+             sex = "female";
+         
+         double num = contact.getText().hashCode();
+         String addr = address.getText().toString();
+         String date = dob.getText().toString();
+         
+         
+       boolean r = false;
+             
+        try {
+            
+                     
+            if( !( user.contentEquals( db[0].fetch().getString(2) ) ) ) 
+            {   if(passString.contentEquals(rePass1String))
+                r = db[0].insertInto( user, passString, sex, num, addr, date);
+                executeLabel.setText("Congratulations your acoount has been created");
+                doneButton.setVisible(true);
+            }
+        }//end try
+        catch (SQLException ex) {
+            Logger.getLogger(SignUp.class.getName()).log(Level.SEVERE, null, ex);
+        }//end catch
+       
+    
+         
+             
+ ////        
     }//GEN-LAST:event_saveActionPerformed
+
+    private void doneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doneButtonActionPerformed
+        // TODO add your handling code here:
+        sign.setVisible(false);
+        log.setVisible(true);
+    }//GEN-LAST:event_doneButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -197,20 +288,21 @@ public class SignUp extends javax.swing.JFrame {
     private javax.swing.JTextField address;
     private javax.swing.JLabel addressLabel;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.ButtonGroup buttonGroup3;
-    private javax.swing.ButtonGroup buttonGroup4;
     private javax.swing.JTextField contact;
     private javax.swing.JLabel contactLabel;
     private javax.swing.JTextField dob;
     private javax.swing.JLabel dobLabel;
+    private javax.swing.JButton doneButton;
+    private javax.swing.JLabel executeLabel;
     private javax.swing.JLayeredPane jLayeredPane1;
+    private javax.swing.JLabel passErrorLabel;
     private javax.swing.JPasswordField passWord;
     private javax.swing.JLabel passWordLabel;
     private javax.swing.JPasswordField rePass;
     private javax.swing.JLabel rePassLabel;
     private javax.swing.JButton save;
     private javax.swing.JLabel sexLabel;
+    private javax.swing.JLabel userErrorLabel;
     private javax.swing.JTextField userName;
     private javax.swing.JLabel userNameLabel;
     // End of variables declaration//GEN-END:variables

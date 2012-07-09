@@ -48,19 +48,28 @@ public class SqlQuery implements DbInterface {
     
      //method insert
     @Override
-    public boolean insertInto( String userName, String passWord, int age, String sex, String contact ) throws SQLException{
-       PreparedStatement insert = connection.prepareStatement(
-            "INSERT INTO user( username, password, age , sex , contact)" +
-            "VALUES(?, ?, ? , ? , ? )");
+    public boolean insertInto( String userName, String passWord, String sex, double contact, String address, String dob ) throws SQLException{
+       PreparedStatement insertUser = connection.prepareStatement(
+            "INSERT INTO user( username, password )" +
+            "VALUES( ?, ? )");
        
-       insert.setString( 1, userName );
-       insert.setString( 2, passWord );
-       insert.setInt( 3, age );
-       insert.setString( 4, sex );
-       insert.setString( 5, contact );
+       insertUser.setString( 1, userName );
+       insertUser.setString( 2, passWord );
        
-     boolean r = insert.execute();
-     return r;
+       boolean r = insertUser.execute();
+
+       int userId = fetch(userName).getInt(1);
+       PreparedStatement insertPerson =  connection.prepareStatement(
+               "INSERT INTO person( sex , contact, address, dob, user_id) " +
+               "VALUES ( ?, ?, ?, ?, ? ) ");
+       insertPerson.setString( 1, sex );
+       insertPerson.setDouble( 2, contact );
+       insertPerson.setString( 3, address );
+       insertPerson.setString( 4, dob );
+       insertPerson.setInt(5, userId);
+     
+     boolean r2 = insertPerson.execute();
+     return r2;
     
     }// end insertInto
     
@@ -103,17 +112,36 @@ public class SqlQuery implements DbInterface {
       return resultSet;
      }
        
-      resultSet.close();
-     fetchus.close();
+     // resultSet.close();
+   //  fetchus.close();
     
      return resultSet;
     }//end fetch
+    
+   @Override
+    public ResultSet fetch() throws SQLException{
+        
+        PreparedStatement fetchus = connection.prepareStatement(
+            "SELECT * FROM user ");
+         resultSet = fetchus.executeQuery();
+          
+     while(resultSet.next()){
+      return resultSet;
+     }
+       
+      resultSet.close();
+    fetchus.close();
+    
+     return resultSet;
+    }//end fetch  
+    
+    
     
     @Override
     public boolean authentication(String username, String password) {
         try {
             ResultSet pass = fetch(username);
-            if(pass.getString(2).equalsIgnoreCase(password)){
+            if(pass.getString(3).contentEquals(password)){
               return true;}
             else{
               return false;}
