@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 public class SignUp extends javax.swing.JFrame {
 
     static public LogInForm log = new LogInForm();
-    static public MainFrame mainF = new MainFrame();
+    //static public MainFrame mainF = new MainFrame();
     static public SignUp sign = new SignUp();
     /**
      * Creates new form SignUp
@@ -198,6 +198,7 @@ public class SignUp extends javax.swing.JFrame {
          String passString = String.valueOf(pass);
          char[] rePass1 = passWord.getPassword();
          String rePass1String = String.valueOf(rePass1);
+         
          if(!passString.contentEquals(rePass1String))
          {   passErrorLabel.setText("password do not match");
              System.out.println("pass check");
@@ -237,7 +238,8 @@ public class SignUp extends javax.swing.JFrame {
 
     private void doneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doneButtonActionPerformed
         // TODO add your handling code here:
-        sign.setVisible(false);
+        
+        sign.dispose();
         log.setVisible(true);
     }//GEN-LAST:event_doneButtonActionPerformed
 
@@ -277,8 +279,9 @@ public class SignUp extends javax.swing.JFrame {
          */
         java.awt.EventQueue.invokeLater(new Runnable() {
 
+            @Override
             public void run() {
-                new SignUp().setVisible(true);
+                sign.setVisible(true);
             }
         });
     }
