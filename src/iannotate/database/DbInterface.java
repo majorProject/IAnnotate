@@ -4,6 +4,7 @@
  */
 package iannotate.database;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -14,5 +15,6 @@ public interface DbInterface {
   public boolean insertInto( String userName, String passWord, int age, String sex, String contact ) throws SQLException;
   public boolean update(String newUserName, String contact, String oldUserName  ) throws SQLException;
   public boolean delete( String userName ) throws SQLException;
-  public void fetch( String userName ) throws SQLException;
+  public ResultSet fetch( String userName ) throws SQLException;
+  public boolean authentication(String username, String password);
 }
