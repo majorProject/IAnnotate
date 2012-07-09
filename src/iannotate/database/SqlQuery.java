@@ -5,6 +5,8 @@
 package iannotate.database;
 
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -90,24 +92,36 @@ public class SqlQuery implements DbInterface {
     
     //method fetch
     @Override
-    public void fetch( String userName ) throws SQLException{
+    public ResultSet fetch( String userName ) throws SQLException{
         
         PreparedStatement fetchus = connection.prepareStatement(
             "SELECT * FROM user WHERE username = ? ");
         fetchus.setString( 1, userName);
-         // boolean r = fetch.execute();
-     resultSet = fetchus.executeQuery();
+        resultSet = fetchus.executeQuery();
+          
      while(resultSet.next()){
-     System.out.println(resultSet.getString(1));
-     System.out.println(resultSet.getString(2));
-     System.out.println(resultSet.getString(3));
-     System.out.println(resultSet.getString(4));
-     System.out.println(resultSet.getString(5));
+      return resultSet;
      }
+       
+      resultSet.close();
      fetchus.close();
+    
+     return resultSet;
     }//end fetch
     
-    
+    @Override
+    public boolean authentication(String username, String password) {
+        try {
+            ResultSet pass = fetch(username);
+            if(pass.getString(2).equalsIgnoreCase(password)){
+              return true;}
+            else{
+              return false;}
+        } catch (SQLException ex) {
+            Logger.getLogger(SqlQuery.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
     
      
     
