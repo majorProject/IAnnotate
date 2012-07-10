@@ -196,10 +196,10 @@ public class SignUp extends javax.swing.JFrame {
          
          char[] pass = passWord.getPassword();
          String passString = String.valueOf(pass);
-         char[] rePass1 = passWord.getPassword();
+         char[] rePass1 = rePass.getPassword();
          String rePass1String = String.valueOf(rePass1);
          
-         if(!passString.contentEquals(rePass1String))
+         if(!passString.equals(rePass1String))
          {   passErrorLabel.setText("password do not match");
              System.out.println("pass check");
          }
@@ -209,7 +209,7 @@ public class SignUp extends javax.swing.JFrame {
          else
              sex = "female";
          
-         double num = contact.getText().hashCode();
+         double num = Double.valueOf(contact.getText().toString());
          String addr = address.getText().toString();
          String date = dob.getText().toString();
          
@@ -220,7 +220,7 @@ public class SignUp extends javax.swing.JFrame {
             
                      
             if( !( user.contentEquals( db[0].fetch().getString(2) ) ) ) 
-            {   if(passString.contentEquals(rePass1String))
+            {   if(passString.equals(rePass1String))
                 r = db[0].insertInto( user, passString, sex, num, addr, date);
                 executeLabel.setText("Congratulations your acoount has been created");
                 doneButton.setVisible(true);
@@ -240,7 +240,8 @@ public class SignUp extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         sign.dispose();
-        log.setVisible(true);
+//        log.setVisible(true);
+        log.main(null);
     }//GEN-LAST:event_doneButtonActionPerformed
 
     /**
