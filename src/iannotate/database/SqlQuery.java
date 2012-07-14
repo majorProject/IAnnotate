@@ -159,6 +159,14 @@ public class SqlQuery implements DbInterface {
         return false;
     }
     
-     
+    
+    @Override
+    public ResultSet executeQuery(String sql){
+        ResultSet result = null ;
+        try{
+            result = connection.createStatement().executeQuery(sql);
+        }catch(SQLException slqe){}
+        return result;
+    }//end queryAny
     
 }//end SqlQuery
