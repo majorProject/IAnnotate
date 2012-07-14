@@ -1,3 +1,5 @@
+package iannotate.metadata;
+
 /*
  * This is metadata extractor class built to get
  * different parameters of EXIF from a JPEG file.
@@ -5,15 +7,17 @@
  *      -metadata-extractor-2.5.0-RC3.jar
  * http://www.drewnoakes.com/code/exif/
  */
-package iannotate.metadata;
 
+
+
+import com.drew.imaging.jpeg.JpegMetadataReader;
+import com.drew.imaging.jpeg.JpegProcessingException;
 import java.io.File;
 import java.io.IOException;
-import com.drew.imaging.ImageMetadataReader;
-import com.drew.imaging.ImageProcessingException;
 import com.drew.metadata.Metadata;
 import com.drew.metadata.MetadataException;
-import com.drew.metadata.exif.ExifSubIFDDirectory;
+import com.drew.metadata.exif.ExifDirectory;
+
 
 /**
  *
@@ -23,7 +27,7 @@ import com.drew.metadata.exif.ExifSubIFDDirectory;
 public class EXIFMetadataExtractor {
     
     private Metadata metadata = null;
-    private ExifSubIFDDirectory directory = null;
+    private ExifDirectory directory = null;
     
     //constructor without any parameter
     public EXIFMetadataExtractor(){
@@ -36,9 +40,9 @@ public class EXIFMetadataExtractor {
      * @throws ImageProcessingException
      * @throws IOException 
      */
-   public EXIFMetadataExtractor(File jpegFile) throws ImageProcessingException, IOException{
-        this.metadata = ImageMetadataReader.readMetadata(jpegFile);
-        this.directory = (ExifSubIFDDirectory) metadata.getDirectory(ExifSubIFDDirectory.class);
+   public EXIFMetadataExtractor(File jpegFile) throws IOException, JpegProcessingException{
+        this.metadata = JpegMetadataReader.readMetadata(jpegFile);
+        this.directory = (ExifDirectory) metadata.getDirectory(ExifDirectory.class);
     }
     
     
@@ -48,10 +52,10 @@ public class EXIFMetadataExtractor {
     * @throws ImageProcessingException
     * @throws IOException 
     */
-    public void readImageFile(String filename) throws ImageProcessingException, IOException{
+    public void readImageFile(String filename) throws IOException, JpegProcessingException{
         File jpegFile = new File(filename);
-        this.metadata = ImageMetadataReader.readMetadata(jpegFile);
-        this.directory = (ExifSubIFDDirectory) metadata.getDirectory(ExifSubIFDDirectory.class);
+        this.metadata = JpegMetadataReader.readMetadata(jpegFile);
+        this.directory = (ExifDirectory) metadata.getDirectory(ExifDirectory.class);
     }
     
     /**
@@ -59,7 +63,7 @@ public class EXIFMetadataExtractor {
      * @return EXIF version
      */
     public String getEXIFVersion() throws MetadataException{
-        return directory.getDescription(ExifSubIFDDirectory.TAG_EXIF_VERSION);
+        return directory.getDescription(ExifDirectory.TAG_EXIF_VERSION);
     }
     
     /**
@@ -67,7 +71,7 @@ public class EXIFMetadataExtractor {
      * @return Image Height
      */
     public String getImageHeight() throws MetadataException{
-        return directory.getDescription(ExifSubIFDDirectory.TAG_EXIF_IMAGE_HEIGHT);
+        return directory.getDescription(ExifDirectory.TAG_EXIF_IMAGE_HEIGHT);
     }
     
     /**
@@ -75,7 +79,7 @@ public class EXIFMetadataExtractor {
      * @return Image Width
      */
     public String getImageWidth() throws MetadataException{
-        return directory.getDescription(ExifSubIFDDirectory.TAG_EXIF_IMAGE_WIDTH);
+        return directory.getDescription(ExifDirectory.TAG_EXIF_IMAGE_WIDTH);
     }
     
     /**
@@ -83,7 +87,7 @@ public class EXIFMetadataExtractor {
      * @return original creation date and time of image
      */
     public String getImageOriginalDateTime() throws MetadataException{
-        return directory.getDescription(ExifSubIFDDirectory.TAG_DATETIME_ORIGINAL);
+        return directory.getDescription(ExifDirectory.TAG_DATETIME_ORIGINAL);
     }
     
     /**
@@ -91,7 +95,7 @@ public class EXIFMetadataExtractor {
      * @return original creation date of image
      */
     public String getImageOriginalDate() throws MetadataException{
-        String dateTime = directory.getDescription(ExifSubIFDDirectory.TAG_DATETIME_ORIGINAL);
+        String dateTime = directory.getDescription(ExifDirectory.TAG_DATETIME_ORIGINAL);
         String[] splitData = dateTime.split(" ");
         return splitData[0];
     }
@@ -102,7 +106,7 @@ public class EXIFMetadataExtractor {
      * @return original creation time of image
      */
     public String getImageOriginalTime() throws MetadataException{
-        String dateTime = directory.getDescription(ExifSubIFDDirectory.TAG_DATETIME_ORIGINAL);
+        String dateTime = directory.getDescription(ExifDirectory.TAG_DATETIME_ORIGINAL);
         String[] splitData = dateTime.split(" ");
         return splitData[1];
     }
@@ -112,7 +116,7 @@ public class EXIFMetadataExtractor {
      * @return digitized creation date and time of image
      */
     public String getImageDigitizedDateTime() throws MetadataException{
-        return directory.getDescription(ExifSubIFDDirectory.TAG_DATETIME_DIGITIZED);
+        return directory.getDescription(ExifDirectory.TAG_DATETIME_DIGITIZED);
     }
     
     
@@ -121,7 +125,7 @@ public class EXIFMetadataExtractor {
      * @return original digitized date of image
      */
     public String getImageDigitizedDate() throws MetadataException{
-        String dateTime = directory.getDescription(ExifSubIFDDirectory.TAG_DATETIME_DIGITIZED);
+        String dateTime = directory.getDescription(ExifDirectory.TAG_DATETIME_DIGITIZED);
         String[] splitData = dateTime.split(" ");
         return splitData[0];
     }
@@ -132,7 +136,7 @@ public class EXIFMetadataExtractor {
      * @throws MetadataException 
      */
     public String getImageDigitizedTime() throws MetadataException{
-        String dateTime = directory.getDescription(ExifSubIFDDirectory.TAG_DATETIME_DIGITIZED);
+        String dateTime = directory.getDescription(ExifDirectory.TAG_DATETIME_DIGITIZED);
         String[] splitData = dateTime.split(" ");
         return splitData[1];
     }
@@ -143,14 +147,14 @@ public class EXIFMetadataExtractor {
      * @return FNumber of image
      */
     public String getFNumber() throws MetadataException{
-        return directory.getDescription(ExifSubIFDDirectory.TAG_FNUMBER);
+        return directory.getDescription(ExifDirectory.TAG_FNUMBER);
     }
     
     /**
-     * This returns focal lenght of the image
+     * This returns focal length of the image
      * @return Focal Length of Image
      */
     public String getFocalLength() throws MetadataException{
-        return directory.getDescription(ExifSubIFDDirectory.TAG_FOCAL_LENGTH);
+        return directory.getDescription(ExifDirectory.TAG_FOCAL_LENGTH);
     }
 }
