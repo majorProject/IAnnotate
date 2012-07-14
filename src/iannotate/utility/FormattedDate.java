@@ -22,7 +22,6 @@ public class FormattedDate {
         String[] month = unformattedDate.split(":");
         String result;
         int dat = Integer.parseInt(month[1]);
-        System.out.println(dat);
         Calendar a = Calendar.getInstance();
         a.set(Calendar.MONTH, dat-1);
         a.set(Calendar.DAY_OF_MONTH,1);
