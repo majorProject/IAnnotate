@@ -4,6 +4,7 @@
  */
 package iannotate.database;
 
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -54,7 +55,14 @@ public class SqlQuery implements DbInterface {
             "VALUES( ?, ? )");
        
        insertUser.setString( 1, userName );
-       insertUser.setString( 2, passWord );
+     //  MessageEncryption encrypt = new MessageEncryption();
+       String passWordEncrypt = null;
+        try {
+            passWordEncrypt = MessageEncryption.encryptMD5(passWord);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(SqlQuery.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       insertUser.setString( 2, passWordEncrypt );
        
        boolean r = insertUser.execute();
 
