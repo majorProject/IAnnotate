@@ -1,23 +1,26 @@
+package iannotate.face;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package iannotate.face;
+
 
 import de.offis.faint.controller.MainController;
 import de.offis.faint.model.ImageModel;
 import de.offis.faint.model.Region;
+import java.util.HashMap;
 
 /**
  *
  * @author susan
  */
-public class Face {
+public class FaceDetection {
     private static String source;
     private static String destination;
     private Region[] regions;
     
-    public Face(String src, String dest) {
+    public FaceDetection(String src, String dest) {
         source = src;
         destination = dest;
     }
@@ -31,5 +34,10 @@ public class Face {
             regions = controller.detectFaces(imageModel, false);                        
         }
         return regions;
+    }
+    public HashMap<String, Integer> recogniseFace(Region r) {
+        MainController controller = MainController.getInstance();
+        HashMap<String, Integer> recognizeFace = controller.recognizeFace(r);
+        return recognizeFace;
     }
 }
