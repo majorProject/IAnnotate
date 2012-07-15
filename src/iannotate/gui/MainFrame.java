@@ -452,7 +452,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         }
         
-        
+        jLabel1.setToolTipText(path);
                
         
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -592,7 +592,7 @@ public class MainFrame extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     
         
-    JFileChooser filechooser = null;
+    JFileChooser filechooser = null;    
     DefaultListModel listModel = new DefaultListModel();
 
 }
