@@ -3,6 +3,7 @@ package iannotate.gui;
 
 import com.drew.imaging.jpeg.JpegProcessingException;
 import com.drew.metadata.MetadataException;
+import de.offis.faint.gui.photobrowser.ImagePanel;
 import de.offis.faint.model.Region;
 import iannotate.face.FaceDetection;
 import iannotate.metadata.EXIFMetadataExtractor;
@@ -21,6 +22,7 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import iannotate.metadata.EXIFMetadataExtractor;
 import iannotate.utility.FormattedDate;
+import java.awt.*;
 
 
 /*
@@ -35,7 +37,7 @@ import iannotate.utility.FormattedDate;
 public class MainFrame extends javax.swing.JFrame {
     String path = null;
     Region regions[];
-    
+    Image image;
 
     /**
      * Creates new form NewJFrame
@@ -412,9 +414,10 @@ public class MainFrame extends javax.swing.JFrame {
             //Display image and its metadata
             path = file.getAbsolutePath();
             ImageIcon img = new ImageIcon(path);
-            Image image = getScaledImage(img.getImage() , jPanel3.getWidth(), jPanel3.getHeight());
+            image = img.getImage();
+            Image imageScaled = getScaledImage(img.getImage() , jPanel3.getWidth(), jPanel3.getHeight());
 
-            img = new ImageIcon(image);
+            img = new ImageIcon(imageScaled);
             jLabel1.setIcon(img);
 
             //extract the metadata of the image
@@ -465,17 +468,19 @@ public class MainFrame extends javax.swing.JFrame {
             Image img = region.toThumbnail(200,200);
             ImageIcon imgg = new ImageIcon(img);
             listModel.add(i, imgg);
-            g = jLabel1.getGraphics();
-            
+                        
             //display rect on the detected faces
-//            imgg = new ImageIcon(path);
-//            BufferedImage bg = (BufferedImage) img;
-//            g.drawImage(bg, 0, 0, rootPane);
-//            g.drawRect(region.getX(), region.getY(), region.getHeight(), region.getWidth());
-//            bg.getSubimage(0, 0, 10, 10);
-//            g.drawImage(bg, 0, 0, rootPane);
-//            jLabel1.paint(g);
-            
+            Icon iconTemp = jLabel1.getIcon();
+            BufferedImage Temp = new BufferedImage(jPanel3.getWidth(),
+                    jPanel3.getHeight(), BufferedImage.TYPE_INT_ARGB);
+            Graphics2D gTemp = Temp.createGraphics();
+            iconTemp.paintIcon(null, gTemp, 0, 0);
+            gTemp.drawRect((region.getX()-region.getWidth()/2)*jPanel3.getWidth()/image.getWidth(rootPane),
+                    (region.getY()-region.getHeight()/2)*jPanel3.getHeight()/image.getHeight(rootPane),
+                    region.getWidth()*jPanel3.getWidth()/image.getWidth(rootPane),
+                    region.getHeight()*jPanel3.getHeight()/image.getHeight(rootPane));
+            jLabel1.setIcon(new ImageIcon(Temp));
+            gTemp.dispose();
 
         }
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -586,7 +591,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
     
-    
+        
     JFileChooser filechooser = null;
     DefaultListModel listModel = new DefaultListModel();
 
