@@ -23,6 +23,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import iannotate.metadata.EXIFMetadataExtractor;
 import iannotate.utility.FormattedDate;
 import java.awt.*;
+import java.util.Random;
 
 
 /*
@@ -35,9 +36,14 @@ import java.awt.*;
  * @author RAJAN
  */
 public class MainFrame extends javax.swing.JFrame {
-    String path = null;
+    private String path = null;
+    private String faintDir = "aa";
+    private String ImageDir = "image";
+    private static final Random randomGenerator = new Random();
     Region regions[];
+    Region regionsManual;
     Image image;
+    int x1,x2,y1,y2;    
 
     /**
      * Creates new form NewJFrame
@@ -252,15 +258,24 @@ public class MainFrame extends javax.swing.JFrame {
 
         jPanel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel1MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLabel1MouseReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         jButton1.setText("Upload");
@@ -466,8 +481,19 @@ public class MainFrame extends javax.swing.JFrame {
         for (int i = 0; i < regions.length; i++) {
             Region region = regions[i];
             Image img = region.toThumbnail(200,200);
-            ImageIcon imgg = new ImageIcon(img);
-            listModel.add(i, imgg);
+            try {
+                region.cacheToDisk();
+            } catch (IOException ex) {}
+
+
+//            if (true) {
+//            String cacheFilename = region.getCachedFile();
+//
+//            File file = new File(faintDir + "//" + cacheFilename);
+//            File dir = new File(ImageDir + "//" + "faces");
+//            boolean success = file.renameTo(new File(dir, "face_" + randomGenerator.nextInt() + ".png"));
+//            }
+            listModel.add(i, new ImageIcon(img));
                         
             //display rect on the detected faces
             Icon iconTemp = jLabel1.getIcon();
@@ -490,7 +516,12 @@ public class MainFrame extends javax.swing.JFrame {
         FaceDetection face = new FaceDetection(path,"images");
         int index = jList1.locationToIndex(evt.getPoint());
 
-        Region region = regions[index];
+        Region region = null;
+        if(index < regions.length) {
+        region = regions[index];
+        }else
+            region = regionsManual;
+            
         HashMap<String, Integer>aa =  face.recogniseFace(region);
         
         Image img = region.toThumbnail(200,200);
@@ -499,6 +530,60 @@ public class MainFrame extends javax.swing.JFrame {
         jFrame1.pack();
         jFrame1.setVisible(true);        
     }//GEN-LAST:event_jList1MouseClicked
+
+    private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
+        // TODO add your handling code here:
+        x1 = evt.getX();
+        y1 = evt.getY();
+    }//GEN-LAST:event_jLabel1MousePressed
+
+    private void jLabel1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseReleased
+        // TODO add your handling code here:
+        x2 = evt.getX();
+        y2 = evt.getY();
+        
+        int x,y,w,h;
+        int width = this.x1 - this.x2;
+        int height = this.y1 - this.y2;
+
+        w = Math.abs( width );
+        h = Math.abs( height );
+        x = width < 0 ? x1: x2;
+        y = height < 0 ? y1: y2;
+        
+        int centroidX = (x1+x2)/2;
+        int centroidY = (y1+y2)/2;
+
+        Icon iconTemp = jLabel1.getIcon();
+        BufferedImage Temp = new BufferedImage(jPanel3.getWidth(),
+                jPanel3.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        Graphics2D gTemp = Temp.createGraphics();
+        iconTemp.paintIcon(null, gTemp, 0, 0);
+        gTemp.drawRect( x, y, w, h );
+        jLabel1.setIcon(new ImageIcon(Temp));
+        gTemp.dispose();
+        
+        regionsManual = new Region( centroidX*image.getWidth(rootPane)/jPanel3.getWidth(),
+                centroidY*image.getHeight(rootPane)/jPanel3.getHeight(),
+                w*image.getWidth(rootPane)/jPanel3.getWidth(),
+                h*image.getHeight(rootPane)/jPanel3.getHeight(), 0.0, path);
+        try {
+                regionsManual.cacheToDisk();
+            } catch (IOException ex) {}
+
+
+//            if (true) {
+//            String cacheFilename = region.getCachedFile();
+//
+//            File file = new File(faintDir + "//" + cacheFilename);
+//            File dir = new File(ImageDir + "//" + "faces");
+//            boolean success = file.renameTo(new File(dir, "face_" + randomGenerator.nextInt() + ".png"));
+//            }
+        
+        Image img = regionsManual.toThumbnail(200, 200);
+        listModel.add(regions.length, new ImageIcon(img));
+        
+    }//GEN-LAST:event_jLabel1MouseReleased
 
     private Image getScaledImage(Image srcImg, int width, int height){
         BufferedImage resizedImg = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
