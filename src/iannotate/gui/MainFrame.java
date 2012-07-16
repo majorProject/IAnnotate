@@ -34,6 +34,7 @@ public class MainFrame extends javax.swing.JFrame {
     private String faintDir = "aa";
     private String ImageDir = "image";
     private static final Random randomGenerator = new Random();
+    private int faceID = 0;
 //    Region regions[];
     Vector<Region> regions = new Vector<>();
     Region regionsManual;
@@ -70,6 +71,7 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jTabbedPane4 = new javax.swing.JTabbedPane();
@@ -93,21 +95,13 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel2.setText("Photo");
 
-        jTextField1.setText("jTextField1");
-
-        jTextField2.setText("jTextField2");
-
         jLabel3.setText("Name");
 
         jLabel4.setText("Address");
 
-        jLabel5.setText("Age");
+        jLabel5.setText("DOB");
 
         jLabel6.setText("Relation");
-
-        jTextField3.setText("jTextField3");
-
-        jTextField4.setText("jTextField4");
 
         jButton3.setText("Submit");
 
@@ -159,33 +153,45 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        jButton5.setText("recognize");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
         jFrame1Layout.setHorizontalGroup(
             jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jFrame1Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jFrame1Layout.createSequentialGroup()
                         .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6))
-                        .addGap(36, 36, 36)
-                        .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField4)
-                            .addComponent(jTextField3)
-                            .addComponent(jTextField2)
-                            .addComponent(jTextField1)))
+                            .addGroup(jFrame1Layout.createSequentialGroup()
+                                .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6))
+                                .addGap(36, 36, 36)
+                                .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
+                                    .addComponent(jTextField3)
+                                    .addComponent(jTextField2)
+                                    .addComponent(jTextField1)))
+                            .addGroup(jFrame1Layout.createSequentialGroup()
+                                .addGap(13, 13, 13)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jFrame1Layout.createSequentialGroup()
                         .addComponent(jButton3)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton4))
-                    .addGroup(jFrame1Layout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
+                        .addComponent(jButton5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                        .addComponent(jButton4)
+                        .addGap(26, 26, 26)))
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32))
         );
@@ -215,7 +221,8 @@ public class MainFrame extends javax.swing.JFrame {
                         .addGap(28, 28, 28)
                         .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton3)
-                            .addComponent(jButton4)))
+                            .addComponent(jButton4)
+                            .addComponent(jButton5)))
                     .addGroup(jFrame1Layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -497,24 +504,25 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
         // TODO add your handling code here:
-        FaceDetection face = new FaceDetection(path, "images");
+//        FaceDetection face = new FaceDetection(path, "images");
         int index = jList1.locationToIndex(evt.getPoint());
+        faceID = index;
 
         Region region;
         region = regions.get(index);
 
-        HashMap<String, Integer> map = face.recogniseFace(region);
-
-        Iterator it = map.entrySet().iterator();
-        int ipp = 0;
-        while (it.hasNext()) {
-            Map.Entry mEntry = (Map.Entry) it.next();
-//            System.out.println(mEntry.getKey() + " : " + mEntry.getValue());
-
-            jTable1.getModel().setValueAt(mEntry.getKey(), ipp, 0);
-            jTable1.getModel().setValueAt(mEntry.getValue(), ipp, 1);
-            ipp++;
-        }
+//        HashMap<String, Integer> map = face.recogniseFace(region);
+//
+//        Iterator it = map.entrySet().iterator();
+//        int ipp = 0;
+//        while (it.hasNext()) {
+//            Map.Entry mEntry = (Map.Entry) it.next();
+////            System.out.println(mEntry.getKey() + " : " + mEntry.getValue());
+//
+//            jTable1.getModel().setValueAt(mEntry.getKey(), ipp, 0);
+//            jTable1.getModel().setValueAt(mEntry.getValue(), ipp, 1);
+//            ipp++;
+//        }
 
 
 
@@ -558,7 +566,30 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        regions.remove(faceID);
+        jFrame1.setVisible(false);
+        paintImage();
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        Region region;
+        region = regions.get(faceID);
+
+        FaceDetection face = new FaceDetection(path, "images");
+        HashMap<String, Integer> map = face.recogniseFace(region);
+
+        Iterator it = map.entrySet().iterator();
+        int ipp = 0;
+        while (it.hasNext()) {
+            Map.Entry mEntry = (Map.Entry) it.next();
+//            System.out.println(mEntry.getKey() + " : " + mEntry.getValue());
+
+            jTable1.getModel().setValueAt(mEntry.getKey(), ipp, 0);
+            jTable1.getModel().setValueAt(mEntry.getValue(), ipp, 1);
+            ipp++;
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     private Image getScaledImage(Image srcImg, int width, int height) {
         BufferedImage resizedImg = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
@@ -654,6 +685,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
