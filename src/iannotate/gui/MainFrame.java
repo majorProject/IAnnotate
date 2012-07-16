@@ -1,14 +1,9 @@
 package iannotate.gui;
 
-
 import com.drew.imaging.jpeg.JpegProcessingException;
 import com.drew.metadata.MetadataException;
-import de.offis.faint.gui.photobrowser.ImagePanel;
 import de.offis.faint.model.Region;
 import iannotate.face.FaceDetection;
-import iannotate.metadata.EXIFMetadataExtractor;
-import iannotate.utility.FormattedDate;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
@@ -22,28 +17,28 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import iannotate.metadata.EXIFMetadataExtractor;
 import iannotate.utility.FormattedDate;
-import java.awt.*;
-import java.util.Random;
+import java.util.*;
 
 
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * To change this template, choose Tools | Templates and open the template in
+ * the editor.
  */
-
 /**
  *
  * @author RAJAN
  */
 public class MainFrame extends javax.swing.JFrame {
+
     private String path = null;
     private String faintDir = "aa";
     private String ImageDir = "image";
     private static final Random randomGenerator = new Random();
-    Region regions[];
+//    Region regions[];
+    Vector<Region> regions = new Vector<>();
     Region regionsManual;
     Image image;
-    int x1,x2,y1,y2;    
+    int x1, x2, y1, y2;
 
     /**
      * Creates new form NewJFrame
@@ -74,6 +69,7 @@ public class MainFrame extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jButton4 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jTabbedPane4 = new javax.swing.JTabbedPane();
@@ -113,7 +109,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jTextField4.setText("jTextField4");
 
-        jButton3.setText("jButton3");
+        jButton3.setText("Submit");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -134,21 +130,34 @@ public class MainFrame extends javax.swing.JFrame {
                 {null, null},
                 {null, null},
                 {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
                 {null, null}
             },
             new String [] {
-                "Name", "Percentage"
+                "Names", "Value"
             }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class
-            };
+        ));
+        jScrollPane4.setViewportView(jTable1);
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+        jButton4.setText("Delete");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
             }
         });
-        jScrollPane4.setViewportView(jTable1);
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -156,7 +165,7 @@ public class MainFrame extends javax.swing.JFrame {
             jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jFrame1Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jFrame1Layout.createSequentialGroup()
                         .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
@@ -165,15 +174,18 @@ public class MainFrame extends javax.swing.JFrame {
                             .addComponent(jLabel6))
                         .addGap(36, 36, 36)
                         .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jButton3)
+                            .addComponent(jTextField4)
+                            .addComponent(jTextField3)
+                            .addComponent(jTextField2)
+                            .addComponent(jTextField1)))
+                    .addGroup(jFrame1Layout.createSequentialGroup()
+                        .addComponent(jButton3)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton4))
                     .addGroup(jFrame1Layout.createSequentialGroup()
                         .addGap(13, 13, 13)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32))
         );
@@ -201,7 +213,9 @@ public class MainFrame extends javax.swing.JFrame {
                             .addComponent(jLabel6)
                             .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(28, 28, 28)
-                        .addComponent(jButton3))
+                        .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton3)
+                            .addComponent(jButton4)))
                     .addGroup(jFrame1Layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -419,18 +433,18 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         int returnVal = 99;
         filechooser = new JFileChooser();
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("Images", "jpg","JPG");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Images", "jpg", "JPG");
         filechooser.setFileFilter(filter);
-                
-        returnVal = filechooser.showDialog(MainFrame.this,"select an image");
-        
-        if (returnVal == JFileChooser.APPROVE_OPTION){
+
+        returnVal = filechooser.showDialog(MainFrame.this, "select an image");
+
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = filechooser.getSelectedFile();
             //Display image and its metadata
             path = file.getAbsolutePath();
             ImageIcon img = new ImageIcon(path);
             image = img.getImage();
-            Image imageScaled = getScaledImage(img.getImage() , jPanel3.getWidth(), jPanel3.getHeight());
+            Image imageScaled = getScaledImage(img.getImage(), jPanel3.getWidth(), jPanel3.getHeight());
 
             img = new ImageIcon(imageScaled);
             jLabel1.setIcon(img);
@@ -441,7 +455,7 @@ public class MainFrame extends javax.swing.JFrame {
                 exif = new EXIFMetadataExtractor(new File(path));
                 exif.readImageFile(path);
 
-            String attributes[][] = {
+                String attributes[][] = {
                     {"ImageHeight", exif.getImageHeight()},
                     {"ImageWidth", exif.getImageWidth()},
                     {"ImageOriginalDate", new FormattedDate().getDate(exif.getImageOriginalDate())},
@@ -451,84 +465,64 @@ public class MainFrame extends javax.swing.JFrame {
                     {"ImageDigitizedDate", new FormattedDate().getDate(exif.getImageDigitizedDate())},
                     {"ImageDigitizedDateTime", exif.getImageDigitizedDateTime()},
                     {"ImageDigitizedTime", exif.getImageDigitizedTime()},
-                    {"FocalLength", exif.getFocalLength()}                
-
+                    {"FocalLength", exif.getFocalLength()}
                 };
 
-            for( int row = 0; row < 10; row++ ){
-                for(int col = 0; col < 2; col++){
-                    jTable2.getModel().setValueAt( attributes[row][col], row, col);
+                for (int row = 0; row < 10; row++) {
+                    for (int col = 0; col < 2; col++) {
+                        jTable2.getModel().setValueAt(attributes[row][col], row, col);
+
+                    }
 
                 }
-
-            }
-            }catch (     JpegProcessingException | MetadataException | IOException ex) {
-                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (JpegProcessingException | MetadataException | IOException ex) {
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+
         jLabel1.setToolTipText(path);
-               
-        
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        FaceDetection face = new FaceDetection(path,"images");
-        regions = face.detectFace();
-        
-        Graphics g;
-        for (int i = 0; i < regions.length; i++) {
-            Region region = regions[i];
-            Image img = region.toThumbnail(200,200);
-            try {
-                region.cacheToDisk();
-            } catch (IOException ex) {}
-
-
-//            if (true) {
-//            String cacheFilename = region.getCachedFile();
-//
-//            File file = new File(faintDir + "//" + cacheFilename);
-//            File dir = new File(ImageDir + "//" + "faces");
-//            boolean success = file.renameTo(new File(dir, "face_" + randomGenerator.nextInt() + ".png"));
-//            }
-            listModel.add(i, new ImageIcon(img));
-                        
-            //display rect on the detected faces
-            Icon iconTemp = jLabel1.getIcon();
-            BufferedImage Temp = new BufferedImage(jPanel3.getWidth(),
-                    jPanel3.getHeight(), BufferedImage.TYPE_INT_ARGB);
-            Graphics2D gTemp = Temp.createGraphics();
-            iconTemp.paintIcon(null, gTemp, 0, 0);
-            gTemp.drawRect((region.getX()-region.getWidth()/2)*jPanel3.getWidth()/image.getWidth(rootPane),
-                    (region.getY()-region.getHeight()/2)*jPanel3.getHeight()/image.getHeight(rootPane),
-                    region.getWidth()*jPanel3.getWidth()/image.getWidth(rootPane),
-                    region.getHeight()*jPanel3.getHeight()/image.getHeight(rootPane));
-            jLabel1.setIcon(new ImageIcon(Temp));
-            gTemp.dispose();
-
+        FaceDetection face = new FaceDetection(path, "images");
+        Region reg[] = face.detectFace();
+        for (int i = 0; i < reg.length; i++) {
+            regions.add(reg[i]);
         }
+        paintImage();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
         // TODO add your handling code here:
-        FaceDetection face = new FaceDetection(path,"images");
+        FaceDetection face = new FaceDetection(path, "images");
         int index = jList1.locationToIndex(evt.getPoint());
 
-        Region region = null;
-        if(index < regions.length) {
-        region = regions[index];
-        }else
-            region = regionsManual;
-            
-        HashMap<String, Integer>aa =  face.recogniseFace(region);
-        
-        Image img = region.toThumbnail(200,200);
+        Region region;
+        region = regions.get(index);
+
+        HashMap<String, Integer> map = face.recogniseFace(region);
+
+        Iterator it = map.entrySet().iterator();
+        int ipp = 0;
+        while (it.hasNext()) {
+            Map.Entry mEntry = (Map.Entry) it.next();
+//            System.out.println(mEntry.getKey() + " : " + mEntry.getValue());
+
+            jTable1.getModel().setValueAt(mEntry.getKey(), ipp, 0);
+            jTable1.getModel().setValueAt(mEntry.getValue(), ipp, 1);
+            ipp++;
+        }
+
+
+
+        Image img = region.toThumbnail(200, 200);
         ImageIcon i = new ImageIcon(img);
         jLabel2.setIcon(i);
         jFrame1.pack();
-        jFrame1.setVisible(true);        
+        jFrame1.setVisible(true);
     }//GEN-LAST:event_jList1MouseClicked
 
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
@@ -541,35 +535,48 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         x2 = evt.getX();
         y2 = evt.getY();
-        
-        int x,y,w,h;
-        int width = this.x1 - this.x2;
-        int height = this.y1 - this.y2;
 
-        w = Math.abs( width );
-        h = Math.abs( height );
-        x = width < 0 ? x1: x2;
-        y = height < 0 ? y1: y2;
-        
-        int centroidX = (x1+x2)/2;
-        int centroidY = (y1+y2)/2;
+        int w, h;
+        int width = x1 - x2;
+        int height = y1 - y2;
 
-        Icon iconTemp = jLabel1.getIcon();
-        BufferedImage Temp = new BufferedImage(jPanel3.getWidth(),
-                jPanel3.getHeight(), BufferedImage.TYPE_INT_ARGB);
-        Graphics2D gTemp = Temp.createGraphics();
-        iconTemp.paintIcon(null, gTemp, 0, 0);
-        gTemp.drawRect( x, y, w, h );
-        jLabel1.setIcon(new ImageIcon(Temp));
-        gTemp.dispose();
-        
-        regionsManual = new Region( centroidX*image.getWidth(rootPane)/jPanel3.getWidth(),
-                centroidY*image.getHeight(rootPane)/jPanel3.getHeight(),
-                w*image.getWidth(rootPane)/jPanel3.getWidth(),
-                h*image.getHeight(rootPane)/jPanel3.getHeight(), 0.0, path);
-        try {
-                regionsManual.cacheToDisk();
-            } catch (IOException ex) {}
+        w = Math.abs(width);
+        h = Math.abs(height);
+
+        int centroidX = (x1 + x2) / 2;
+        int centroidY = (y1 + y2) / 2;
+
+        regionsManual = new Region(centroidX * image.getWidth(rootPane) / jPanel3.getWidth(),
+                centroidY * image.getHeight(rootPane) / jPanel3.getHeight(),
+                w * image.getWidth(rootPane) / jPanel3.getWidth(),
+                h * image.getHeight(rootPane) / jPanel3.getHeight(), 0.0, path);
+
+        regions.add(regionsManual);
+
+        paintImage();
+    }//GEN-LAST:event_jLabel1MouseReleased
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private Image getScaledImage(Image srcImg, int width, int height) {
+        BufferedImage resizedImg = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        Graphics2D g2 = resizedImg.createGraphics();
+        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+        g2.drawImage(srcImg, 0, 0, width, height, null);
+        g2.dispose();
+        return resizedImg;
+    }
+
+    private void paintImage() {
+        listModel.removeAllElements();
+        for (int i = 0; i < regions.size(); i++) {
+            Region region = regions.get(i);
+            Image img = region.toThumbnail(75, 75);
+//            try {
+//                region.cacheToDisk();
+//            } catch (IOException ex) {}
 
 
 //            if (true) {
@@ -579,22 +586,24 @@ public class MainFrame extends javax.swing.JFrame {
 //            File dir = new File(ImageDir + "//" + "faces");
 //            boolean success = file.renameTo(new File(dir, "face_" + randomGenerator.nextInt() + ".png"));
 //            }
-        
-        Image img = regionsManual.toThumbnail(200, 200);
-        listModel.add(regions.length, new ImageIcon(img));
-        
-    }//GEN-LAST:event_jLabel1MouseReleased
+            listModel.add(i, new ImageIcon(img));
 
-    private Image getScaledImage(Image srcImg, int width, int height){
-        BufferedImage resizedImg = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-        Graphics2D g2 = resizedImg.createGraphics();
-        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
-        g2.drawImage(srcImg, 0, 0, width, height, null);
-        g2.dispose();
-        return resizedImg;
+            //display rect on the detected faces
+            Icon iconTemp = jLabel1.getIcon();
+            BufferedImage Temp = new BufferedImage(jPanel3.getWidth(),
+                    jPanel3.getHeight(), BufferedImage.TYPE_INT_ARGB);
+            Graphics2D gTemp = Temp.createGraphics();
+            iconTemp.paintIcon(null, gTemp, 0, 0);
+            gTemp.drawRect((region.getX() - region.getWidth() / 2) * jPanel3.getWidth() / image.getWidth(rootPane),
+                    (region.getY() - region.getHeight() / 2) * jPanel3.getHeight() / image.getHeight(rootPane),
+                    region.getWidth() * jPanel3.getWidth() / image.getWidth(rootPane),
+                    region.getHeight() * jPanel3.getHeight() / image.getHeight(rootPane));
+            jLabel1.setIcon(new ImageIcon(Temp));
+            gTemp.dispose();
+
+        }
     }
-    
-    
+
     /**
      * @param args the command line arguments
      */
@@ -644,6 +653,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -675,9 +685,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
-    
-        
-    JFileChooser filechooser = null;    
+    JFileChooser filechooser = null;
     DefaultListModel listModel = new DefaultListModel();
-
 }
