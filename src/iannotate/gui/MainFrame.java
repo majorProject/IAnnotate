@@ -602,6 +602,12 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void paintImage() {
         listModel.removeAllElements();
+        ImageIcon imag = new ImageIcon(path);
+        image = imag.getImage();
+        Image imageScaled = getScaledImage(imag.getImage(), jPanel3.getWidth(), jPanel3.getHeight());
+
+        imag = new ImageIcon(imageScaled);
+        jLabel1.setIcon(imag);
         for (int i = 0; i < regions.size(); i++) {
             Region region = regions.get(i);
             Image img = region.toThumbnail(75, 75);
