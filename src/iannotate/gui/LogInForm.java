@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 public class LogInForm extends javax.swing.JFrame {
 
     static public LogInForm log = new LogInForm();
-    static public SignUp sign = new SignUp();
+    
     
  //   public MessageEncryption encrypt = new MessageEncryption();
     /**
@@ -93,7 +93,7 @@ public class LogInForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 555, Short.MAX_VALUE)
+                        .addGap(0, 38, Short.MAX_VALUE)
                         .addComponent(logIn, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -146,7 +146,7 @@ public class LogInForm extends javax.swing.JFrame {
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         // TODO add your handling code here:
         log.dispose();
-        sign.setVisible(true);
+        new SignUp().main(null);
         
     }//GEN-LAST:event_jLabel3MouseClicked
 

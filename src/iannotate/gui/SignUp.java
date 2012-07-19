@@ -239,6 +239,7 @@ public class SignUp extends javax.swing.JFrame {
     private void doneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doneButtonActionPerformed
         // TODO add your handling code here:
         
+        sign.setVisible(false);
         sign.dispose();
 //        log.setVisible(true);
         log.main(null);
