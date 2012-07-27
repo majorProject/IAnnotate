@@ -18,5 +18,5 @@ public interface DbInterface {
    public ResultSet fetch()throws SQLException;
   public ResultSet fetch( String userName ) throws SQLException;
   public boolean authentication(String username, String password);
-  public ResultSet executeQuery(String sql);
+  public boolean executeQuery(String sql);
 }

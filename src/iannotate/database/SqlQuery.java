@@ -161,12 +161,22 @@ public class SqlQuery implements DbInterface {
     
     
     @Override
-    public ResultSet executeQuery(String sql){
-        ResultSet result = null ;
+    public boolean executeQuery(String sql){
+//        ResultSet result = null ;
+        boolean execute = false;
         try{
-            result = connection.createStatement().executeQuery(sql);
-        }catch(SQLException slqe){}
-        return result;
+            //result = connection.createStatement().executeQuery(sql);
+            execute = connection.createStatement().execute(sql);
+        }catch(SQLException slqe){
+            System.out.println(slqe);
+        }
+        return execute;
     }//end queryAny
     
+    
+//    public static void main(String[] args) {
+//     SqlQuery s = new SqlQuery("major_project");   
+//     String q = "INSERT INTO test VALUES (macha, sale)";
+//     s.executeQuery(q);
+//    }
 }//end SqlQuery
