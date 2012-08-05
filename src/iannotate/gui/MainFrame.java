@@ -3,6 +3,7 @@ package iannotate.gui;
 import com.drew.imaging.jpeg.JpegProcessingException;
 import com.drew.metadata.MetadataException;
 import de.offis.faint.controller.MainController;
+import de.offis.faint.model.FaceDatabase;
 import de.offis.faint.model.Region;
 import iannotate.face.FaceDetection;
 import java.awt.Graphics2D;
@@ -115,6 +116,11 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel6.setText("Relation");
 
         jButton3.setText("new");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Delete");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -235,7 +241,12 @@ public class MainFrame extends javax.swing.JFrame {
 
         jTextField4.setText("jTextField4");
 
-        jButton6.setText("jButton6");
+        jButton6.setText("OK");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jFrame2Layout = new javax.swing.GroupLayout(jFrame2.getContentPane());
         jFrame2.getContentPane().setLayout(jFrame2Layout);
@@ -669,6 +680,24 @@ public class MainFrame extends javax.swing.JFrame {
         System.out.println(result[0]);
         
     }//GEN-LAST:event_jList2MouseClicked
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        String name = jTextField1.getText();
+        FaceDatabase db = new FaceDatabase();
+        db.put(regions.get(faceID), name);
+        try {
+            db.writeToDisk();
+        }catch(IOException e){}
+               
+        
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        jFrame2.setVisible(true);
+        jFrame2.setSize(500, 500);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     private Image getScaledImage(Image srcImg, int width, int height) {
         BufferedImage resizedImg = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
