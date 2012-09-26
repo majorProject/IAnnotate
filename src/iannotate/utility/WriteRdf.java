@@ -11,6 +11,7 @@ import com.hp.hpl.jena.sparql.vocabulary.FOAF;
 import com.hp.hpl.jena.vocabulary.RDF;
 import java.io.*;
 import myclass.EXIF;
+import myclass.Relationship;
 
 /**
  *
@@ -35,17 +36,20 @@ public class WriteRdf {
             // set a namespace prefix
             model.setNsPrefix("foaf", FOAF.NS);
             model.setNsPrefix("EXIF", EXIF.NS);
+            model.setNsPrefix("relation", Relationship.NS);
 
             // create a contributor
-            Resource root = model.createResource();
-            Resource first = model.createResource();
+            Resource root = model.createResource("http://something.com");            
 
             root.addProperty(RDF.type, FOAF.Image);
-            root.addProperty(FOAF.thumbnail, first);
+            root.addProperty(FOAF.thumbnail, model.createResource().addProperty(FOAF.thumbnail,
+                    model.createResource().addProperty(EXIF.height, x).addProperty(EXIF.width, y)
+                    .addProperty(EXIF.imageLength, "30").addProperty(EXIF.imageWidth, "20"))
+                    .addProperty(FOAF.surname, lname).addProperty(FOAF.name, fname));
 
-            first.addProperty(FOAF.thumbnail, model.createResource().addProperty(EXIF.height, x).addProperty(EXIF.width, y).addProperty(EXIF.imageLength, "30").addProperty(EXIF.imageWidth, "20"));
-            first.addProperty(FOAF.surname, lname).addProperty(FOAF.name, fname);
+
             
+
             // write the RDF model to the console as RDF/XML
             model.write(System.out, "RDF/XML-ABBREV");
             try {
@@ -59,14 +63,14 @@ public class WriteRdf {
             // read the RDF/XML file
             model.read(new InputStreamReader(in), "");
 
-            // retrieve the Adam Smith vcard resource from the model
-            Resource node = model.getResource("http://something.com");
+            // retrieve resource from the model
+            Resource root = model.getResource("http://something.com");
 
-            Resource first = model.createResource("http://something.com");
-            node.addProperty(FOAF.thumbnail, first);
-
-            first.addProperty(FOAF.thumbnail, model.createResource().addProperty(EXIF.height, "20").addProperty(EXIF.width, "10").addProperty(EXIF.imageLength, "30").addProperty(EXIF.imageWidth, "20"));
-            first.addProperty(FOAF.surname, "lname").addProperty(FOAF.name, "fname");
+            root.addProperty(RDF.type, FOAF.Image);
+            root.addProperty(FOAF.thumbnail, model.createResource().addProperty(FOAF.thumbnail,
+                    model.createResource().addProperty(EXIF.height, x).addProperty(EXIF.width, y)
+                    .addProperty(EXIF.imageLength, "30").addProperty(EXIF.imageWidth, "20"))
+                    .addProperty(FOAF.surname, lname).addProperty(FOAF.name, fname));
 
 
 
@@ -81,7 +85,64 @@ public class WriteRdf {
         }
     }
 
+    public static void writerdfR(String name1, String name2, String relation) {
+        // create an empty Model
+        Model model = ModelFactory.createDefaultModel();
+
+        // find the input file
+        InputStream in = null;
+        try {
+            in = new FileInputStream("rdf//relation.rdf");
+        } catch (IOException e) {
+        }
+        if (in == null) {
+            // set a namespace prefix
+            model.setNsPrefix("foaf", FOAF.NS);
+            model.setNsPrefix("EXIF", EXIF.NS);
+            model.setNsPrefix("relation", Relationship.NS);
+
+            // create a contributor
+            Resource root = model.createResource("http://something.com");
+            
+            root.addProperty(RDF.type, FOAF.Person);
+            
+            root.addProperty(FOAF.name,name1);
+            root.addProperty(Relationship.parentOf,name2);
+            
+
+
+            // write the RDF model to the console as RDF/XML
+            model.write(System.out, "RDF/XML-ABBREV");
+
+            try {
+                FileOutputStream fout = new FileOutputStream("rdf//relation.rdf");
+                model.write(fout);
+            } catch (FileNotFoundException e) {
+                System.out.println("error:" + e);
+            }
+        } else {
+            // read the RDF/XML file
+            model.read(new InputStreamReader(in), "");
+
+            // retrieve resource from the model
+            Resource root = model.getResource("http://something.com");
+            
+            root.addProperty(FOAF.knows,name2);
+            
+            // write the RDF model to the console as RDF/XML
+            model.write(System.out, "RDF/XML-ABBREV");
+
+            try {
+                FileOutputStream fout = new FileOutputStream("rdf//relation.rdf");
+                model.write(fout);
+            } catch (FileNotFoundException e) {
+                System.out.println("error:" + e);
+            }
+        }
+    }
+
     public static void main(String[] args) {
         writerdf("rdf//test2.rdf", "samer", "Dangol", "60", "100", "info");
+        writerdfR("a", "b0b", "c");
     }
 }
