@@ -19,19 +19,19 @@ public class FaceDetection {
     private static String source;
     private static String destination;
     private Region[] regions;
-    
+        
     public FaceDetection(String src, String dest) {
         source = src;
         destination = dest;
     }
     
-    public Region[] detectFace() {
+    public Region[] detectFace() {        
         MainController controller = MainController.getInstance();
         if(controller != null) {
             controller.setScanWindowSize(1);
             ImageModel imageModel = new ImageModel(source);
             imageModel.initThumbnail();
-            regions = controller.detectFaces(imageModel, false);                        
+            regions = controller.detectFaces(imageModel, false);
         }
         return regions;
     }
@@ -39,5 +39,5 @@ public class FaceDetection {
         MainController controller = MainController.getInstance();
         HashMap<String, Integer> recognizeFace = controller.recognizeFace(r);
         return recognizeFace;
-    }
+    }    
 }
