@@ -39,16 +39,14 @@ public class WriteRdf {
             model.setNsPrefix("relation", Relationship.NS);
 
             // create a contributor
-            Resource root = model.createResource("http://something.com");            
+            Resource root = model.createResource("http://something.com");
 
             root.addProperty(RDF.type, FOAF.Image);
             root.addProperty(FOAF.thumbnail, model.createResource().addProperty(FOAF.thumbnail,
-                    model.createResource().addProperty(EXIF.height, x).addProperty(EXIF.width, y)
-                    .addProperty(EXIF.imageLength, "30").addProperty(EXIF.imageWidth, "20"))
-                    .addProperty(FOAF.surname, lname).addProperty(FOAF.name, fname));
+                    model.createResource().addProperty(EXIF.height, x).addProperty(EXIF.width, y).addProperty(EXIF.imageLength, "30").addProperty(EXIF.imageWidth, "20")).addProperty(FOAF.surname, lname).addProperty(FOAF.name, fname));
 
 
-            
+
 
             // write the RDF model to the console as RDF/XML
             model.write(System.out, "RDF/XML-ABBREV");
@@ -68,9 +66,7 @@ public class WriteRdf {
 
             root.addProperty(RDF.type, FOAF.Image);
             root.addProperty(FOAF.thumbnail, model.createResource().addProperty(FOAF.thumbnail,
-                    model.createResource().addProperty(EXIF.height, x).addProperty(EXIF.width, y)
-                    .addProperty(EXIF.imageLength, "30").addProperty(EXIF.imageWidth, "20"))
-                    .addProperty(FOAF.surname, lname).addProperty(FOAF.name, fname));
+                    model.createResource().addProperty(EXIF.height, x).addProperty(EXIF.width, y).addProperty(EXIF.imageLength, "30").addProperty(EXIF.imageWidth, "20")).addProperty(FOAF.surname, lname).addProperty(FOAF.name, fname));
 
 
 
@@ -85,7 +81,7 @@ public class WriteRdf {
         }
     }
 
-    public static void writerdfR(String name1, String name2, String relation) {
+    public static void writerdfR(String username, String name, String relation) {
         // create an empty Model
         Model model = ModelFactory.createDefaultModel();
 
@@ -103,13 +99,60 @@ public class WriteRdf {
 
             // create a contributor
             Resource root = model.createResource("http://something.com");
-            
-            root.addProperty(RDF.type, FOAF.Person);
-            
-            root.addProperty(FOAF.name,name1);
-            root.addProperty(Relationship.parentOf,name2);
-            
 
+            root.addProperty(RDF.type, FOAF.Person);
+
+            root.addProperty(FOAF.name, username);
+            switch (relation) {
+                case "ambivalentOf":
+                    root.addProperty(Relationship.ambivalentOf, name);
+                    break;
+                case "antagonistOf":
+                    root.addProperty(Relationship.antagonistOf, name);
+                    break;
+                case "apprenticeTo":
+                    root.addProperty(Relationship.apprenticeTo, name);
+                    break;
+                case "childOf":
+                    root.addProperty(Relationship.childOf, name);
+                    break;
+                case "employerOf":
+                    root.addProperty(Relationship.employerOf, name);
+                    break;
+                case "enemyOf":
+                    root.addProperty(Relationship.enemyOf, name);
+                    break;
+                case "grandchildOf":
+                    root.addProperty(Relationship.grandchildOf, name);
+                    break;
+                case "grandparentOf":
+                    root.addProperty(Relationship.grandparentOf, name);
+                    break;
+                case "influencedBy":
+                    root.addProperty(Relationship.influencedBy, name);
+                    break;
+                case "knowsByReputation":
+                    root.addProperty(Relationship.knowsByReputation, name);
+                    break;
+                case "knowsInPassing":
+                    root.addProperty(Relationship.knowsInPassing, name);
+                    break;
+                case "knowsOf":
+                    root.addProperty(Relationship.knowsOf, name);
+                    break;
+                case "mentorOf":
+                    root.addProperty(Relationship.mentorOf, name);
+                    break;
+                case "participant":
+                    root.addProperty(Relationship.participant, name);
+                    break;
+                case "participantIn":
+                    root.addProperty(Relationship.participantIn, name);
+                    break;
+                case "wouldLikeToknow":
+                    root.addProperty(Relationship.wouldLikeToKnow, name);
+                    break;
+            }
 
             // write the RDF model to the console as RDF/XML
             model.write(System.out, "RDF/XML-ABBREV");
@@ -126,9 +169,58 @@ public class WriteRdf {
 
             // retrieve resource from the model
             Resource root = model.getResource("http://something.com");
-            
-            root.addProperty(FOAF.knows,name2);
-            
+
+            switch (relation) {
+                case "ambivalentOf":
+                    root.addProperty(Relationship.ambivalentOf, name);
+                    break;
+                case "antagonistOf":
+                    root.addProperty(Relationship.antagonistOf, name);
+                    break;
+                case "apprenticeTo":
+                    root.addProperty(Relationship.apprenticeTo, name);
+                    break;
+                case "childOf":
+                    root.addProperty(Relationship.childOf, name);
+                    break;
+                case "employerOf":
+                    root.addProperty(Relationship.employerOf, name);
+                    break;
+                case "enemyOf":
+                    root.addProperty(Relationship.enemyOf, name);
+                    break;
+                case "grandchildOf":
+                    root.addProperty(Relationship.grandchildOf, name);
+                    break;
+                case "grandparentOf":
+                    root.addProperty(Relationship.grandparentOf, name);
+                    break;
+                case "influencedBy":
+                    root.addProperty(Relationship.influencedBy, name);
+                    break;
+                case "knowsByReputation":
+                    root.addProperty(Relationship.knowsByReputation, name);
+                    break;
+                case "knowsInPassing":
+                    root.addProperty(Relationship.knowsInPassing, name);
+                    break;
+                case "knowsOf":
+                    root.addProperty(Relationship.knowsOf, name);
+                    break;
+                case "mentorOf":
+                    root.addProperty(Relationship.mentorOf, name);
+                    break;
+                case "participant":
+                    root.addProperty(Relationship.participant, name);
+                    break;
+                case "participantIn":
+                    root.addProperty(Relationship.participantIn, name);
+                    break;
+                case "wouldLikeToknow":
+                    root.addProperty(Relationship.wouldLikeToKnow, name);
+                    break;
+            }
+
             // write the RDF model to the console as RDF/XML
             model.write(System.out, "RDF/XML-ABBREV");
 
@@ -142,7 +234,7 @@ public class WriteRdf {
     }
 
     public static void main(String[] args) {
-        writerdf("rdf//test2.rdf", "samer", "Dangol", "60", "100", "info");
-        writerdfR("a", "b0b", "c");
+        //writerdf("rdf//test2.rdf", "samer", "Dangol", "60", "100", "info");
+        writerdfR("rajan", "susan", "knowsOf");
     }
 }
