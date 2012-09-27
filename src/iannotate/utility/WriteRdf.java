@@ -103,7 +103,7 @@ public class WriteRdf {
             root.addProperty(RDF.type, FOAF.Person);
 
             root.addProperty(FOAF.name, username);
-            switch (relation) {
+                        switch (relation) {
                 case "ambivalentOf":
                     root.addProperty(Relationship.ambivalentOf, name);
                     break;
@@ -152,6 +152,22 @@ public class WriteRdf {
                 case "wouldLikeToknow":
                     root.addProperty(Relationship.wouldLikeToKnow, name);
                     break;
+                case "friendOf":
+                    root.addProperty(Relationship.friendOf, name);
+                case "colleagueOf":
+                    root.addProperty(Relationship.colleagueOf, name);
+                case "spouseOf":
+                    root.addProperty(Relationship.spouseOf, name);
+                case "closeFriendOf":
+                    root.addProperty(Relationship.closeFriendOf, name);
+                case "livesWith":
+                    root.addProperty(Relationship.livesWith, name);
+                case "neighborOf":
+                    root.addProperty(Relationship.neighborOf, name);
+                case "siblingOf":
+                    root.addProperty(Relationship.siblingOf, name);
+
+
             }
 
             // write the RDF model to the console as RDF/XML
@@ -219,6 +235,22 @@ public class WriteRdf {
                 case "wouldLikeToknow":
                     root.addProperty(Relationship.wouldLikeToKnow, name);
                     break;
+                case "friendOf":
+                    root.addProperty(Relationship.friendOf, name);
+                case "colleagueOf":
+                    root.addProperty(Relationship.colleagueOf, name);
+                case "spouseOf":
+                    root.addProperty(Relationship.spouseOf, name);
+                case "closeFriendOf":
+                    root.addProperty(Relationship.closeFriendOf, name);
+                case "livesWith":
+                    root.addProperty(Relationship.livesWith, name);
+                case "neighborOf":
+                    root.addProperty(Relationship.neighborOf, name);
+                case "siblingOf":
+                    root.addProperty(Relationship.siblingOf, name);
+
+
             }
 
             // write the RDF model to the console as RDF/XML
@@ -233,8 +265,61 @@ public class WriteRdf {
         }
     }
 
+    public static void writerdfD(String filename,String info){
+        // create an empty Model
+        Model model = ModelFactory.createDefaultModel();
+
+        // find the input file
+        InputStream in = null;
+        try {
+            in = new FileInputStream(filename);
+        } catch (IOException e) {
+        }
+
+        if (in == null) {
+            // set a namespace prefix
+            model.setNsPrefix("foaf", FOAF.NS);
+            model.setNsPrefix("EXIF", EXIF.NS);
+            model.setNsPrefix("relation", Relationship.NS);
+
+            // create a contributor
+            Resource root = model.createResource("http://something.com");
+
+            root.addProperty(EXIF.imageDescription, info);
+            
+            // write the RDF model to the console as RDF/XML
+            model.write(System.out, "RDF/XML-ABBREV");
+            try {
+                FileOutputStream fout = new FileOutputStream(filename);
+                model.write(fout);
+            } catch (FileNotFoundException e) {
+                System.out.println("error:" + e);
+            }
+        } else {
+
+            // read the RDF/XML file
+            model.read(new InputStreamReader(in), "");
+
+            // retrieve resource from the model
+            Resource root = model.getResource("http://something.com");
+
+            root.addProperty(EXIF.imageDescription, info);
+
+
+            // write the RDF model to the console as RDF/XML
+            model.write(System.out, "RDF/XML-ABBREV");
+            try {
+                FileOutputStream fout = new FileOutputStream(filename);
+                model.write(fout);
+            } catch (FileNotFoundException e) {
+                System.out.println("error:" + e);
+            }
+        }
+    }
+    
     public static void main(String[] args) {
-        //writerdf("rdf//test2.rdf", "samer", "Dangol", "60", "100", "info");
-        writerdfR("rajan", "susan", "knowsOf");
+        //writerdf("rdf/test2.rdf", "rajan", "maharjan", "60", "100", "info");
+        //writerdfR("rajan", "susan", "friendOf");
+        writerdfD("rdf/test2.rdf","decsripcitons aaaaaa sfs");        
     }
 }
