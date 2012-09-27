@@ -1,5 +1,7 @@
 package iannotate.utility;
 
+import de.offis.faint.global.Constants;
+import de.offis.faint.model.FaceDatabase;
 import java.io.*;
 
 public class FileUtil {
@@ -30,6 +32,21 @@ public class FileUtil {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    //for recovering FaceDb.data from the disk
+    public static FaceDatabase recoverFromDisk(String path) throws IOException {
+        String filename = path + File.separator + Constants.FACE_DB_FILE;
+        FileInputStream fis = new FileInputStream(filename);
+        ObjectInputStream in = new ObjectInputStream(fis);
+        FaceDatabase db = null;
+        try {
+            db = (FaceDatabase) in.readObject();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        in.close();
+        return db;
     }
 // for testing
 //    public static void main(String[] args) {
