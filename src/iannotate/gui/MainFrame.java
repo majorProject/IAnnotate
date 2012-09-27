@@ -2,7 +2,6 @@ package iannotate.gui;
 
 import com.drew.imaging.jpeg.JpegProcessingException;
 import com.drew.metadata.MetadataException;
-import de.offis.faint.controller.MainController;
 import de.offis.faint.model.FaceDatabase;
 import de.offis.faint.model.Region;
 import iannotate.face.FaceDetection;
@@ -18,6 +17,7 @@ import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import iannotate.metadata.EXIFMetadataExtractor;
+import iannotate.utility.FileUtil;
 import iannotate.utility.FormattedDate;
 import java.util.*;
 
@@ -83,14 +83,18 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
         jButton6 = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox();
         jTabbedPane4 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTextArea3 = new javax.swing.JTextArea();
+        jLabel16 = new javax.swing.JLabel();
+        jButton8 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
@@ -231,13 +235,11 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel13.setText("Relation");
 
-        jLabel14.setText("jLabel14");
+        jLabel14.setText("Phone no.");
 
         jTextField1.setText("jTextField1");
 
         jTextField2.setText("jTextField2");
-
-        jTextField3.setText("jTextField3");
 
         jTextField4.setText("jTextField4");
 
@@ -248,34 +250,35 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ambivalentOf    ", "antagonistOf", "apprenticeTo    ", "childOf    ", "employedBy    ", "employerOf    ", "enemyOf", "grandchildOf", "grandparentOf", "influencedBy", "knowsByReputation", "knowsInPassing", "knowsOf", "mentorOf", "parentOf  ", "participant   ", "participantIn    ", "wouldLikeToKnow    ", "friendOf    ", "colleagueOf    ", "spouseOf    ", "closeFriendOf    ", "livesWith    ", "neighborOf    ", "siblingOf" }));
+
         javax.swing.GroupLayout jFrame2Layout = new javax.swing.GroupLayout(jFrame2.getContentPane());
         jFrame2.getContentPane().setLayout(jFrame2Layout);
         jFrame2Layout.setHorizontalGroup(
             jFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jFrame2Layout.createSequentialGroup()
-                .addGap(74, 74, 74)
+                .addGap(19, 19, 19)
                 .addGroup(jFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton6)
-                    .addGroup(jFrame2Layout.createSequentialGroup()
-                        .addGroup(jFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel13)
-                            .addComponent(jLabel14))
-                        .addGap(53, 53, 53)
-                        .addGroup(jFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(169, Short.MAX_VALUE))
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel14))
+                .addGap(20, 20, 20)
+                .addGroup(jFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextField2)
+                    .addComponent(jTextField1)
+                    .addComponent(jTextField4))
+                .addContainerGap(98, Short.MAX_VALUE))
         );
         jFrame2Layout.setVerticalGroup(
             jFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jFrame2Layout.createSequentialGroup()
+                .addGap(47, 47, 47)
                 .addGroup(jFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jFrame2Layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
                         .addComponent(jLabel11)
                         .addGap(18, 18, 18)
                         .addGroup(jFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -284,17 +287,14 @@ public class MainFrame extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel13)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel14)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jFrame2Layout.createSequentialGroup()
-                        .addGap(56, 56, 56)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(jButton6)
-                .addContainerGap(61, Short.MAX_VALUE))
+                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton6)))
+                .addGap(41, 41, 41))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -327,18 +327,43 @@ public class MainFrame extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(jTable2);
 
+        jTextArea3.setColumns(20);
+        jTextArea3.setRows(5);
+        jScrollPane6.setViewportView(jTextArea3);
+
+        jLabel16.setText("Desciption");
+
+        jButton8.setText("OK");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane6)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel16)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(92, 92, 92)
+                                .addComponent(jButton8)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3)
-                .addContainerGap())
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(jLabel16)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton8)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -513,6 +538,14 @@ public class MainFrame extends javax.swing.JFrame {
             File file = filechooser.getSelectedFile();
             //Display image and its metadata
             path = file.getAbsolutePath();
+            System.out.println(path);
+
+            //copy the uploaded file to imagedb file
+            new FileUtil().copyfile(path, "imagedb\\" + filechooser.getName(file));
+
+            path = "imagedb\\" + filechooser.getName(file);
+            System.out.println(path);
+
             ImageIcon img = new ImageIcon(path);
             image = img.getImage();
             Image imageScaled = getScaledImage(img.getImage(), jPanel3.getWidth(), jPanel3.getHeight());
@@ -642,7 +675,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         FaceDetection face = new FaceDetection(path, "images");
         HashMap<String, Integer> map = face.recogniseFace(region);
-        
+
         //sorting the hashmap table
         Map mapSorted = sortByValue(map);
 
@@ -657,16 +690,16 @@ public class MainFrame extends javax.swing.JFrame {
 //            jTable1.getModel().setValueAt(mEntry.getKey(), ipp, 0);
 //            jTable1.getModel().setValueAt(mEntry.getValue(), ipp, 1);
             String name = (String) mEntry.getKey();
-            String photo = (String) mEntry.getKey()+ "//" + mEntry.getValue();
+            String photo = (String) mEntry.getKey() + "//" + mEntry.getValue();
 //            MainController.getInstance().getFaceDB().renameAnnotation("rajan", "rajanM");
 //            System.out.println(MainController.getInstance().getFaceDB().getKnownFaces().length);
 //            System.out.println(MainController.getInstance().getDataDir());
             listModel1.add(ipp, photo);
 //            System.out.println(photo);
 //            System.out.println(MainController.getInstance().getFaceDB().getRegionsForFace(photo).toString());
-            
+
 //            listModel1.add(ipp, MainController.getInstance().getFaceDB().getRegionsForFace(photo));
-            
+
             ipp++;
         }
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -678,19 +711,31 @@ public class MainFrame extends javax.swing.JFrame {
         System.out.println(listModel1.get(a).toString());
         String result[] = listModel1.get(a).toString().split("/");
         System.out.println(result[0]);
-        
+
     }//GEN-LAST:event_jList2MouseClicked
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
         String name = jTextField1.getText();
         FaceDatabase db = new FaceDatabase();
+//        String pa = String.valueOf(System.getProperty("user.home")) + "//.faint";
+//        System.out.println(pa);
+        String path = System.getProperty("user.home") + File.separator + ".faint";
+        System.out.println(path);
+        try {
+            db = new FileUtil().recoverFromDisk(path);
+        } catch (IOException ex) {
+        }
+
+        System.out.println(db.getKnownFaces().length);
+
         db.put(regions.get(faceID), name);
         try {
             db.writeToDisk();
-        }catch(IOException e){}
-               
-        
+        } catch (IOException e) {
+        }
+
+        jFrame2.setVisible(false);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -748,26 +793,23 @@ public class MainFrame extends javax.swing.JFrame {
 
         }
     }
-    public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue( Map<K, V> map )
-    {
+
+    public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map) {
         List<Map.Entry<K, V>> list =
-            new LinkedList<Map.Entry<K, V>>( map.entrySet() );
-        Collections.sort( list, new Comparator<Map.Entry<K, V>>()
-        {
-            public int compare( Map.Entry<K, V> o1, Map.Entry<K, V> o2 )
-            {
-                return (o1.getValue()).compareTo( o2.getValue() );
+                new LinkedList<Map.Entry<K, V>>(map.entrySet());
+        Collections.sort(list, new Comparator<Map.Entry<K, V>>() {
+
+            public int compare(Map.Entry<K, V> o1, Map.Entry<K, V> o2) {
+                return (o1.getValue()).compareTo(o2.getValue());
             }
-        } );
+        });
 
         Map<K, V> result = new LinkedHashMap<K, V>();
-        for (Map.Entry<K, V> entry : list)
-        {
-            result.put( entry.getKey(), entry.getValue() );
+        for (Map.Entry<K, V> entry : list) {
+            result.put(entry.getKey(), entry.getValue());
         }
         return result;
     }
-
 
     /**
      * @param args the command line arguments
@@ -821,6 +863,8 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JFrame jFrame2;
     private javax.swing.JLabel jLabel1;
@@ -829,6 +873,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -852,12 +897,13 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane4;
     private javax.swing.JTable jTable2;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextArea3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
