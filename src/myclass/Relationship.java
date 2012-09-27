@@ -58,6 +58,21 @@ public class Relationship {
     
     public static final Property wouldLikeToKnow = m_model.createProperty( "http://purl.org/vocab/relationship/wouldLikeToKnow" );
     
+    public static final Property friendOf = m_model.createProperty( "http://purl.org/vocab/relationship/friendOf" );
+    
+    public static final Property colleagueOf = m_model.createProperty("http://purl.org/vocab/relationship/colleagueOf");
+    
+    public static final Property spouseOf = m_model.createProperty( "http://purl.org/vocab/relationship/spouseOf" );
+    
+    public static final Property closeFriendOf = m_model.createProperty( "http://purl.org/vocab/relationship/closeFriendOf" );
+    
+    public static final Property livesWith = m_model.createProperty( "http://purl.org/vocab/relationship/livesWith" );
+    
+    public static final Property neighborOf = m_model.createProperty( "http://purl.org/vocab/relationship/neighborOf" );
+    
+    public static final Property siblingOf = m_model.createProperty( "http://purl.org/vocab/relationship/siblingOf" );
+          
+    
     /** <p>&lt;p&gt;The RELATIONSHIP vocabulary can be used without modification with 
      *  &lt;a href="http://xmlns.com/foaf/0.1/"&gt;FOAF&lt;/a&gt; documents. Simply 
      *  replace &lt;code&gt;foaf:knows&lt;/code&gt; properties with a more specific 
