@@ -20,7 +20,7 @@ import myclass.Relationship;
 public class WriteRdf {
 
     public static void writerdf(String filename, String fname,
-            String lname, String x, String y, String phone, String info ) {
+            String lname, String x, String y, String phone, String info) {
 
         // create an empty Model
         Model model = ModelFactory.createDefaultModel();
@@ -43,9 +43,7 @@ public class WriteRdf {
 
             root.addProperty(RDF.type, FOAF.Image);
             root.addProperty(FOAF.thumbnail, model.createResource().addProperty(FOAF.thumbnail,
-                    model.createResource().addProperty(EXIF.height, x).addProperty(EXIF.width, y)
-                    .addProperty(EXIF.imageLength, "30").addProperty(EXIF.imageWidth, "20"))
-                    .addProperty(FOAF.phone, phone).addProperty(FOAF.surname, lname).addProperty(FOAF.name, fname));
+                    model.createResource().addProperty(EXIF.height, x).addProperty(EXIF.width, y).addProperty(EXIF.imageLength, "30").addProperty(EXIF.imageWidth, "20")).addProperty(FOAF.phone, phone).addProperty(FOAF.surname, lname).addProperty(FOAF.name, fname));
 
 
 
@@ -105,7 +103,7 @@ public class WriteRdf {
             root.addProperty(RDF.type, FOAF.Person);
 
             root.addProperty(FOAF.name, username);
-                        switch (relation) {
+            switch (relation) {
                 case "ambivalentOf":
                     root.addProperty(Relationship.ambivalentOf, name);
                     break;
@@ -267,7 +265,7 @@ public class WriteRdf {
         }
     }
 
-    public static void writerdfD(String filename,String info){
+    public static void writerdfD(String filename, String info) {
         // create an empty Model
         Model model = ModelFactory.createDefaultModel();
 
@@ -288,7 +286,7 @@ public class WriteRdf {
             Resource root = model.createResource("http://something.com");
 
             root.addProperty(EXIF.imageDescription, info);
-            
+
             // write the RDF model to the console as RDF/XML
             model.write(System.out, "RDF/XML-ABBREV");
             try {
@@ -318,7 +316,7 @@ public class WriteRdf {
             }
         }
     }
-    
+
     public static void main(String[] args) {
         //writerdf("rdf/test2.rdf", "rajan", "maharjan", "60", "100", "info");
         //writerdfR("rajan", "susan", "friendOf");
