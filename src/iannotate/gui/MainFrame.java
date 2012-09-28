@@ -19,6 +19,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import iannotate.metadata.EXIFMetadataExtractor;
 import iannotate.utility.FileUtil;
 import iannotate.utility.FormattedDate;
+import iannotate.utility.WriteRdf;
+import java.io.FileNotFoundException;
+import java.lang.String;
 import java.util.*;
 
 
@@ -33,6 +36,7 @@ import java.util.*;
 public class MainFrame extends javax.swing.JFrame {
 
     private String path = null;
+    private String filename = null;
     private String faintDir = "aa";
     private String ImageDir = "image";
     private static final Random randomGenerator = new Random();
@@ -95,6 +99,8 @@ public class MainFrame extends javax.swing.JFrame {
         jTextArea3 = new javax.swing.JTextArea();
         jLabel16 = new javax.swing.JLabel();
         jButton8 = new javax.swing.JButton();
+        jTextField3 = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
@@ -230,7 +236,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel11.setText("Name");
 
-        jLabel12.setText("Full name");
+        jLabel12.setText("Surname");
 
         jLabel13.setText("Relation");
 
@@ -249,7 +255,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "me", "ambivalentOf    ", "antagonistOf", "apprenticeTo    ", "childOf    ", "employedBy    ", "employerOf    ", "enemyOf", "grandchildOf", "grandparentOf", "influencedBy", "knowsByReputation", "knowsInPassing", "knowsOf", "mentorOf", "parentOf  ", "participant   ", "participantIn    ", "wouldLikeToKnow    ", "friendOf    ", "colleagueOf    ", "spouseOf    ", "closeFriendOf    ", "livesWith    ", "neighborOf    ", "siblingOf" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "me", "ambivalentOf", "antagonistOf", "apprenticeTo", "childOf", "employedBy", "employerOf", "enemyOf", "grandchildOf", "grandparentOf", "influencedBy", "knowsByReputation", "knowsInPassing", "knowsOf", "mentorOf", "parentOf", "participant", "participantIn", "wouldLikeToKnow", "friendOf", "colleagueOf", "spouseOf", "closeFriendOf", "livesWith", "neighborOf", "siblingOf" }));
 
         javax.swing.GroupLayout jFrame2Layout = new javax.swing.GroupLayout(jFrame2.getContentPane());
         jFrame2.getContentPane().setLayout(jFrame2Layout);
@@ -269,7 +275,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jTextField2)
                     .addComponent(jTextField1)
                     .addComponent(jTextField4))
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
         jFrame2Layout.setVerticalGroup(
             jFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -334,6 +340,10 @@ public class MainFrame extends javax.swing.JFrame {
 
         jButton8.setText("OK");
 
+        jTextField3.setText("jTextField3");
+
+        jLabel15.setText("Location");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -342,13 +352,16 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane6)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton8))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel16)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(92, 92, 92)
-                                .addComponent(jButton8)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jLabel16)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel15)
+                        .addGap(36, 36, 36)
+                        .addComponent(jTextField3)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -356,13 +369,17 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addGap(29, 29, 29)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel16)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton8)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jPanel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -457,9 +474,10 @@ public class MainFrame extends javax.swing.JFrame {
                                 .addGap(11, 11, 11)
                                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane2))
-                        .addGap(0, 5, Short.MAX_VALUE))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                        .addContainerGap(16, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(40, 40, 40))))
         );
 
         jTabbedPane4.addTab("Annotation", jPanel1);
@@ -542,6 +560,7 @@ public class MainFrame extends javax.swing.JFrame {
             //copy the uploaded file to imagedb file
             new FileUtil().copyfile(path, "imagedb\\" + filechooser.getName(file));
 
+            filename = filechooser.getName(file);
             path = "imagedb\\" + filechooser.getName(file);
             System.out.println(path);
 
@@ -716,13 +735,11 @@ public class MainFrame extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
         String name = jTextField1.getText().trim();
-        String fullName = jTextField2.getText().trim();
-        String relation = (String)jComboBox1.getSelectedItem();
+        String surName = jTextField2.getText().trim();
+        String relation = (String) jComboBox1.getSelectedItem();
         String phoneNumber = jTextField4.getText().trim();
-        
+
         FaceDatabase db = new FaceDatabase();
-//        String pa = String.valueOf(System.getProperty("user.home")) + "//.faint";
-//        System.out.println(pa);
         String path = System.getProperty("user.home") + File.separator + ".faint";
         System.out.println(path);
         try {
@@ -737,10 +754,28 @@ public class MainFrame extends javax.swing.JFrame {
             db.writeToDisk();
         } catch (IOException e) {
         }
-        
+
         //write in a .rdf file
+        WriteRdf w = new WriteRdf();
+        String x = regions.get(faceID).getX() + "";
+        String y = regions.get(faceID).getY() + "";
+        String rdfImagePath = null;
+        String rdfRelationPath = null;
+        String currentUser = null;
+        try {
+            currentUser = new FileUtil().getSession();
+            rdfImagePath = "imagedb" + File.separator + "rdf" + File.separator + changeFileExt(filename);
+            rdfRelationPath = "imagedb" + File.separator + "rdf" + File.separator + currentUser + File.separator + currentUser +".rdf";
+            System.out.println(currentUser);
+            System.out.println(rdfImagePath);
+            System.out.println(rdfRelationPath);
+            
+            
+        } catch (FileNotFoundException ex) {} catch (IOException ex) {}
+        w.writerdf(rdfImagePath, name, surName, x, y, phoneNumber, path);
         
-        
+        w.writerdfR(rdfRelationPath,currentUser, name, relation);
+
 
         jFrame2.setVisible(false);
     }//GEN-LAST:event_jButton6ActionPerformed
@@ -760,6 +795,14 @@ public class MainFrame extends javax.swing.JFrame {
         return resizedImg;
     }
 
+    private static String changeFileExt(String str) {
+        String string[];
+        string = str.split(".jpg");
+        System.out.println(string.length);
+        string[0] = string[0] + ".rdf";
+        return string[0];
+    }
+    
     private void paintImage() {
         listModel.removeAllElements();
         ImageIcon imag = new ImageIcon(path);
@@ -880,6 +923,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -911,6 +955,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables

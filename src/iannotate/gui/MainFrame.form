@@ -218,7 +218,7 @@
                       <Component id="jTextField1" alignment="0" max="32767" attributes="0"/>
                       <Component id="jTextField4" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="98" max="32767" attributes="0"/>
+                  <EmptySpace pref="99" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -262,7 +262,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel12">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Full name"/>
+            <Property name="text" type="java.lang.String" value="Surname"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel13">
@@ -303,12 +303,12 @@
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="26">
                 <StringItem index="0" value="me"/>
-                <StringItem index="1" value="ambivalentOf    "/>
+                <StringItem index="1" value="ambivalentOf"/>
                 <StringItem index="2" value="antagonistOf"/>
-                <StringItem index="3" value="apprenticeTo    "/>
-                <StringItem index="4" value="childOf    "/>
-                <StringItem index="5" value="employedBy    "/>
-                <StringItem index="6" value="employerOf    "/>
+                <StringItem index="3" value="apprenticeTo"/>
+                <StringItem index="4" value="childOf"/>
+                <StringItem index="5" value="employedBy"/>
+                <StringItem index="6" value="employerOf"/>
                 <StringItem index="7" value="enemyOf"/>
                 <StringItem index="8" value="grandchildOf"/>
                 <StringItem index="9" value="grandparentOf"/>
@@ -317,16 +317,16 @@
                 <StringItem index="12" value="knowsInPassing"/>
                 <StringItem index="13" value="knowsOf"/>
                 <StringItem index="14" value="mentorOf"/>
-                <StringItem index="15" value="parentOf  "/>
-                <StringItem index="16" value="participant   "/>
-                <StringItem index="17" value="participantIn    "/>
-                <StringItem index="18" value="wouldLikeToKnow    "/>
-                <StringItem index="19" value="friendOf    "/>
-                <StringItem index="20" value="colleagueOf    "/>
-                <StringItem index="21" value="spouseOf    "/>
-                <StringItem index="22" value="closeFriendOf    "/>
-                <StringItem index="23" value="livesWith    "/>
-                <StringItem index="24" value="neighborOf    "/>
+                <StringItem index="15" value="parentOf"/>
+                <StringItem index="16" value="participant"/>
+                <StringItem index="17" value="participantIn"/>
+                <StringItem index="18" value="wouldLikeToKnow"/>
+                <StringItem index="19" value="friendOf"/>
+                <StringItem index="20" value="colleagueOf"/>
+                <StringItem index="21" value="spouseOf"/>
+                <StringItem index="22" value="closeFriendOf"/>
+                <StringItem index="23" value="livesWith"/>
+                <StringItem index="24" value="neighborOf"/>
                 <StringItem index="25" value="siblingOf"/>
               </StringArray>
             </Property>
@@ -429,11 +429,13 @@
                                   </Group>
                                   <Component id="jScrollPane2" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace min="0" pref="5" max="32767" attributes="0"/>
+                              <EmptySpace pref="16" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="jPanel2" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="jPanel2" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -448,15 +450,18 @@
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jScrollPane6" max="32767" attributes="0"/>
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
-                                          <Component id="jButton8" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
+                              <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <Component id="jButton8" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                                  <Component id="jTextField3" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -468,13 +473,18 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jScrollPane3" min="-2" pref="191" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jTextField3" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="32767" attributes="0"/>
                           <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jScrollPane6" min="-2" pref="152" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jButton8" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -539,6 +549,16 @@
                 <Component class="javax.swing.JButton" name="jButton8">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="OK"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="jTextField3">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="jTextField3"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel15">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Location"/>
                   </Properties>
                 </Component>
               </SubComponents>
