@@ -7,7 +7,9 @@ package iannotate.search;
 import com.hp.hpl.jena.query.*;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
+import iannotate.database.SearchPersonClass;
 import java.io.*;
+import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,13 +27,15 @@ public class SparqlQuery {
         InputStream in = new FileInputStream(rdf);
         model = ModelFactory.createMemModelMaker().createModel(null);
         model.read(in, null);
-
+        
+        //LinkedList for the search Result
+        LinkedList<SearchPersonClass> searchList = new LinkedList<>();
         // Create a new query
         String queryString =
         "PREFIX foaf: <http://xmlns.com/foaf/0.1/> " +
         "PREFIX EXIF: <http://www.w3.org/2003/12/exif/ns#> " +
         "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> " +
-        "SELECT ?node ?w ?h " +
+        "SELECT ?node ?w ?h ?iw ?il" +
         "WHERE {" +
            
         //" ?n foaf:thumbnail ?node . " +
@@ -54,6 +58,13 @@ public class SparqlQuery {
             while (results.hasNext()) {
                 QuerySolution soln = results.nextSolution();
                 System.out.println(soln.get("h").toString());
+                System.out.println(soln.get("w").toString());
+                System.out.println(soln.get("il").toString());
+                System.out.println(soln.get("iw").toString());
+
+
+                //String imageHeight = 
+               // searchList
                 
             }
         } catch (Exception ex) {
@@ -64,6 +75,6 @@ public class SparqlQuery {
     }
     
     public static void main(String[] args) throws IOException {
-        searchPerson(".\\rdf\\test2.rdf","samer");
+        searchPerson(".\\rdf\\test2.rdf","rajan");
     }
 }
