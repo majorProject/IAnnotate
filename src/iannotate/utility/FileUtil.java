@@ -48,8 +48,21 @@ public class FileUtil {
         in.close();
         return db;
     }
+
+    public static String getSession() throws FileNotFoundException, IOException, IOException {
+        int ch;
+        StringBuffer strContent = new StringBuffer("");
+        FileInputStream fs = new FileInputStream("session.txt");
+        while ((ch = fs.read()) != -1) {
+            strContent.append((char) ch);
+        }
+        fs.close();
+        return strContent.toString().trim();
+    }
 // for testing
-//    public static void main(String[] args) {
-//        copyfile("D:\\Temp\\test.html", "D:\\test.html");
-//    }
+    public static void main(String[] args) throws FileNotFoundException, IOException {
+        //copyfile("D:\\Temp\\test.html", "D:\\test.html");
+        String s = getSession();
+        System.out.println(s);
+    }
 }
