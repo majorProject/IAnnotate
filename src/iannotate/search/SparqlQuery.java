@@ -53,7 +53,8 @@ public class SparqlQuery {
 
             while (results.hasNext()) {
                 QuerySolution soln = results.nextSolution();
-                System.out.println(soln.get("h"));
+                System.out.println(soln.get("h").toString());
+                
             }
         } catch (Exception ex) {
             System.out.println(ex);
@@ -63,6 +64,6 @@ public class SparqlQuery {
     }
     
     public static void main(String[] args) throws IOException {
-        searchPerson(".\\rdfs\\test2.rdf","Sameer");
+        searchPerson(".\\rdf\\test2.rdf","samer");
     }
 }
