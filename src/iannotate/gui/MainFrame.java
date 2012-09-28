@@ -113,11 +113,11 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel3.setText("Name");
 
-        jLabel4.setText("Address");
+        jLabel4.setText("Full Name");
 
-        jLabel5.setText("DOB");
+        jLabel5.setText("Relation");
 
-        jLabel6.setText("Relation");
+        jLabel6.setText("Phone");
 
         jButton3.setText("new");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -171,49 +171,48 @@ public class MainFrame extends javax.swing.JFrame {
                         .addComponent(jButton4))
                     .addComponent(jLabel6)
                     .addGroup(jFrame1Layout.createSequentialGroup()
-                        .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel4)
-                            .addComponent(jLabel5)
                             .addGroup(jFrame1Layout.createSequentialGroup()
                                 .addGap(13, 13, 13)
-                                .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel10)
-                                        .addComponent(jLabel9)
-                                        .addComponent(jLabel8)
-                                        .addComponent(jLabel7))))
-                            .addComponent(jLabel3))
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel3)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jFrame1Layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel7))))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jFrame1Layout.setVerticalGroup(
             jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jFrame1Layout.createSequentialGroup()
                 .addGap(43, 43, 43)
                 .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jFrame1Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(24, 24, 24))
-                    .addGroup(jFrame1Layout.createSequentialGroup()
-                        .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jFrame1Layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jFrame1Layout.createSequentialGroup()
-                                        .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(jLabel3)
-                                            .addComponent(jLabel7))
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel4))
-                                    .addGroup(jFrame1Layout.createSequentialGroup()
-                                        .addGap(32, 32, 32)
-                                        .addComponent(jLabel8)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel9)))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel7))
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel4))
+                            .addGroup(jFrame1Layout.createSequentialGroup()
+                                .addGap(32, 32, 32)
+                                .addComponent(jLabel8)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel9))
+                        .addGap(7, 7, 7)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addComponent(jLabel10))
@@ -250,7 +249,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ambivalentOf    ", "antagonistOf", "apprenticeTo    ", "childOf    ", "employedBy    ", "employerOf    ", "enemyOf", "grandchildOf", "grandparentOf", "influencedBy", "knowsByReputation", "knowsInPassing", "knowsOf", "mentorOf", "parentOf  ", "participant   ", "participantIn    ", "wouldLikeToKnow    ", "friendOf    ", "colleagueOf    ", "spouseOf    ", "closeFriendOf    ", "livesWith    ", "neighborOf    ", "siblingOf" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "me", "ambivalentOf    ", "antagonistOf", "apprenticeTo    ", "childOf    ", "employedBy    ", "employerOf    ", "enemyOf", "grandchildOf", "grandparentOf", "influencedBy", "knowsByReputation", "knowsInPassing", "knowsOf", "mentorOf", "parentOf  ", "participant   ", "participantIn    ", "wouldLikeToKnow    ", "friendOf    ", "colleagueOf    ", "spouseOf    ", "closeFriendOf    ", "livesWith    ", "neighborOf    ", "siblingOf" }));
 
         javax.swing.GroupLayout jFrame2Layout = new javax.swing.GroupLayout(jFrame2.getContentPane());
         jFrame2.getContentPane().setLayout(jFrame2Layout);
@@ -716,7 +715,11 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        String name = jTextField1.getText();
+        String name = jTextField1.getText().trim();
+        String fullName = jTextField2.getText().trim();
+        String relation = (String)jComboBox1.getSelectedItem();
+        String phoneNumber = jTextField4.getText().trim();
+        
         FaceDatabase db = new FaceDatabase();
 //        String pa = String.valueOf(System.getProperty("user.home")) + "//.faint";
 //        System.out.println(pa);
@@ -734,6 +737,10 @@ public class MainFrame extends javax.swing.JFrame {
             db.writeToDisk();
         } catch (IOException e) {
         }
+        
+        //write in a .rdf file
+        
+        
 
         jFrame2.setVisible(false);
     }//GEN-LAST:event_jButton6ActionPerformed
