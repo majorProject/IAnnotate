@@ -20,7 +20,7 @@ import myclass.Relationship;
 public class WriteRdf {
 
     public static void writerdf(String filename, String fname,
-            String lname, String x, String y, String info) {
+            String lname, String x, String y, String phone, String info ) {
 
         // create an empty Model
         Model model = ModelFactory.createDefaultModel();
@@ -43,7 +43,9 @@ public class WriteRdf {
 
             root.addProperty(RDF.type, FOAF.Image);
             root.addProperty(FOAF.thumbnail, model.createResource().addProperty(FOAF.thumbnail,
-                    model.createResource().addProperty(EXIF.height, x).addProperty(EXIF.width, y).addProperty(EXIF.imageLength, "30").addProperty(EXIF.imageWidth, "20")).addProperty(FOAF.surname, lname).addProperty(FOAF.name, fname));
+                    model.createResource().addProperty(EXIF.height, x).addProperty(EXIF.width, y)
+                    .addProperty(EXIF.imageLength, "30").addProperty(EXIF.imageWidth, "20"))
+                    .addProperty(FOAF.phone, phone).addProperty(FOAF.surname, lname).addProperty(FOAF.name, fname));
 
 
 
@@ -81,14 +83,14 @@ public class WriteRdf {
         }
     }
 
-    public static void writerdfR(String username, String name, String relation) {
+    public static void writerdfR(String filename, String username, String name, String relation) {
         // create an empty Model
         Model model = ModelFactory.createDefaultModel();
 
         // find the input file
         InputStream in = null;
         try {
-            in = new FileInputStream("rdf//relation.rdf");
+            in = new FileInputStream(filename);
         } catch (IOException e) {
         }
         if (in == null) {
@@ -174,7 +176,7 @@ public class WriteRdf {
             model.write(System.out, "RDF/XML-ABBREV");
 
             try {
-                FileOutputStream fout = new FileOutputStream("rdf//relation.rdf");
+                FileOutputStream fout = new FileOutputStream(filename);
                 model.write(fout);
             } catch (FileNotFoundException e) {
                 System.out.println("error:" + e);
@@ -257,7 +259,7 @@ public class WriteRdf {
             model.write(System.out, "RDF/XML-ABBREV");
 
             try {
-                FileOutputStream fout = new FileOutputStream("rdf//relation.rdf");
+                FileOutputStream fout = new FileOutputStream(filename);
                 model.write(fout);
             } catch (FileNotFoundException e) {
                 System.out.println("error:" + e);
@@ -320,6 +322,6 @@ public class WriteRdf {
     public static void main(String[] args) {
         //writerdf("rdf/test2.rdf", "rajan", "maharjan", "60", "100", "info");
         //writerdfR("rajan", "susan", "friendOf");
-        writerdfD("rdf/test2.rdf","decsripcitons aaaaaa sfs");        
+        //writerdfD("rdf/test2.rdf","decsripcitons aaaaaa sfs");                
     }
 }
