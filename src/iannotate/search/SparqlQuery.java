@@ -137,7 +137,7 @@ public class SparqlQuery {
                     String imageWidth = soln.get("iw").toString();
                     String height = soln.get("h").toString();
                     String width = soln.get("w").toString();
-                    String filename = rootPath + changeFileExt(new File(path).getName());
+                    String filename = "imagedb" + File.separator + changeFileExt(new File(path).getName());
                     if (!imageLength.isEmpty()) {
                         searchList.add(new SearchPersonClass(filename, imageWidth, imageLength, height, width));
                     }
