@@ -76,8 +76,8 @@ public class SparqlQuery {
         qe.close();
     }
     
-    public static void searchPersonThroughDirectory(String pathToDirectory, String personName) {
-        //LinkedList<SearchPersonClass> searchList = new LinkedList<>();
+    public static LinkedList searchPersonThroughDirectory(String pathToDirectory, String personName) {
+        LinkedList<SearchPersonClass> searchList = new LinkedList<>();
         File f = new File(pathToDirectory);
         FileExtensionFilter fef = new FileExtensionFilter();
         fef.setExtension("rdf");
@@ -137,8 +137,9 @@ public class SparqlQuery {
                     String height = soln.get("h").toString();
                     String width = soln.get("w").toString();
                     String filename = new File(path).getName();
-                    //searchList.add(new SearchPersonClass(filename, imageWidth, imageLength, height, width));
-                    
+                    if(!imageLength.isEmpty()){
+                        searchList.add(new SearchPersonClass(filename, imageWidth, imageLength, height, width));
+                    }
                     qe.close();
                 }
                 System.out.println("--------");
@@ -147,10 +148,11 @@ public class SparqlQuery {
                 System.out.println("file not found Exception");
             }
         } // ---for(String content: contents) ends here---
+        return searchList;
     }
     public static void main(String[] args) throws IOException {
         //searchPerson(".\\rdf\\test2.rdf","rajan");
-        String pathToDirectory = "C:\\new\\Sujan007";
+        String pathToDirectory = "imagedb/rdf";
         searchPersonThroughDirectory(pathToDirectory, "Chinese2");
     }
 }
