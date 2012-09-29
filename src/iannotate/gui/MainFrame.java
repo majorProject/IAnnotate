@@ -45,6 +45,7 @@ public class MainFrame extends javax.swing.JFrame {
     private int faceID = 0;
 //    Region regions[];
     Vector<Region> regions = new Vector<>();
+    LinkedList<SearchPersonClass> list;         //for the search list
     Region regionsManual;
     Image image;
     int x1, x2, y1, y2;
@@ -55,7 +56,7 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() throws IOException {
         initComponents();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -118,8 +119,6 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
-        jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jButton7 = new javax.swing.JButton();
         jComboBox2 = new javax.swing.JComboBox();
@@ -128,8 +127,11 @@ public class MainFrame extends javax.swing.JFrame {
         jCheckBox2 = new javax.swing.JCheckBox();
         jTextField5 = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
+        jButton10 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         jLabel2.setText("Photo");
@@ -499,21 +501,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jTabbedPane4.addTab("Annotation", jPanel1);
 
-        jLabel18.setText("jLabel18");
-
-        jLabel19.setText("jLabel19");
-
-        jLabel20.setText("jLabel20");
-
-        jLabel21.setText("jLabel21");
-
-        jLabel22.setText("jLabel22");
-
-        jLabel23.setText("jLabel23");
-
-        jButton9.setText("<<");
-
-        jButton10.setText(">>");
+        jPanel7.setPreferredSize(new java.awt.Dimension(768, 400));
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -533,12 +521,8 @@ public class MainFrame extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel22)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel23))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(jButton9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton10)))
-                .addContainerGap(650, Short.MAX_VALUE))
+                        .addComponent(jLabel23)))
+                .addContainerGap(722, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -553,11 +537,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jLabel21)
                     .addComponent(jLabel22)
                     .addComponent(jLabel23))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 311, Short.MAX_VALUE)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton9)
-                    .addComponent(jButton10))
-                .addContainerGap())
+                .addContainerGap(378, Short.MAX_VALUE))
         );
 
         jButton7.setText("Search");
@@ -581,33 +561,29 @@ public class MainFrame extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel17)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(205, 205, 205))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextField5))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jCheckBox2)
                             .addComponent(jCheckBox1))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(22, 22, 22)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, 18)
                 .addComponent(jButton7)
-                .addContainerGap())
+                .addContainerGap(186, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(jButton7))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel17))
@@ -615,12 +591,17 @@ public class MainFrame extends javax.swing.JFrame {
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jCheckBox1)
                             .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jCheckBox2)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(12, Short.MAX_VALUE))
+                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jButton7))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
+
+        jButton10.setText(">>");
+
+        jButton9.setText("<<");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -630,8 +611,12 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(47, Short.MAX_VALUE))
+                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jButton9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton10)))
+                .addContainerGap(95, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -640,12 +625,26 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         jTabbedPane4.addTab("Search", jPanel4);
 
         jMenu1.setText("File");
+
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItem1.setText("Close");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Edit");
@@ -892,16 +891,18 @@ public class MainFrame extends javax.swing.JFrame {
         try {
             currentUser = new FileUtil().getSession();
             rdfImagePath = "imagedb" + File.separator + "rdf" + File.separator + changeFileExt(filename);
-            rdfRelationPath = "imagedb" + File.separator + "rdf" + File.separator + currentUser + File.separator + currentUser +".rdf";
+            rdfRelationPath = "imagedb" + File.separator + "rdf" + File.separator + currentUser + File.separator + currentUser + ".rdf";
             System.out.println(currentUser);
             System.out.println(rdfImagePath);
             System.out.println(rdfRelationPath);
-            
-            
-        } catch (FileNotFoundException ex) {} catch (IOException ex) {}
+
+
+        } catch (FileNotFoundException ex) {
+        } catch (IOException ex) {
+        }
         w.writerdf(rdfImagePath, name, surName, x, y, phoneNumber, path);
-        
-        w.writerdfR(rdfRelationPath,currentUser, name, relation);
+
+        w.writerdfR(rdfRelationPath, currentUser, name, relation);
 
 
         jFrame2.setVisible(false);
@@ -918,32 +919,48 @@ public class MainFrame extends javax.swing.JFrame {
         String searchedPerson = jTextField5.getText().trim();
         String relation = null;
         String location = null;
-        if(jCheckBox1.isSelected()) {
+        if (jCheckBox1.isSelected()) {
             relation = jComboBox2.getName().trim();
         }
-        if(jCheckBox2.isSelected()) {
+        if (jCheckBox2.isSelected()) {
             location = jTextField6.getText().trim();
         }
-        
-        if(!searchedPerson.isEmpty()) {
-            LinkedList<SearchPersonClass> list = SparqlQuery.searchPersonThroughDirectory("imagedb/rdf", searchedPerson);
-            
-            for(int i = 0; i < 1 ; i++) {
-                jLabel18.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(),50,50)));
+
+        if (!searchedPerson.isEmpty()) {
+            list = SparqlQuery.searchPersonThroughDirectory("imagedb/rdf", searchedPerson);
+
+            for (int i = 0; i < list.size(); i++) {
+                if (i == 0) {
+                    jLabel18.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 200)));
+                }
+                if (i == 1) {
+                    jLabel19.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 200)));
+                }
+                if (i == 2) {
+                    jLabel20.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 200)));
+                }
+                if (i == 3) {
+                    jLabel21.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 200)));
+                }
+                if (i == 4) {
+                    jLabel22.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 200)));
+                }
+                if (i == 4) {
+                    jLabel23.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 200)));
+                }                
                 System.out.println(list.get(i).getFileName());
             }
+        } else if (!searchedPerson.isEmpty() && !relation.isEmpty() && location.isEmpty()) {
+        } else if (!searchedPerson.isEmpty() && relation.isEmpty() && !location.isEmpty()) {
+        } else if (!searchedPerson.isEmpty() && !relation.isEmpty() && !location.isEmpty()) {
         }
-        else if(!searchedPerson.isEmpty() && !relation.isEmpty() && location.isEmpty()) {
-            
-        }
-        else if(!searchedPerson.isEmpty() && relation.isEmpty() && !location.isEmpty()) {
-            
-        }
-        else if(!searchedPerson.isEmpty() && !relation.isEmpty() && !location.isEmpty()){
-            
-        }
-        
+
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        System.exit(1);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private Image getScaledImage(Image srcImg, int width, int height) {
         BufferedImage resizedImg = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
@@ -961,7 +978,7 @@ public class MainFrame extends javax.swing.JFrame {
         string[0] = string[0] + ".rdf";
         return string[0];
     }
-    
+
     private void paintImage() {
         listModel.removeAllElements();
         ImageIcon imag = new ImageIcon(path);
@@ -1032,11 +1049,17 @@ public class MainFrame extends javax.swing.JFrame {
          * If Nimbus (introduced in Java SE 6) is not available, stay with the
          * default look and feel. For details see
          * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
+         */     
+        try {
+            UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
+            }
+        catch(Exception e) {
+            System.out.println(e);
+            }
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Metal".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
                     break;
                 }
             }
@@ -1110,6 +1133,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
