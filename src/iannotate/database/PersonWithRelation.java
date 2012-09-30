@@ -17,7 +17,7 @@ public class PersonWithRelation {
     private String personPhoneNumber;
     private String imageFileName;
     
-    PersonWithRelation(String faintName, String fullName, String relation, String phoneNumber, String imageFName ){
+    public PersonWithRelation(String faintName, String fullName, String relation, String phoneNumber, String imageFName ){
         personFaintName = faintName;
         personFullName = fullName;
         personRelation = relation;
