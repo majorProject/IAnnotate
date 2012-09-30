@@ -265,6 +265,56 @@ public class SparqlQuery {
 
         return relation;
     }
+    
+    public static LinkedList RelateToPerson(String user, String rdfPath, String relation) throws FileNotFoundException, IOException {
+
+        LinkedList<PersonWithRelation> list = new LinkedList<>();
+        // Open the bloggers RDF graph from the filesystem
+        InputStream in = new FileInputStream(new File(rdfPath));
+        // Create an empty in-memory model and populate it from the graph
+        Model model = ModelFactory.createMemModelMaker().createModel(null);
+        model.read(in, null); // null base URI, since model URIs are absolute
+        in.close();
+
+        // Create a new query
+        String queryString =
+                "PREFIX foaf: <http://xmlns.com/foaf/0.1/> "
+                + "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> "
+                + "PREFIX EXIF: <http://www.w3.org/2003/12/exif/ns#> "
+                + "PREFIX relation: <http://purl.org/vocab/relationship/> "
+                + "DESCRIBE ?person "
+                + "WHERE {"
+                + " ?person foaf:name \"" + user + "\" . "
+                + " }";
+        Query query = QueryFactory.create(queryString);
+// Execute the query and obtain results
+        QueryExecution qe = QueryExecutionFactory.create(query, model);
+        Model result = qe.execDescribe();
+
+//            System.out.println(result);
+        // System.out.println(result.listStatements().next().getPredicate().getLocalName());//gives the relation name
+        //System.out.println(result.listStatements().next().getObject() + " yeah" );       
+        List<Statement> toList = result.listStatements().toList();
+        int i = 0;
+        String personName = null;
+        while (i != toList.size()) {
+            String qRelation = toList.get(i).getPredicate().getLocalName();
+            personName = toList.get(i).getObject().toString();
+            
+            
+            if (qRelation.contentEquals(relation)) {
+                list.add(new PersonWithRelation(personName,"","","",""));
+                System.out.println(user + " is " + relation + " " + personName);
+            }
+            i++;
+
+        }
+        // Important - free up resources used running the query
+        qe.close();
+
+        return list;
+
+    }
 
     private static String changeFileExt(String str) {
         String string[];
