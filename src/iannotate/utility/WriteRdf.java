@@ -265,7 +265,7 @@ public class WriteRdf {
         }
     }
 
-    public static void writerdfD(String filename, String info) {
+    public static void writerdfD(String filename, String info, String date) {
         // create an empty Model
         Model model = ModelFactory.createDefaultModel();
 
@@ -285,7 +285,7 @@ public class WriteRdf {
             // create a contributor
             Resource root = model.createResource("http://something.com");
 
-            root.addProperty(EXIF.imageDescription, info);
+            root.addProperty(EXIF.imageDescription, info).addProperty(EXIF.date, date);
 
             // write the RDF model to the console as RDF/XML
             model.write(System.out, "RDF/XML-ABBREV");
@@ -320,6 +320,6 @@ public class WriteRdf {
     public static void main(String[] args) {
         //writerdf("rdf/test2.rdf", "rajan", "maharjan", "60", "100", "info");
         //writerdfR("rajan", "susan", "friendOf");
-        //writerdfD("rdf/test2.rdf","decsripcitons aaaaaa sfs");                
+        writerdfD("rdf/date1.rdf","Description about the image and the something about the something","01-02-2011");
     }
 }
