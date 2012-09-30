@@ -188,8 +188,8 @@ public class SparqlQuery {
                         + "SELECT ?node ?s ?p "
                         + "WHERE {"
                         + " ?node foaf:name \"" + personName + "\" . "
-                        + " ?t foaf:surname ?s ."
-                        + " ?t foaf:phone ?p ."
+                        + " ?node foaf:surname ?s ."
+                        + " ?node foaf:phone ?p ."
                         + " }";
 
 
@@ -206,9 +206,9 @@ public class SparqlQuery {
                     String surname = soln.get("s").toString();
                     String phone = soln.get("p").toString();
                     String filename = "imagedb" + File.separator + changeFileExt(new File(path).getName());
-                    if (!surname.isEmpty()) {
+                    if (!surname.isEmpty() && !phone.isEmpty()) {
                         searchList.add(new PersonWithRelation(personName, surname, "", phone, ""));
-                        //return searchList;
+                        return searchList;
                     }
                     qe.close();
                 }
@@ -266,9 +266,9 @@ public class SparqlQuery {
         return relation;
     }
     
-    public static LinkedList RelateToPerson(String user, String rdfPath, String relation) throws FileNotFoundException, IOException {
+    public static LinkedList relateToPerson(String rdfPath,String user,String relation) throws FileNotFoundException, IOException {
 
-        LinkedList<PersonWithRelation> list = new LinkedList<>();
+        LinkedList<SearchPersonClass> list = new LinkedList<>();
         // Open the bloggers RDF graph from the filesystem
         InputStream in = new FileInputStream(new File(rdfPath));
         // Create an empty in-memory model and populate it from the graph
@@ -303,7 +303,7 @@ public class SparqlQuery {
             
             
             if (qRelation.contentEquals(relation)) {
-                list.add(new PersonWithRelation(personName,"","","",""));
+                list.add(new SearchPersonClass(personName,"","","",""));
                 System.out.println(user + " is " + relation + " " + personName);
             }
             i++;
@@ -325,10 +325,11 @@ public class SparqlQuery {
 
     public static void main(String[] args) throws IOException {
         //searchPerson(".\\rdf\\test2.rdf","rajan");
-        String pathToDirectory = "imagedb/rdf/susan/susan.rdf";
+//        String pathToDirectory = "imagedb/rdf/";
         //searchPersonThroughDirectory(pathToDirectory, "Chinese2");
-//        searchPersonWithPhone(pathToDirectory, "Chinese");
-        String relation = findRelation(pathToDirectory,"saru","susan");
-        System.out.println(relation);
+//        searchPersonWithPhone(pathToDirectory, "prajjwol");
+//        relateToPerson("imagedb/rdf/susan/susan.rdf", "susan", "closeFriendOf");
+//        String relation = findRelation(pathToDirectory,"saru","susan");
+//        System.out.println(relation);
     }
 }
