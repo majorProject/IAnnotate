@@ -46,7 +46,7 @@ public class MainFrame extends javax.swing.JFrame {
     private int faceID = 0;
 //    Region regions[];
     Vector<Region> regions = new Vector<>();
-    LinkedList<SearchPersonClass> list;         //for the search list
+    LinkedList<SearchPersonClass> list = new LinkedList<>();         //for the search list
     Region regionsManual;
     Image image;
     int x1, x2, y1, y2;
@@ -82,6 +82,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jButton9 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jFrame2 = new javax.swing.JFrame();
@@ -180,6 +181,13 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel10.setText("jLabel10");
 
+        jButton9.setText("OK");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
         jFrame1Layout.setHorizontalGroup(
@@ -187,12 +195,6 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(jFrame1Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jFrame1Layout.createSequentialGroup()
-                        .addComponent(jButton3)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton5)
-                        .addGap(30, 30, 30)
-                        .addComponent(jButton4))
                     .addComponent(jLabel6)
                     .addGroup(jFrame1Layout.createSequentialGroup()
                         .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -210,7 +212,16 @@ public class MainFrame extends javax.swing.JFrame {
                                     .addComponent(jLabel8)
                                     .addComponent(jLabel7))))
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jFrame1Layout.createSequentialGroup()
+                        .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton9)
+                            .addGroup(jFrame1Layout.createSequentialGroup()
+                                .addComponent(jButton3)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton5)))
+                        .addGap(30, 30, 30)
+                        .addComponent(jButton4)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jFrame1Layout.setVerticalGroup(
@@ -245,7 +256,9 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jButton3)
                     .addComponent(jButton4)
                     .addComponent(jButton5))
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton9)
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         jTextArea1.setColumns(20);
@@ -864,12 +877,19 @@ public class MainFrame extends javax.swing.JFrame {
         } catch (FileNotFoundException ex) {
         } catch (IOException ex) {
         }
-
-
         jLabel7.setText(result[0]);
-        jLabel8.setText(l.element().getPersonFullName());
+        if(!l.get(0).getPersonFullName().isEmpty()) {
+            jLabel8.setText(l.element().getPersonFullName());
+        }
+        else
+            jLabel8.setText("");
         jLabel9.setText(relation);
-        jLabel10.setText(l.element().getPersonPhoneNumber());
+        if(!l.element().getPersonPhoneNumber().isEmpty()) {
+            jLabel10.setText(l.element().getPersonPhoneNumber());
+        }
+        else
+            jLabel10.setText("");
+        
     }//GEN-LAST:event_jList2MouseClicked
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -934,13 +954,13 @@ public class MainFrame extends javax.swing.JFrame {
         String relation = null;
         String location = null;
         if (jCheckBox1.isSelected()) {
-            relation = jComboBox2.getName().trim();
+            relation = (String) jComboBox2.getSelectedItem();
         }
         if (jCheckBox2.isSelected()) {
             location = jTextField6.getText().trim();
         }
 
-        if (!searchedPerson.isEmpty()) {
+        if (!searchedPerson.isEmpty()  && !jCheckBox1.isSelected() && !jCheckBox2.isSelected()) {
             list = SparqlQuery.searchPersonThroughDirectory("imagedb/rdf", searchedPerson);
 
             for (int i = 0; i < list.size(); i++) {
@@ -964,7 +984,59 @@ public class MainFrame extends javax.swing.JFrame {
                 }
                 System.out.println(list.get(i).getFileName());
             }
-        } else if (!searchedPerson.isEmpty() && !relation.isEmpty() && location.isEmpty()) {
+        } else if (!searchedPerson.isEmpty() && jCheckBox1.isSelected() && !jCheckBox2.isSelected()) {
+            try {
+                LinkedList<SearchPersonClass> list2 = SparqlQuery.relateToPerson("imagedb/rdf/"+searchedPerson+"/"+searchedPerson+".rdf", searchedPerson,relation);
+                LinkedList<SearchPersonClass> list3 = new LinkedList<>();
+                
+                //System.out.println(list2.element().getFileName());
+                for(int i=0;i<list2.size(); i++){
+                    //if(!list2.element().getFileName().isEmpty()){
+                        //System.out.println("dd");
+                    System.out.println(list2.get(i).getFileName());
+                        list3 = SparqlQuery.searchPersonThroughDirectory("imagedb/rdf", list2.get(i).getFileName());
+                        for(int j=0;j<list3.size();j++){
+                            System.out.println("1");
+                            String fN = list3.get(j).getFileName(); //FileName
+                            String iW = list3.get(j).getImageWidth(); //ImageWidth
+                            String iL = list3.get(j).getImageLength(); //ImageLength
+                            String w = list3.get(j).getWidth(); //Width
+                            String h = list3.get(j).getHeight(); //Height
+                            System.out.println(h + fN + iW + iL + w);
+                            list.add(new SearchPersonClass(fN,iW,iL,h,w));
+                            
+                        }
+                    //}
+                }
+                System.out.println(list.size());
+                for (int i = 0; i < list.size(); i++) {
+                    if (i == 0) {
+                        jLabel18.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 200)));
+                    }
+                    if (i == 1) {
+                        jLabel19.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 200)));
+                    }
+                    if (i == 2) {
+                        jLabel20.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 200)));
+                    }
+                    if (i == 3) {
+                        jLabel21.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 200)));
+                    }
+                    if (i == 4) {
+                        jLabel22.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 200)));
+                    }
+                    if (i == 5) {
+                        jLabel23.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 200)));
+                    }
+                    System.out.println(list.get(i).getFileName());
+                }
+                
+                
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else if (!searchedPerson.isEmpty() && relation.isEmpty() && !location.isEmpty()) {
         } else if (!searchedPerson.isEmpty() && !relation.isEmpty() && !location.isEmpty()) {
         }
@@ -975,6 +1047,56 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(1);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:
+        String name = jLabel7.getText();
+        String surName = jLabel8.getText();
+        String relation = jLabel9.getText();
+        String phoneNumber = jLabel10.getText();
+        
+        //write in faint database
+        FaceDatabase db = new FaceDatabase();
+        String path = System.getProperty("user.home") + File.separator + ".faint";
+        System.out.println(path);
+        try {
+            db = new FileUtil().recoverFromDisk(path);
+        } catch (IOException ex) {
+        }
+
+        System.out.println(db.getKnownFaces().length);
+
+        db.put(regions.get(faceID), name);
+        try {
+            db.writeToDisk();
+        } catch (IOException e) {
+        }
+        
+        //write in a .rdf file
+        WriteRdf w = new WriteRdf();
+        String x = regions.get(faceID).getX() + "";
+        String y = regions.get(faceID).getY() + "";
+        String rdfImagePath = null;
+        String rdfRelationPath = null;
+        String currentUser = null;
+        try {
+            currentUser = new FileUtil().getSession();
+            rdfImagePath = "imagedb" + File.separator + "rdf" + File.separator + changeFileExt(filename);
+            rdfRelationPath = "imagedb" + File.separator + "rdf" + File.separator + currentUser + File.separator + currentUser + ".rdf";
+            System.out.println(currentUser);
+            System.out.println(rdfImagePath);
+            System.out.println(rdfRelationPath);
+
+
+        } catch (FileNotFoundException ex) {
+        } catch (IOException ex) {
+        }
+        w.writerdf(rdfImagePath, name, surName, x, y, phoneNumber, path);
+
+        w.writerdfR(rdfRelationPath, currentUser, name, relation);
+        
+        jFrame1.setVisible(false);
+    }//GEN-LAST:event_jButton9ActionPerformed
 
     private Image getScaledImage(Image srcImg, int width, int height) {
         BufferedImage resizedImg = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
@@ -1070,27 +1192,27 @@ public class MainFrame extends javax.swing.JFrame {
          * default look and feel. For details see
          * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
-        try {
-            UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
+//        try {
+//            UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
         //</editor-fold>
 
         /*
@@ -1116,6 +1238,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JComboBox jComboBox1;
