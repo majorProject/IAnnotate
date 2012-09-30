@@ -1140,6 +1140,7 @@ public class MainFrame extends javax.swing.JFrame {
             System.out.println(currentUser);
             System.out.println(rdfImagePath);
             System.out.println(rdfRelationPath);
+            //test for pushing don't mind this comment
 
 
         } catch (FileNotFoundException ex) {
