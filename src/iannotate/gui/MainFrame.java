@@ -23,6 +23,7 @@ import iannotate.search.SparqlQuery;
 import iannotate.utility.FileUtil;
 import iannotate.utility.FormattedDate;
 import iannotate.utility.WriteRdf;
+import java.awt.Cursor;
 import java.io.FileNotFoundException;
 import java.lang.String;
 import java.util.*;
@@ -86,8 +87,6 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jButton9 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
         jFrame2 = new javax.swing.JFrame();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -279,10 +278,6 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
-
         jLabel11.setText("Name");
 
         jLabel12.setText("Surname");
@@ -324,7 +319,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jTextField2)
                     .addComponent(jTextField1)
                     .addComponent(jTextField4))
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         jFrame2Layout.setVerticalGroup(
             jFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -348,7 +343,7 @@ public class MainFrame extends javax.swing.JFrame {
                             .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jButton6)))
-                .addGap(41, 41, 41))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "me", "ambivalentOf", "antagonistOf", "apprenticeTo", "childOf", "colleagueOf", "closeFriendOf", "employedBy", "employerOf", "enemyOf", "friendOf", "grandchildOf", "grandparentOf", "influencedBy", "knowsByReputation", "knowsInPassing", "knowsOf", "livesWith", "mentorOf", "neighborOf", "parentOf", "participant", "participantIn", "siblingOf", "spouseOf", "wouldLikeToKnow" }));
@@ -426,6 +421,8 @@ public class MainFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
+        jTabbedPane4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -460,13 +457,13 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel16.setText("Desciption");
 
         jButton8.setText("OK");
+        jButton8.setEnabled(false);
+        jButton8.setPreferredSize(new java.awt.Dimension(65, 23));
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton8ActionPerformed(evt);
             }
         });
-
-        jTextField3.setText("jTextField3");
 
         jLabel15.setText("Location");
 
@@ -478,16 +475,16 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane6)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton8))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel16)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel15)
                         .addGap(36, 36, 36)
-                        .addComponent(jTextField3)))
+                        .addComponent(jTextField3))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -499,23 +496,23 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel15))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel16)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane6)
                 .addGap(18, 18, 18)
-                .addComponent(jButton8)
+                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         jPanel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel1MousePressed(evt);
-            }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 jLabel1MouseReleased(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel1MousePressed(evt);
             }
         });
 
@@ -531,6 +528,8 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         jButton1.setText("Upload");
+        jButton1.setToolTipText("Upload a picture");
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -538,6 +537,8 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         jButton2.setText("Detect");
+        jButton2.setToolTipText("Detect the faces on the picture");
+        jButton2.setEnabled(false);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -630,18 +631,14 @@ public class MainFrame extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(11, 11, 11)
-                                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane2))
-                        .addContainerGap(16, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(40, 40, 40))))
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(11, 11, 11)
+                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         jTabbedPane4.addTab("Annotation", jPanel1);
@@ -656,14 +653,39 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         jLabel19.setPreferredSize(new java.awt.Dimension(200, 190));
+        jLabel19.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel19MouseClicked(evt);
+            }
+        });
 
         jLabel20.setPreferredSize(new java.awt.Dimension(200, 190));
+        jLabel20.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel20MouseClicked(evt);
+            }
+        });
 
         jLabel21.setPreferredSize(new java.awt.Dimension(200, 190));
+        jLabel21.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel21MouseClicked(evt);
+            }
+        });
 
         jLabel22.setPreferredSize(new java.awt.Dimension(200, 190));
+        jLabel22.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel22MouseClicked(evt);
+            }
+        });
 
         jLabel23.setPreferredSize(new java.awt.Dimension(200, 190));
+        jLabel23.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel23MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -842,6 +864,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jMenu2.setText("Manage");
 
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_MASK));
         jMenuItem2.setText("Arrange");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -880,6 +903,10 @@ public class MainFrame extends javax.swing.JFrame {
         returnVal = filechooser.showDialog(MainFrame.this, "select an image");
 
         if (returnVal == JFileChooser.APPROVE_OPTION) {
+            progressImageDetection.setValue(100);
+            jButton2.setEnabled(true);
+            jButton8.setEnabled(true);
+            
             File file = filechooser.getSelectedFile();
             //Display image and its metadata
             path = file.getAbsolutePath();
@@ -921,9 +948,7 @@ public class MainFrame extends javax.swing.JFrame {
                 for (int row = 0; row < 10; row++) {
                     for (int col = 0; col < 2; col++) {
                         jTable2.getModel().setValueAt(attributes[row][col], row, col);
-
                     }
-
                 }
             } catch (JpegProcessingException | MetadataException | IOException ex) {
                 Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -939,9 +964,11 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         FaceDetection face = new FaceDetection(path, "images");
         int precision = precisionSlider.getValue();
-        progressImageDetection.setValue(0);
+        
+        jTabbedPane4.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         Region reg[] = face.detectFace(precision);
         progressImageDetection.setValue(100);
+        jTabbedPane4.setCursor(Cursor.getDefaultCursor());
         
         regions.removeAllElements();
         for (int i = 0; i < reg.length; i++) {
@@ -991,27 +1018,29 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jLabel1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseReleased
         // TODO add your handling code here:
-        x2 = evt.getX();
-        y2 = evt.getY();
+        if(path != null) {
+            x2 = evt.getX();
+            y2 = evt.getY();
 
-        int w, h;
-        int width = x1 - x2;
-        int height = y1 - y2;
+            int w, h;
+            int width = x1 - x2;
+            int height = y1 - y2;
 
-        w = Math.abs(width);
-        h = Math.abs(height);
+            w = Math.abs(width);
+            h = Math.abs(height);
 
-        int centroidX = (x1 + x2) / 2;
-        int centroidY = (y1 + y2) / 2;
+            int centroidX = (x1 + x2) / 2;
+            int centroidY = (y1 + y2) / 2;
 
-        regionsManual = new Region(centroidX * image.getWidth(rootPane) / jPanel3.getWidth(),
-                centroidY * image.getHeight(rootPane) / jPanel3.getHeight(),
-                w * image.getWidth(rootPane) / jPanel3.getWidth(),
-                h * image.getHeight(rootPane) / jPanel3.getHeight(), 0.0, path);
+            regionsManual = new Region(centroidX * image.getWidth(rootPane) / jPanel3.getWidth(),
+                    centroidY * image.getHeight(rootPane) / jPanel3.getHeight(),
+                    w * image.getWidth(rootPane) / jPanel3.getWidth(),
+                    h * image.getHeight(rootPane) / jPanel3.getHeight(), 0.0, path);
 
-        regions.add(regionsManual);
+            regions.add(regionsManual);
 
-        paintImage();
+            paintImage();
+        }
     }//GEN-LAST:event_jLabel1MouseReleased
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -1149,6 +1178,11 @@ public class MainFrame extends javax.swing.JFrame {
         String searchedPerson = jTextField5.getText().trim().toLowerCase();
         String relation = null;
         String location = null;
+        
+        //reset the display area
+        list.removeAll(list);
+        clearResultScreen();
+        
         if (jCheckBox1.isSelected()) {
             relation = (String) jComboBox2.getSelectedItem();
         }
@@ -1157,92 +1191,88 @@ public class MainFrame extends javax.swing.JFrame {
         }
 
         if (!searchedPerson.isEmpty()  && !jCheckBox1.isSelected() && !jCheckBox2.isSelected()) {
-            list.removeAll(list);
+//            list.removeAll(list);
             list = SparqlQuery.searchPersonThroughDirectory("imagedb/rdf", searchedPerson);
             
-            //reset the display area
-            clearResultScreen();
-
-            for (int i = 0; i < list.size(); i++) {
-                if (i == 0) {
-                    jLabel18.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 180)));
-                }
-                if (i == 1) {
-                    jLabel19.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 180)));
-                }
-                if (i == 2) {
-                    jLabel20.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 180)));
-                }
-                if (i == 3) {
-                    jLabel21.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 180)));
-                }
-                if (i == 4) {
-                    jLabel22.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 180)));
-                }
-                if (i == 5) {
-                    jLabel23.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 180)));
-                }
-                System.out.println(list.size());
-                System.out.println(list.get(i).getFileName());
-                //for previous and next button
-                if(list.size()>5) {
-                    nextButton.setEnabled(true);
-                    nextID = 6;
-                    displayStatus = 0;
-                }
+            displayStatus = 0;
+            displayResult();
+            
+            
+//            for (int i = 0; i < list.size() && i < 6; i++) {
+//                if (i == 0) {                    
+//                    jLabel18.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 180)));
+//                }
+//                if (i == 1) {
+//                    jLabel19.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 180)));
+//                }
+//                if (i == 2) {
+//                    jLabel20.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 180)));
+//                }
+//                if (i == 3) {
+//                    jLabel21.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 180)));
+//                }
+//                if (i == 4) {
+//                    jLabel22.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 180)));
+//                }
+//                if (i == 5) {
+//                    jLabel23.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 180)));
+//                }                
+//            }
+            //for previous and next button
+            if(list.size()>5) {
+                nextButton.setEnabled(true);
+                previousButton.setEnabled(false);
+                nextID = 6;
+                displayStatus = 0;
             }
+            else{
+                nextButton.setEnabled(false);
+                previousButton.setEnabled(false);
+            }
+            
         } else if (!searchedPerson.isEmpty() && jCheckBox1.isSelected() && !jCheckBox2.isSelected()) {
-            list.removeAll(list);
+//            list.removeAll(list);
             try {
                 
                 LinkedList<SearchPersonClass> list2 = SparqlQuery.relateToPerson("imagedb/rdf/"+searchedPerson+"/"+searchedPerson+".rdf", searchedPerson,relation);
                 LinkedList<SearchPersonClass> list3 = new LinkedList<>();
-                
-                //System.out.println(list2.element().getFileName());
-                for(int i=0;i<list2.size(); i++){
-                    //if(!list2.element().getFileName().isEmpty()){
-                        //System.out.println("dd");
-                    System.out.println(list2.get(i).getFileName());
+                                
+                for( int i=0 ; i < list2.size(); i++ ) {
                         list3 = SparqlQuery.searchPersonThroughDirectory("imagedb/rdf", list2.get(i).getFileName());
                         for(int j=0;j<list3.size();j++){
-                            System.out.println("1");
                             String fN = list3.get(j).getFileName(); //FileName
                             String iW = list3.get(j).getImageWidth(); //ImageWidth
                             String iL = list3.get(j).getImageLength(); //ImageLength
                             String w = list3.get(j).getWidth(); //Width
                             String h = list3.get(j).getHeight(); //Height
-                            System.out.println(h + fN + iW + iL + w);
+                            
                             list.add(new SearchPersonClass(fN,iW,iL,h,w));
                             
                         }
                     //}
                 }
-                System.out.println(list.size());
-                
-                //reset the display area
-                clearResultScreen();
-                
-                for (int i = 0; i < list.size(); i++) {
-                    if (i == 0) {
-                        jLabel18.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 180)));
-                    }
-                    if (i == 1) {
-                        jLabel19.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 180)));
-                    }
-                    if (i == 2) {
-                        jLabel20.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 180)));
-                    }
-                    if (i == 3) {
-                        jLabel21.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 180)));
-                    }
-                    if (i == 4) {
-                        jLabel22.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 180)));
-                    }
-                    if (i == 5) {
-                        jLabel23.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 180)));
-                    }
-                    System.out.println(list.get(i).getFileName());
-                }
+                displayStatus = 0;
+                displayResult();
+//                for (int i = 0; i < list.size() && i < 6; i++) {
+//                    if (i == 0) {
+//                        jLabel18.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 180)));
+//                    }
+//                    if (i == 1) {
+//                        jLabel19.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 180)));
+//                    }
+//                    if (i == 2) {
+//                        jLabel20.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 180)));
+//                    }
+//                    if (i == 3) {
+//                        jLabel21.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 180)));
+//                    }
+//                    if (i == 4) {
+//                        jLabel22.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 180)));
+//                    }
+//                    if (i == 5) {
+//                        jLabel23.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 180)));
+//                    }                    
+//                }
                 
                 
             } catch (FileNotFoundException ex) {
@@ -1252,10 +1282,15 @@ public class MainFrame extends javax.swing.JFrame {
             }
             
             //for previous and next button
-            if(list.size()>5) {
+            if(list.size() > 5) {
                 nextButton.setEnabled(true);
+                previousButton.setEnabled(false);
                 nextID = 6;
                 displayStatus = 0;
+            }
+            else {
+                nextButton.setEnabled(false);
+                previousButton.setEnabled(false);
             }
             
         } else if (!searchedPerson.isEmpty() && relation.isEmpty() && !location.isEmpty()) {
@@ -1332,6 +1367,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
         // TODO add your handling code here:
+        disableHandCursor();
         previousButton.setEnabled(true);
         previousID = nextID;       
         
@@ -1347,6 +1383,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void previousButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previousButtonActionPerformed
         // TODO add your handling code here:
+        disableHandCursor();
         nextButton.setEnabled(true);
         nextID = previousID;
         
@@ -1445,6 +1482,8 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:        
         clearResultScreen();
         jLabel26.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(displayStatus*6 + 0).getFileName()).getImage(), 600, 400)));
+        nextButton.setVisible(false);
+        previousButton.setVisible(false);
         backToResult.setEnabled(true);
     }//GEN-LAST:event_jLabel18MouseClicked
 
@@ -1452,12 +1491,69 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         jLabel26.setIcon(null);
         displayResult();
+        nextButton.setVisible(true);
+        previousButton.setVisible(true);
         backToResult.setEnabled(false);
     }//GEN-LAST:event_backToResultActionPerformed
 
     private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox3ActionPerformed
+
+    private void jLabel19MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel19MouseClicked
+        // TODO add your handling code here:
+        if((displayStatus*6 + 1) < list.size()) {
+            clearResultScreen();
+            jLabel26.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(displayStatus*6 + 1).getFileName()).getImage(), 600, 400)));
+            nextButton.setVisible(false);
+            previousButton.setVisible(false);
+            backToResult.setEnabled(true);
+    }
+    }//GEN-LAST:event_jLabel19MouseClicked
+
+    private void jLabel20MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel20MouseClicked
+        // TODO add your handling code here:
+        if((displayStatus*6 + 2) < list.size()) {
+            clearResultScreen();
+            jLabel26.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(displayStatus*6 + 2).getFileName()).getImage(), 600, 400)));
+            nextButton.setVisible(false);
+            previousButton.setVisible(false);
+            backToResult.setEnabled(true);
+        }
+    }//GEN-LAST:event_jLabel20MouseClicked
+
+    private void jLabel21MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel21MouseClicked
+        // TODO add your handling code here:
+        if((displayStatus*6 + 3) < list.size()) {
+            clearResultScreen();
+            jLabel26.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(displayStatus*6 + 3).getFileName()).getImage(), 600, 400)));
+            nextButton.setVisible(false);
+            previousButton.setVisible(false);
+            backToResult.setEnabled(true);
+        }
+    }//GEN-LAST:event_jLabel21MouseClicked
+
+    private void jLabel22MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel22MouseClicked
+        // TODO add your handling code here:
+        if((displayStatus*6 + 4) < list.size()) {
+            clearResultScreen();
+            jLabel26.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(displayStatus*6 + 4).getFileName()).getImage(), 600, 400)));
+            nextButton.setVisible(false);
+            previousButton.setVisible(false);
+            backToResult.setEnabled(true);
+        }
+    }//GEN-LAST:event_jLabel22MouseClicked
+
+    private void jLabel23MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel23MouseClicked
+        // TODO add your handling code here:
+        if((displayStatus*6 + 5) < list.size()) {
+            clearResultScreen();
+            jLabel26.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(displayStatus*6 + 5).getFileName()).getImage(), 600, 400)));
+            nextButton.setVisible(false);
+            previousButton.setVisible(false);
+            backToResult.setEnabled(true);
+        }
+    }//GEN-LAST:event_jLabel23MouseClicked
 
     private Image getScaledImage(Image srcImg, int width, int height) {
         BufferedImage resizedImg = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
@@ -1554,27 +1650,27 @@ public class MainFrame extends javax.swing.JFrame {
          * default look and feel. For details see
          * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
-//        try {
-//            UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
-//        } catch (Exception e) {
-//            System.out.println(e);
-//        }
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
+        try {
+            UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
         //</editor-fold>
 
         /*
@@ -1655,14 +1751,12 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JProgressBar jProgressBar1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane4;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
@@ -1683,21 +1777,27 @@ public class MainFrame extends javax.swing.JFrame {
     private void displayResult() {
         for (int i = displayStatus *6; i < list.size() && i<(displayStatus*6+6) ; i++) {
                 if (i == displayStatus *6+0) {
+                    jLabel18.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
                     jLabel18.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 180)));
                 }
                 if (i == displayStatus *6+1) {
+                    jLabel19.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
                     jLabel19.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 180)));
                 }
                 if (i == displayStatus *6+2) {
+                    jLabel20.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
                     jLabel20.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 180)));
                 }
                 if (i == displayStatus *6+3) {
+                    jLabel21.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
                     jLabel21.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 180)));
                 }
                 if (i == displayStatus *6+4) {
+                    jLabel22.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
                     jLabel22.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 180)));
                 }
                 if (i == displayStatus *6+5) {
+                    jLabel23.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
                     jLabel23.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 180)));
                 }
         }
@@ -1707,28 +1807,31 @@ public class MainFrame extends javax.swing.JFrame {
     
         clearResultScreen();
         for (int i = nextID; i < list.size() && i < (nextID+6); i++) {
-            System.out.println(nextID);
+
             if (i == nextID + 0) {
-                System.out.println("ffff");
+                jLabel18.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
                 jLabel18.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 180)));
             }
-            if (i == nextID + 1) {
-                System.out.println("gggg");
+            if (i == nextID + 1) {                
+                jLabel19.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
                 jLabel19.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 180)));
             }
             if (i == nextID + 2) {
+                jLabel20.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
                 jLabel20.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 180)));
             }
             if (i == nextID + 3) {
+                jLabel21.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
                 jLabel21.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 180)));
             }
             if (i == nextID + 4) {
+                jLabel22.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
                 jLabel22.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 180)));
             }
             if (i == nextID + 5) {
+                jLabel23.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
                 jLabel23.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 180)));
-            }
-    
+            }   
         
         }
     }
@@ -1741,29 +1844,42 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel22.setIcon(null);
         jLabel23.setIcon(null);
     }
+    
+    private void disableHandCursor() {
+        jLabel18.setCursor(Cursor.getDefaultCursor());
+        jLabel19.setCursor(Cursor.getDefaultCursor());
+        jLabel20.setCursor(Cursor.getDefaultCursor());
+        jLabel21.setCursor(Cursor.getDefaultCursor());
+        jLabel22.setCursor(Cursor.getDefaultCursor());
+        jLabel23.setCursor(Cursor.getDefaultCursor());
+    }
 
     private void displayPreviousResult() {
         clearResultScreen();
         for (int i = previousID - 6; i < previousID; i++) {
-            System.out.println(nextID);
+            
             if (i == previousID - 6 + 0) {
-                System.out.println("ffff");
+                jLabel18.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
                 jLabel18.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 180)));
             }
             if (i == previousID - 6 + 1) {
-                System.out.println("gggg");
+                jLabel19.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
                 jLabel19.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 180)));
             }
             if (i == previousID - 6 + 2) {
+                jLabel20.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
                 jLabel20.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 180)));
             }
             if (i == previousID - 6 + 3) {
+                jLabel21.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
                 jLabel21.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 180)));
             }
             if (i == previousID - 6 + 4) {
+                jLabel22.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
                 jLabel22.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 180)));
             }
             if (i == previousID - 6 + 5) {
+                jLabel23.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
                 jLabel23.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 180)));
             }
         }
