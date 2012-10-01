@@ -19,16 +19,16 @@ public class FaceDetection {
     private static String source;
     private static String destination;
     private Region[] regions;
-        
+    
     public FaceDetection(String src, String dest) {
         source = src;
         destination = dest;
     }
     
-    public Region[] detectFace() {        
+    public Region[] detectFace(int p) {        
         MainController controller = MainController.getInstance();
         if(controller != null) {
-            controller.setScanWindowSize(1);
+            controller.setScanWindowSize(p);
             ImageModel imageModel = new ImageModel(source);
             imageModel.initThumbnail();
             regions = controller.detectFaces(imageModel, false);
