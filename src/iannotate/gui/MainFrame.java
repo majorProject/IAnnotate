@@ -136,6 +136,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jButton7 = new javax.swing.JButton();
         jComboBox2 = new javax.swing.JComboBox();
@@ -146,6 +147,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         nextButton = new javax.swing.JButton();
         previousButton = new javax.swing.JButton();
+        backToResult = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -631,7 +633,7 @@ public class MainFrame extends javax.swing.JFrame {
                                 .addGap(11, 11, 11)
                                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane2))
-                        .addContainerGap(16, Short.MAX_VALUE))
+                        .addContainerGap(20, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(40, 40, 40))))
@@ -642,6 +644,11 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel7.setPreferredSize(new java.awt.Dimension(600, 400));
 
         jLabel18.setPreferredSize(new java.awt.Dimension(200, 190));
+        jLabel18.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel18MouseClicked(evt);
+            }
+        });
 
         jLabel19.setPreferredSize(new java.awt.Dimension(200, 190));
 
@@ -673,6 +680,11 @@ public class MainFrame extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(15, Short.MAX_VALUE))
+            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel7Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel26)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -688,6 +700,11 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel7Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel26)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         jButton7.setText("Search");
@@ -763,6 +780,14 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        backToResult.setText("<< BACK");
+        backToResult.setEnabled(false);
+        backToResult.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backToResultActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -773,10 +798,12 @@ public class MainFrame extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(previousButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(nextButton))
+                        .addComponent(nextButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(backToResult))
                     .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 661, Short.MAX_VALUE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(202, Short.MAX_VALUE))
+                .addContainerGap(215, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -788,7 +815,8 @@ public class MainFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(previousButton, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nextButton, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nextButton, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(backToResult, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1159,7 +1187,9 @@ public class MainFrame extends javax.swing.JFrame {
                 }
             }
         } else if (!searchedPerson.isEmpty() && jCheckBox1.isSelected() && !jCheckBox2.isSelected()) {
+            list.removeAll(list);
             try {
+                
                 LinkedList<SearchPersonClass> list2 = SparqlQuery.relateToPerson("imagedb/rdf/"+searchedPerson+"/"+searchedPerson+".rdf", searchedPerson,relation);
                 LinkedList<SearchPersonClass> list3 = new LinkedList<>();
                 
@@ -1406,6 +1436,20 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel28.setText(precision);
     }//GEN-LAST:event_precisionSliderStateChanged
 
+    private void jLabel18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel18MouseClicked
+        // TODO add your handling code here:        
+        clearResultScreen();
+        jLabel26.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(displayStatus*6 + 0).getFileName()).getImage(), 600, 400)));
+        backToResult.setEnabled(true);
+    }//GEN-LAST:event_jLabel18MouseClicked
+
+    private void backToResultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToResultActionPerformed
+        // TODO add your handling code here:
+        jLabel26.setIcon(null);
+        displayResult();
+        backToResult.setEnabled(false);
+    }//GEN-LAST:event_backToResultActionPerformed
+
     private Image getScaledImage(Image srcImg, int width, int height) {
         BufferedImage resizedImg = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         Graphics2D g2 = resizedImg.createGraphics();
@@ -1540,6 +1584,7 @@ public class MainFrame extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFrame Arrange;
+    private javax.swing.JButton backToResult;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
@@ -1576,6 +1621,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
@@ -1625,6 +1671,29 @@ public class MainFrame extends javax.swing.JFrame {
     DefaultListModel listModel = new DefaultListModel();
     DefaultListModel listModel1 = new DefaultListModel();
 
+    private void displayResult() {
+        for (int i = displayStatus *6; i < list.size() && i<(displayStatus*6+6) ; i++) {
+                if (i == displayStatus *6+0) {
+                    jLabel18.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 180)));
+                }
+                if (i == displayStatus *6+1) {
+                    jLabel19.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 180)));
+                }
+                if (i == displayStatus *6+2) {
+                    jLabel20.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 180)));
+                }
+                if (i == displayStatus *6+3) {
+                    jLabel21.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 180)));
+                }
+                if (i == displayStatus *6+4) {
+                    jLabel22.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 180)));
+                }
+                if (i == displayStatus *6+5) {
+                    jLabel23.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 180)));
+                }
+        }
+    }
+    
     private void displayNextResult() {
     
         clearResultScreen();
