@@ -101,7 +101,11 @@ public class MainFrame extends javax.swing.JFrame {
         Arrange = new javax.swing.JFrame();
         jComboBox3 = new javax.swing.JComboBox();
         jLabel24 = new javax.swing.JLabel();
-        jToggleButton1 = new javax.swing.JToggleButton();
+        jButton10 = new javax.swing.JButton();
+        jTextField7 = new javax.swing.JTextField();
+        jLabel25 = new javax.swing.JLabel();
+        jButton11 = new javax.swing.JButton();
+        jProgressBar1 = new javax.swing.JProgressBar();
         jTabbedPane4 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -345,30 +349,69 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel24.setText("Arrange By");
 
-        jToggleButton1.setText("OK");
+        jButton10.setText("OK");
+        jButton10.setEnabled(false);
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
+
+        jTextField7.setText("jTextField7");
+
+        jLabel25.setText("Location");
+
+        jButton11.setText("Open");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
+
+        jProgressBar1.setStringPainted(true);
 
         javax.swing.GroupLayout ArrangeLayout = new javax.swing.GroupLayout(Arrange.getContentPane());
         Arrange.getContentPane().setLayout(ArrangeLayout);
         ArrangeLayout.setHorizontalGroup(
             ArrangeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ArrangeLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel24)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jToggleButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(ArrangeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ArrangeLayout.createSequentialGroup()
+                        .addGap(123, 123, 123)
+                        .addComponent(jButton10))
+                    .addGroup(ArrangeLayout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addGroup(ArrangeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(ArrangeLayout.createSequentialGroup()
+                                .addGroup(ArrangeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel24)
+                                    .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(29, 29, 29)
+                                .addGroup(ArrangeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jTextField7))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton11))
+                            .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         ArrangeLayout.setVerticalGroup(
             ArrangeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ArrangeLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(52, 52, 52)
                 .addGroup(ArrangeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton1)
                     .addComponent(jLabel24))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(44, 44, 44)
+                .addGroup(ArrangeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel25)
+                    .addComponent(jButton11))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(jButton10)
+                .addGap(21, 21, 21))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -1221,6 +1264,72 @@ public class MainFrame extends javax.swing.JFrame {
         previousID = previousID - 6;
     }//GEN-LAST:event_previousButtonActionPerformed
 
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        // TODO add your handling code here:
+        JFileChooser jFileChooser = new JFileChooser();
+        jFileChooser.setVisible(true);
+        jFileChooser.showOpenDialog(null);
+        jFileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        
+        File location = jFileChooser.getSelectedFile();
+        jTextField7.setText(location.getAbsolutePath());
+        jButton10.setEnabled(true);
+        
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        String optionList = (String) jComboBox3.getSelectedItem();
+        int progressValue = 0;
+        int initialValue = 0;
+        String finalLocation = null; //yesma rakhna baaki cha
+        finalLocation = jTextField7.getText();
+            switch (optionList) {
+                case "me":
+                    try {
+                        String session = FileUtil.getSession();
+                        LinkedList<SearchPersonClass> selectedList = SparqlQuery.searchPersonThroughDirectory("imagedb/rdf", session);
+
+                        if (selectedList.size() > 0) {
+                            progressValue = (100 % selectedList.size());
+                        }
+                        for (int i = 0; i < selectedList.size(); i++) {
+                            FileUtil.copyfile(selectedList.get(i).getFileName(),finalLocation);
+                            initialValue += progressValue;
+                            jProgressBar1.setValue(initialValue);
+                        }
+
+                    } catch (FileNotFoundException ex) {
+                        Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IOException ex) {
+                        Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+
+                case "Date":
+
+
+                default:
+                    try {
+                        String session = FileUtil.getSession();
+                        LinkedList<SearchPersonClass> relatedPersons = SparqlQuery.relateToPerson("imagedb/rdf/" + session + "/" + session + ".rdf", session, optionList);
+                        for (int i = 0; i < relatedPersons.size(); i++) {
+                            LinkedList<SearchPersonClass> RDFOfListedPerson = SparqlQuery.searchPersonThroughDirectory("image/rdf", relatedPersons.get(i).getFileName());
+                            for (int j = 0; j < RDFOfListedPerson.size(); j++) {
+                                FileUtil.copyfile(RDFOfListedPerson.get(j).getFileName(),finalLocation);
+                                initialValue += progressValue;
+                                jProgressBar1.setValue(initialValue);
+                            }
+                        }
+
+                    } catch (FileNotFoundException ex) {
+                        Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IOException ex) {
+                        Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+            }
+    }//GEN-LAST:event_jButton10ActionPerformed
+
     private Image getScaledImage(Image srcImg, int width, int height) {
         BufferedImage resizedImg = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         Graphics2D g2 = resizedImg.createGraphics();
@@ -1355,6 +1464,8 @@ public class MainFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFrame Arrange;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -1387,6 +1498,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1408,6 +1520,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1423,7 +1536,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
-    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JTextField jTextField7;
     private javax.swing.JButton nextButton;
     private javax.swing.JButton previousButton;
     // End of variables declaration//GEN-END:variables
