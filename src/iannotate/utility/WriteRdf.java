@@ -8,9 +8,12 @@ import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.sparql.vocabulary.FOAF;
+import com.hp.hpl.jena.vocabulary.DC_11;
 import com.hp.hpl.jena.vocabulary.RDF;
+import com.hp.hpl.jena.vocabulary.VCARD;
 import java.io.*;
 import myclass.EXIF;
+import myclass.Ical;
 import myclass.Relationship;
 
 /**
@@ -279,7 +282,7 @@ public class WriteRdf {
         if (in == null) {
             // set a namespace prefix
             model.setNsPrefix("foaf", FOAF.NS);
-            model.setNsPrefix("EXIF", EXIF.NS);
+            model.setNsPrefix("EXIF", EXIF.NS);                  
             model.setNsPrefix("relation", Relationship.NS);
 
             // create a contributor
@@ -303,7 +306,9 @@ public class WriteRdf {
             // retrieve resource from the model
             Resource root = model.getResource("http://something.com");
 
-            root.addProperty(EXIF.imageDescription, info);
+            //root.addProperty(VCARD.Locality, "aa");
+            
+            root.addProperty(EXIF.imageDescription, info).addProperty(VCARD.Locality, "kirtipur").addProperty(EXIF.date,"2012-02-02");
 
 
             // write the RDF model to the console as RDF/XML
