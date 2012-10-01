@@ -1376,10 +1376,13 @@ public class MainFrame extends javax.swing.JFrame {
                     try {
                         String session = FileUtil.getSession();
                         LinkedList<SearchPersonClass> relatedPersons = SparqlQuery.relateToPerson("imagedb/rdf/" + session + "/" + session + ".rdf", session, optionList);
+                        
                         for (int i = 0; i < relatedPersons.size(); i++) {
-                            LinkedList<SearchPersonClass> RDFOfListedPerson = SparqlQuery.searchPersonThroughDirectory("image/rdf", relatedPersons.get(i).getFileName());
+                        
+                            LinkedList<SearchPersonClass> RDFOfListedPerson = SparqlQuery.searchPersonThroughDirectory("imagedb/rdf", relatedPersons.get(i).getFileName());
                             for (int j = 0; j < RDFOfListedPerson.size(); j++) {
-                                FileUtil.copyfile(RDFOfListedPerson.get(j).getFileName(),finalLocation+RDFOfListedPerson.get(i).getFileName().substring(8));
+                            
+                                FileUtil.copyfile(RDFOfListedPerson.get(j).getFileName(),finalLocation+RDFOfListedPerson.get(j).getFileName().substring(8));
                                 initialValue += progressValue;
                                 jProgressBar1.setValue(initialValue);
                             }
