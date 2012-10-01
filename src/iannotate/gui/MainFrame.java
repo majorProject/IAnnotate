@@ -122,6 +122,10 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel8 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        precisionSlider = new javax.swing.JSlider();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        progressImageDetection = new javax.swing.JProgressBar();
         jScrollPane2 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
         jPanel4 = new javax.swing.JPanel();
@@ -357,8 +361,6 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        jTextField7.setText("jTextField7");
-
         jLabel25.setText("Location");
 
         jButton11.setText("Open");
@@ -535,25 +537,63 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        precisionSlider.setMaximum(25);
+        precisionSlider.setMinimum(1);
+        precisionSlider.setValue(10);
+        precisionSlider.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                precisionSliderStateChanged(evt);
+            }
+        });
+
+        jLabel28.setText("7");
+
+        jLabel29.setText("Precision");
+
+        progressImageDetection.setStringPainted(true);
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1)
-                .addGap(18, 18, 18)
-                .addComponent(jButton2)
-                .addContainerGap(322, Short.MAX_VALUE))
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2))
+                    .addComponent(progressImageDetection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel29)
+                        .addGap(119, 119, 119)
+                        .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(precisionSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addComponent(jLabel28))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel29, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(progressImageDetection, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(precisionSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 36, Short.MAX_VALUE))
+                .addGap(0, 26, Short.MAX_VALUE))
         );
 
         jList1.setModel(listModel);
@@ -572,9 +612,9 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
@@ -865,17 +905,23 @@ public class MainFrame extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         FaceDetection face = new FaceDetection(path, "images");
-        Region reg[] = face.detectFace();
+        int precision = precisionSlider.getValue();
+        progressImageDetection.setValue(0);
+        Region reg[] = face.detectFace(precision);
+        progressImageDetection.setValue(100);
+        
         regions.removeAllElements();
         for (int i = 0; i < reg.length; i++) {
             regions.add(reg[i]);
         }
         paintImage();
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
         // TODO add your handling code here:
 //        FaceDetection face = new FaceDetection(path, "images");
+//        jList1.getmo
         int index = jList1.locationToIndex(evt.getPoint());
         faceID = index;
 
@@ -1080,6 +1126,9 @@ public class MainFrame extends javax.swing.JFrame {
         if (!searchedPerson.isEmpty()  && !jCheckBox1.isSelected() && !jCheckBox2.isSelected()) {
             list.removeAll(list);
             list = SparqlQuery.searchPersonThroughDirectory("imagedb/rdf", searchedPerson);
+            
+            //reset the display area
+            clearResultScreen();
 
             for (int i = 0; i < list.size(); i++) {
                 if (i == 0) {
@@ -1134,6 +1183,10 @@ public class MainFrame extends javax.swing.JFrame {
                     //}
                 }
                 System.out.println(list.size());
+                
+                //reset the display area
+                clearResultScreen();
+                
                 for (int i = 0; i < list.size(); i++) {
                     if (i == 0) {
                         jLabel18.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 180)));
@@ -1162,6 +1215,14 @@ public class MainFrame extends javax.swing.JFrame {
             } catch (IOException ex) {
                 Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
+            //for previous and next button
+            if(list.size()>5) {
+                nextButton.setEnabled(true);
+                nextID = 6;
+                displayStatus = 0;
+            }
+            
         } else if (!searchedPerson.isEmpty() && relation.isEmpty() && !location.isEmpty()) {
         } else if (!searchedPerson.isEmpty() && !relation.isEmpty() && !location.isEmpty()) {
         }
@@ -1230,7 +1291,8 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
-        
+        Arrange.setVisible(true);
+        Arrange.pack();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
@@ -1268,12 +1330,14 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         JFileChooser jFileChooser = new JFileChooser();
         jFileChooser.setVisible(true);
-        jFileChooser.showOpenDialog(null);
-        jFileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         
-        File location = jFileChooser.getSelectedFile();
-        jTextField7.setText(location.getAbsolutePath());
-        jButton10.setEnabled(true);
+        jFileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        jFileChooser.setAcceptAllFileFilterUsed(false);
+        if(jFileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION){
+            File location = jFileChooser.getSelectedFile();
+            jTextField7.setText(location.getAbsolutePath());
+            jButton10.setEnabled(true);
+        }
         
     }//GEN-LAST:event_jButton11ActionPerformed
 
@@ -1282,7 +1346,7 @@ public class MainFrame extends javax.swing.JFrame {
         int progressValue = 0;
         int initialValue = 0;
         String finalLocation = null; //yesma rakhna baaki cha
-        finalLocation = jTextField7.getText();
+        finalLocation = jTextField7.getText()+File.separator;
             switch (optionList) {
                 case "me":
                     try {
@@ -1290,10 +1354,10 @@ public class MainFrame extends javax.swing.JFrame {
                         LinkedList<SearchPersonClass> selectedList = SparqlQuery.searchPersonThroughDirectory("imagedb/rdf", session);
 
                         if (selectedList.size() > 0) {
-                            progressValue = (100 % selectedList.size());
+                            progressValue = (100 / selectedList.size());
                         }
                         for (int i = 0; i < selectedList.size(); i++) {
-                            FileUtil.copyfile(selectedList.get(i).getFileName(),finalLocation);
+                            FileUtil.copyfile(selectedList.get(i).getFileName(),finalLocation+selectedList.get(i).getFileName().substring(8));
                             initialValue += progressValue;
                             jProgressBar1.setValue(initialValue);
                         }
@@ -1315,7 +1379,7 @@ public class MainFrame extends javax.swing.JFrame {
                         for (int i = 0; i < relatedPersons.size(); i++) {
                             LinkedList<SearchPersonClass> RDFOfListedPerson = SparqlQuery.searchPersonThroughDirectory("image/rdf", relatedPersons.get(i).getFileName());
                             for (int j = 0; j < RDFOfListedPerson.size(); j++) {
-                                FileUtil.copyfile(RDFOfListedPerson.get(j).getFileName(),finalLocation);
+                                FileUtil.copyfile(RDFOfListedPerson.get(j).getFileName(),finalLocation+RDFOfListedPerson.get(i).getFileName().substring(8));
                                 initialValue += progressValue;
                                 jProgressBar1.setValue(initialValue);
                             }
@@ -1328,7 +1392,16 @@ public class MainFrame extends javax.swing.JFrame {
                     }
 
             }
+            jButton10.setEnabled(false);
+            jProgressBar1.setValue(0);
+            Arrange.setVisible(false);
     }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void precisionSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_precisionSliderStateChanged
+        // TODO add your handling code here:
+        String precision = String.valueOf(precisionSlider.getValue());
+        jLabel28.setText(precision);
+    }//GEN-LAST:event_precisionSliderStateChanged
 
     private Image getScaledImage(Image srcImg, int width, int height) {
         BufferedImage resizedImg = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
@@ -1354,6 +1427,7 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     private void paintImage() {
+        if(regions.size() > 0) {
         listModel.removeAllElements();
         ImageIcon imag = new ImageIcon(path);
         image = imag.getImage();
@@ -1390,7 +1464,7 @@ public class MainFrame extends javax.swing.JFrame {
                     region.getHeight() * jPanel3.getHeight() / image.getHeight(rootPane));
             jLabel1.setIcon(new ImageIcon(Temp));
             gTemp.dispose();
-
+        }
         }
     }
 
@@ -1499,6 +1573,8 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1538,13 +1614,16 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JButton nextButton;
+    private javax.swing.JSlider precisionSlider;
     private javax.swing.JButton previousButton;
+    private javax.swing.JProgressBar progressImageDetection;
     // End of variables declaration//GEN-END:variables
     JFileChooser filechooser = null;
     DefaultListModel listModel = new DefaultListModel();
     DefaultListModel listModel1 = new DefaultListModel();
 
     private void displayNextResult() {
+    
         clearResultScreen();
         for (int i = nextID; i < list.size() && i < (nextID+6); i++) {
             System.out.println(nextID);
@@ -1568,6 +1647,8 @@ public class MainFrame extends javax.swing.JFrame {
             if (i == nextID + 5) {
                 jLabel23.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(i).getFileName()).getImage(), 200, 180)));
             }
+    
+        
         }
     }
     
