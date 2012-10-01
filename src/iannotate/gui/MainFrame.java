@@ -351,7 +351,12 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGap(41, 41, 41))
         );
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "me", "ambivalentOf", "antagonistOf", "apprenticeTo", "childOf", "employedBy", "employerOf", "enemyOf", "grandchildOf", "grandparentOf", "influencedBy", "knowsByReputation", "knowsInPassing", "knowsOf", "mentorOf", "parentOf", "participant", "participantIn", "wouldLikeToKnow", "friendOf", "colleagueOf", "spouseOf", "closeFriendOf", "livesWith", "neighborOf", "siblingOf", "me", "Date" }));
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "me", "ambivalentOf", "antagonistOf", "apprenticeTo", "childOf", "colleagueOf", "closeFriendOf", "employedBy", "employerOf", "enemyOf", "friendOf", "grandchildOf", "grandparentOf", "influencedBy", "knowsByReputation", "knowsInPassing", "knowsOf", "livesWith", "mentorOf", "neighborOf", "parentOf", "participant", "participantIn", "siblingOf", "spouseOf", "wouldLikeToKnow" }));
+        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox3ActionPerformed(evt);
+            }
+        });
 
         jLabel24.setText("Arrange By");
 
@@ -633,7 +638,7 @@ public class MainFrame extends javax.swing.JFrame {
                                 .addGap(11, 11, 11)
                                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane2))
-                        .addContainerGap(20, Short.MAX_VALUE))
+                        .addContainerGap(16, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(40, 40, 40))))
@@ -714,7 +719,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ambivalentOf", "antagonistOf", "apprenticeTo", "childOf", "employedBy", "employerOf", "enemyOf", "grandchildOf", "grandparentOf", "influencedBy", "knowsByReputation", "knowsInPassing", "knowsOf", "mentorOf", "parentOf", "participant", "participantIn", "wouldLikeToKnow", "friendOf", "colleagueOf", "spouseOf", "closeFriendOf", "livesWith", "neighborOf", "siblingOf" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ambivalentOf", "antagonistOf", "apprenticeTo", "childOf", "colleagueOf", "closeFriendOf", "employedBy", "employerOf", "enemyOf", "friendOf", "grandchildOf", "grandparentOf", "influencedBy", "knowsByReputation", "knowsInPassing", "knowsOf", "livesWith", "mentorOf", "neighborOf", "parentOf", "participant", "participantIn", "siblingOf", "spouseOf", "wouldLikeToKnow" }));
 
         jTextField6.setText("Location");
 
@@ -803,7 +808,7 @@ public class MainFrame extends javax.swing.JFrame {
                         .addComponent(backToResult))
                     .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 661, Short.MAX_VALUE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(215, Short.MAX_VALUE))
+                .addContainerGap(202, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1449,6 +1454,10 @@ public class MainFrame extends javax.swing.JFrame {
         displayResult();
         backToResult.setEnabled(false);
     }//GEN-LAST:event_backToResultActionPerformed
+
+    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox3ActionPerformed
 
     private Image getScaledImage(Image srcImg, int width, int height) {
         BufferedImage resizedImg = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
