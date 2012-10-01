@@ -1090,8 +1090,8 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        String name = jTextField1.getText().trim();
-        String surName = jTextField2.getText().trim();
+        String name = jTextField1.getText().trim().toLowerCase();
+        String surName = jTextField2.getText().trim().toLowerCase();
         String relation = (String) jComboBox1.getSelectedItem();
         String phoneNumber = jTextField4.getText().trim();
 
@@ -1146,14 +1146,14 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
-        String searchedPerson = jTextField5.getText().trim();
+        String searchedPerson = jTextField5.getText().trim().toLowerCase();
         String relation = null;
         String location = null;
         if (jCheckBox1.isSelected()) {
             relation = (String) jComboBox2.getSelectedItem();
         }
         if (jCheckBox2.isSelected()) {
-            location = jTextField6.getText().trim();
+            location = jTextField6.getText().trim().toLowerCase();
         }
 
         if (!searchedPerson.isEmpty()  && !jCheckBox1.isSelected() && !jCheckBox2.isSelected()) {
@@ -1271,8 +1271,8 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
-        String name = jLabel7.getText();
-        String surName = jLabel8.getText();
+        String name = jLabel7.getText().toLowerCase().trim();
+        String surName = jLabel8.getText().toLowerCase().toLowerCase();
         String relation = jLabel9.getText();
         String phoneNumber = jLabel10.getText();
         
