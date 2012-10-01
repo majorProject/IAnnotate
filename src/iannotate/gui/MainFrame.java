@@ -347,11 +347,6 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "me", "ambivalentOf", "antagonistOf", "apprenticeTo", "childOf", "colleagueOf", "closeFriendOf", "employedBy", "employerOf", "enemyOf", "friendOf", "grandchildOf", "grandparentOf", "influencedBy", "knowsByReputation", "knowsInPassing", "knowsOf", "livesWith", "mentorOf", "neighborOf", "parentOf", "participant", "participantIn", "siblingOf", "spouseOf", "wouldLikeToKnow" }));
-        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox3ActionPerformed(evt);
-            }
-        });
 
         jLabel24.setText("Arrange By");
 
@@ -709,9 +704,9 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap(15, Short.MAX_VALUE))
             .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel7Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGap(0, 330, Short.MAX_VALUE)
                     .addComponent(jLabel26)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGap(0, 331, Short.MAX_VALUE)))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -729,9 +724,9 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel7Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGap(0, 206, Short.MAX_VALUE)
                     .addComponent(jLabel26)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGap(0, 207, Short.MAX_VALUE)))
         );
 
         jButton7.setText("Search");
@@ -1483,8 +1478,9 @@ public class MainFrame extends javax.swing.JFrame {
         clearResultScreen();
         jLabel26.setIcon(new ImageIcon(getScaledImage(new ImageIcon(list.get(displayStatus*6 + 0).getFileName()).getImage(), 600, 400)));
         nextButton.setVisible(false);
-        previousButton.setVisible(false);
+        previousButton.setVisible(false);        
         backToResult.setEnabled(true);
+        disableHandCursor();
     }//GEN-LAST:event_jLabel18MouseClicked
 
     private void backToResultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToResultActionPerformed
@@ -1496,10 +1492,6 @@ public class MainFrame extends javax.swing.JFrame {
         backToResult.setEnabled(false);
     }//GEN-LAST:event_backToResultActionPerformed
 
-    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox3ActionPerformed
-
     private void jLabel19MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel19MouseClicked
         // TODO add your handling code here:
         if((displayStatus*6 + 1) < list.size()) {
@@ -1508,7 +1500,8 @@ public class MainFrame extends javax.swing.JFrame {
             nextButton.setVisible(false);
             previousButton.setVisible(false);
             backToResult.setEnabled(true);
-    }
+            disableHandCursor();
+        }
     }//GEN-LAST:event_jLabel19MouseClicked
 
     private void jLabel20MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel20MouseClicked
@@ -1519,6 +1512,7 @@ public class MainFrame extends javax.swing.JFrame {
             nextButton.setVisible(false);
             previousButton.setVisible(false);
             backToResult.setEnabled(true);
+            disableHandCursor();
         }
     }//GEN-LAST:event_jLabel20MouseClicked
 
@@ -1530,6 +1524,7 @@ public class MainFrame extends javax.swing.JFrame {
             nextButton.setVisible(false);
             previousButton.setVisible(false);
             backToResult.setEnabled(true);
+            disableHandCursor();
         }
     }//GEN-LAST:event_jLabel21MouseClicked
 
@@ -1541,6 +1536,7 @@ public class MainFrame extends javax.swing.JFrame {
             nextButton.setVisible(false);
             previousButton.setVisible(false);
             backToResult.setEnabled(true);
+            disableHandCursor();
         }
     }//GEN-LAST:event_jLabel22MouseClicked
 
@@ -1552,6 +1548,7 @@ public class MainFrame extends javax.swing.JFrame {
             nextButton.setVisible(false);
             previousButton.setVisible(false);
             backToResult.setEnabled(true);
+            disableHandCursor();
         }
     }//GEN-LAST:event_jLabel23MouseClicked
 
