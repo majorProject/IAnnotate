@@ -57,7 +57,7 @@ public class MainFrame extends javax.swing.JFrame {
      * Creates new form NewJFrame
      */
     public MainFrame() throws IOException {
-        initComponents();
+        initComponents();        
         nextButton.setEnabled(false);
         previousButton.setEnabled(false);
     }
@@ -1002,6 +1002,7 @@ public class MainFrame extends javax.swing.JFrame {
         ImageIcon i = new ImageIcon(img);
         jLabel2.setIcon(i);
         jFrame1.pack();
+        jFrame1.setLocationRelativeTo(this);
         jFrame1.setVisible(true);
     }//GEN-LAST:event_jList1MouseClicked
 
@@ -1165,7 +1166,8 @@ public class MainFrame extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         jFrame2.setVisible(true);
-        jFrame2.setSize(500, 500);
+        jFrame2.setLocationRelativeTo(null);
+        jFrame2.pack();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -1357,6 +1359,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
         Arrange.setVisible(true);
+        Arrange.setLocationRelativeTo(null);
         Arrange.pack();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
@@ -1655,7 +1658,7 @@ public class MainFrame extends javax.swing.JFrame {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
+                    javax.swing.UIManager.setLookAndFeel("com.jtattoo.plaf.fast.FastLookAndFeel");
                     break;
                 }
             }
