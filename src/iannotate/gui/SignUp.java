@@ -6,6 +6,7 @@ package iannotate.gui;
 
 import iannotate.database.DbInterface;
 import iannotate.database.SqlQuery;
+import java.io.File;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,7 +16,7 @@ import java.util.logging.Logger;
  * @author Sameer
  */
 public class SignUp extends javax.swing.JFrame {
-
+    
     static public LogInForm log = new LogInForm();
     //static public MainFrame mainF = new MainFrame();
     static public SignUp sign = new SignUp();
@@ -182,7 +183,7 @@ public class SignUp extends javax.swing.JFrame {
          String sex;
          
          
-         String user = userName.getText().toString();
+         String user = userName.getText().toString().toLowerCase().trim();
         try {
             if( user.contentEquals(db[0].fetch().getString(2))){
                       userErrorLabel.setText("*"+user + " is already taken");
@@ -223,6 +224,7 @@ public class SignUp extends javax.swing.JFrame {
             {   if(passString.equals(rePass1String))
                 r = db[0].insertInto( user, passString, sex, num, addr, date);
                 executeLabel.setText("Congratulations your acoount has been created");
+                new File(user).mkdir();
                 doneButton.setVisible(true);
             }
         }//end try

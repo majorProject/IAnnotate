@@ -7,6 +7,8 @@ package iannotate.gui;
 import iannotate.database.DbInterface;
 import iannotate.database.MessageEncryption;
 import iannotate.database.SqlQuery;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
@@ -19,6 +21,8 @@ import java.util.logging.Logger;
 public class LogInForm extends javax.swing.JFrame {
 
     static public LogInForm log = new LogInForm();
+    
+    private static FileOutputStream toStoreSession;
     
     
  //   public MessageEncryption encrypt = new MessageEncryption();
@@ -122,7 +126,7 @@ public class LogInForm extends javax.swing.JFrame {
     private void logInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logInActionPerformed
         // TODO add your handling code here:
 
-        String userId = userName.getText();
+        String userId = userName.getText().toLowerCase().trim();
         char[] pass = passWord.getPassword();
         String passString = String.valueOf(pass);
         String passStringEncrypt= null;
@@ -136,7 +140,10 @@ public class LogInForm extends javax.swing.JFrame {
         if(db[0].authentication(userId, passStringEncrypt)){
             log.dispose();
             try{
-            new MainFrame().setVisible(true);
+                toStoreSession = new FileOutputStream("session.txt");
+                toStoreSession.write(userId.getBytes());
+                toStoreSession.close();
+                new MainFrame().setVisible(true);
             }catch(IOException e){}
             
         }
