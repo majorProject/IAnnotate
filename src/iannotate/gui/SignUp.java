@@ -238,7 +238,7 @@ public class SignUp extends javax.swing.JFrame {
             {   if(passString.equals(rePass1String))
                 r = db.insertInto( user, passString, sex, num, addr, date, name);
                 executeLabel.setText("Congratulations your acoount has been created");
-                new File("imagedb/rdf/" + user).mkdir();
+                new File("imagedb/rdf/user").mkdir();
                 doneButton.setVisible(true);
             }
         }//end try

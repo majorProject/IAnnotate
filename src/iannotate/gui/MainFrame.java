@@ -952,7 +952,7 @@ public class MainFrame extends javax.swing.JFrame {
         }
 
         jLabel1.setToolTipText(path);
-
+        
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -1095,7 +1095,7 @@ public class MainFrame extends javax.swing.JFrame {
         LinkedList<PersonWithRelation> l = SparqlQuery.searchPersonWithPhone("imagedb/rdf", result[0]);
         try {
             String user = FileUtil.getSession();
-            relation = SparqlQuery.findRelation("imagedb/rdf/" + user + "/" + user + ".rdf", result[0], user);
+            relation = SparqlQuery.findRelation("imagedb/rdf/" + "user" + "/" + user + ".rdf", result[0], user);
         } catch (FileNotFoundException ex) {
         } catch (IOException ex) {
         }
@@ -1147,7 +1147,7 @@ public class MainFrame extends javax.swing.JFrame {
         try {
             currentUser = new FileUtil().getSession();
             rdfImagePath = "imagedb" + File.separator + "rdf" + File.separator + changeFileExt(filename);
-            rdfRelationPath = "imagedb" + File.separator + "rdf" + File.separator + currentUser + File.separator + currentUser + ".rdf";
+            rdfRelationPath = "imagedb" + File.separator + "rdf" + File.separator + "user" + File.separator + currentUser + ".rdf";
             System.out.println(currentUser);
             System.out.println(rdfImagePath);
             System.out.println(rdfRelationPath);
@@ -1232,7 +1232,7 @@ public class MainFrame extends javax.swing.JFrame {
 //            list.removeAll(list);
             try {
                 
-                LinkedList<SearchPersonClass> list2 = SparqlQuery.relateToPerson("imagedb/rdf/"+searchedPerson+"/"+searchedPerson+".rdf", searchedPerson,relation);
+                LinkedList<SearchPersonClass> list2 = SparqlQuery.relateToPerson("imagedb/rdf/"+"user"+"/"+searchedPerson+".rdf", searchedPerson,relation);
                 LinkedList<SearchPersonClass> list3 = new LinkedList<>();
                                 
                 for( int i=0 ; i < list2.size(); i++ ) {
@@ -1336,7 +1336,7 @@ public class MainFrame extends javax.swing.JFrame {
         try {
             currentUser = new FileUtil().getSession();
             rdfImagePath = "imagedb" + File.separator + "rdf" + File.separator + changeFileExt(filename);
-            rdfRelationPath = "imagedb" + File.separator + "rdf" + File.separator + currentUser + File.separator + currentUser + ".rdf";
+            rdfRelationPath = "imagedb" + File.separator + "rdf" + File.separator + "user" + File.separator + currentUser + ".rdf";
             System.out.println(currentUser);
             System.out.println(rdfImagePath);
             System.out.println(rdfRelationPath);
@@ -1446,7 +1446,7 @@ public class MainFrame extends javax.swing.JFrame {
                 default:
                     try {
                         String session = FileUtil.getSession();
-                        LinkedList<SearchPersonClass> relatedPersons = SparqlQuery.relateToPerson("imagedb/rdf/" + session + "/" + session + ".rdf", session, optionList);
+                        LinkedList<SearchPersonClass> relatedPersons = SparqlQuery.relateToPerson("imagedb/rdf/" + "user" + "/" + session + ".rdf", session, optionList);
                         
                         for (int i = 0; i < relatedPersons.size(); i++) {
                         
