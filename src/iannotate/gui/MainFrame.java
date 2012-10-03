@@ -60,6 +60,7 @@ public class MainFrame extends javax.swing.JFrame {
         initComponents();        
         nextButton.setEnabled(false);
         previousButton.setEnabled(false);
+        progressImageDetection.setVisible(false);
     }
 
     /**
@@ -358,7 +359,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel25.setText("Location");
+        jLabel25.setText("Output Path");
 
         jButton11.setText("Open");
         jButton11.addActionListener(new java.awt.event.ActionListener() {
@@ -1650,11 +1651,6 @@ public class MainFrame extends javax.swing.JFrame {
          * default look and feel. For details see
          * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
-        try {
-            UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
-        } catch (Exception e) {
-            System.out.println(e);
-        }
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {

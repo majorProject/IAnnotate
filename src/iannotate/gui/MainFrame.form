@@ -442,7 +442,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel25">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Location"/>
+            <Property name="text" type="java.lang.String" value="Output Path"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="jButton11">
