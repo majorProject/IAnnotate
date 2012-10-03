@@ -55,6 +55,8 @@ public class SignUp extends javax.swing.JFrame {
         sexLabel = new javax.swing.JLabel();
         passErrorLabel = new javax.swing.JLabel();
         userErrorLabel = new javax.swing.JLabel();
+        pName = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
         save = new javax.swing.JButton();
         executeLabel = new javax.swing.JLabel();
         doneButton = new javax.swing.JButton();
@@ -114,12 +116,24 @@ public class SignUp extends javax.swing.JFrame {
         jLayeredPane1.add(sexLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         passErrorLabel.setForeground(new java.awt.Color(255, 0, 0));
-        passErrorLabel.setBounds(280, 120, 220, 30);
+        passErrorLabel.setBounds(280, 120, 170, 30);
         jLayeredPane1.add(passErrorLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         userErrorLabel.setForeground(new java.awt.Color(255, 0, 0));
         userErrorLabel.setBounds(270, 40, 220, 30);
         jLayeredPane1.add(userErrorLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        pName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pNameActionPerformed(evt);
+            }
+        });
+        pName.setBounds(130, 0, 140, 30);
+        jLayeredPane1.add(pName, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jLabel1.setText("Fullname :");
+        jLabel1.setBounds(0, 10, 70, 14);
+        jLayeredPane1.add(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         save.setText("Save");
         save.addActionListener(new java.awt.event.ActionListener() {
@@ -146,13 +160,13 @@ public class SignUp extends javax.swing.JFrame {
                         .addGap(20, 20, 20)
                         .addComponent(save)
                         .addGap(27, 27, 27)
-                        .addComponent(executeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(executeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(doneButton))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(43, 43, 43)
-                        .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(35, Short.MAX_VALUE))
+                        .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 487, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,21 +190,20 @@ public class SignUp extends javax.swing.JFrame {
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
         // TODO add your handling code here:
         
-         DbInterface[] db = new DbInterface[2];
-         db[0] = new SqlQuery("major_project");
-         
+         DbInterface db = new SqlQuery("major_project");
+       
          
          String sex;
          
          
          String user = userName.getText().toString().toLowerCase().trim();
         try {
-            if( user.contentEquals(db[0].fetch().getString(2))){
+            if( user.contentEquals(db.fetch().getString(2))){
                       userErrorLabel.setText("*"+user + " is already taken");
                        
             }
-//            else
-//                 db[] = new SqlQuery("major_project");
+            else
+                 db = new SqlQuery("major_project");
         } catch (SQLException ex) {
             Logger.getLogger(SignUp.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -213,6 +226,7 @@ public class SignUp extends javax.swing.JFrame {
          double num = Double.valueOf(contact.getText().toString());
          String addr = address.getText().toString();
          String date = dob.getText().toString();
+         String name = pName.getText().toString();
          
          
        boolean r = false;
@@ -220,11 +234,11 @@ public class SignUp extends javax.swing.JFrame {
         try {
             
                      
-            if( !( user.contentEquals( db[0].fetch().getString(2) ) ) ) 
+            if( !( user.contentEquals( db.fetch().getString(2) ) ) ) 
             {   if(passString.equals(rePass1String))
-                r = db[0].insertInto( user, passString, sex, num, addr, date);
+                r = db.insertInto( user, passString, sex, num, addr, date, name);
                 executeLabel.setText("Congratulations your acoount has been created");
-                new File(user).mkdir();
+                new File("imagedb/rdf/" + user).mkdir();
                 doneButton.setVisible(true);
             }
         }//end try
@@ -247,6 +261,10 @@ public class SignUp extends javax.swing.JFrame {
         log.main(null);
     }//GEN-LAST:event_doneButtonActionPerformed
 
+    private void pNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pNameActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -262,7 +280,7 @@ public class SignUp extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Metal".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -301,7 +319,9 @@ public class SignUp extends javax.swing.JFrame {
     private javax.swing.JLabel dobLabel;
     private javax.swing.JButton doneButton;
     private javax.swing.JLabel executeLabel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLayeredPane jLayeredPane1;
+    private javax.swing.JTextField pName;
     private javax.swing.JLabel passErrorLabel;
     private javax.swing.JPasswordField passWord;
     private javax.swing.JLabel passWordLabel;
