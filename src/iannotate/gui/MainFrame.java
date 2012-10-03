@@ -1141,6 +1141,8 @@ public class MainFrame extends javax.swing.JFrame {
         WriteRdf w = new WriteRdf();
         String x = regions.get(faceID).getX() + "";
         String y = regions.get(faceID).getY() + "";
+        String imageWidth = regions.get(faceID).getWidth() + "";
+        String imageHeight = regions.get(faceID).getHeight() + "";
         String rdfImagePath = null;
         String rdfRelationPath = null;
         String currentUser = null;
@@ -1156,7 +1158,7 @@ public class MainFrame extends javax.swing.JFrame {
         } catch (FileNotFoundException ex) {
         } catch (IOException ex) {
         }
-        w.writerdf(rdfImagePath, name, surName, x, y, phoneNumber, path);
+        w.writerdf(rdfImagePath, name, surName, x, y, imageWidth, imageHeight, phoneNumber, path);
 
         w.writerdfR(rdfRelationPath, currentUser, name, relation);
 
@@ -1180,6 +1182,8 @@ public class MainFrame extends javax.swing.JFrame {
         //reset the display area
         list.removeAll(list);
         clearResultScreen();
+        
+        
         
         if (jCheckBox1.isSelected()) {
             relation = (String) jComboBox2.getSelectedItem();
@@ -1330,6 +1334,9 @@ public class MainFrame extends javax.swing.JFrame {
         WriteRdf w = new WriteRdf();
         String x = regions.get(faceID).getX() + "";
         String y = regions.get(faceID).getY() + "";
+        String imageWidth = regions.get(faceID).getWidth() + "";
+        String imageHeight = regions.get(faceID).getHeight() + "";
+        System.out.println(regions.get(faceID).getHeight() + "jjjjjjjjjjjjjjjj");
         String rdfImagePath = null;
         String rdfRelationPath = null;
         String currentUser = null;
@@ -1346,7 +1353,7 @@ public class MainFrame extends javax.swing.JFrame {
         } catch (FileNotFoundException ex) {
         } catch (IOException ex) {
         }
-        w.writerdf(rdfImagePath, name, surName, x, y, phoneNumber, path);
+        w.writerdf(rdfImagePath, name, surName, x, y, imageWidth, imageHeight, phoneNumber, path);
 
         w.writerdfR(rdfRelationPath, currentUser, name, relation);
         
@@ -1485,6 +1492,7 @@ public class MainFrame extends javax.swing.JFrame {
         previousButton.setVisible(false);        
         backToResult.setEnabled(true);
         disableHandCursor();
+        paintThumbnail(displayStatus * 6 + 0);
     }//GEN-LAST:event_jLabel18MouseClicked
 
     private void backToResultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToResultActionPerformed
@@ -1505,6 +1513,7 @@ public class MainFrame extends javax.swing.JFrame {
             previousButton.setVisible(false);
             backToResult.setEnabled(true);
             disableHandCursor();
+            paintThumbnail(displayStatus * 6 + 1);
         }
     }//GEN-LAST:event_jLabel19MouseClicked
 
@@ -1591,18 +1600,7 @@ public class MainFrame extends javax.swing.JFrame {
         for (int i = 0; i < regions.size(); i++) {
             Region region = regions.get(i);
             Image img = region.toThumbnail(75, 75);
-//            try {
-//                region.cacheToDisk();
-//            } catch (IOException ex) {}
 
-
-//            if (true) {
-//            String cacheFilename = region.getCachedFile();
-//
-//            File file = new File(faintDir + "//" + cacheFilename);
-//            File dir = new File(ImageDir + "//" + "faces");
-//            boolean success = file.renameTo(new File(dir, "face_" + randomGenerator.nextInt() + ".png"));
-//            }
             listModel.add(i, new ImageIcon(img));
 
             //display rect on the detected faces
@@ -1619,6 +1617,33 @@ public class MainFrame extends javax.swing.JFrame {
             gTemp.dispose();
         }
         }
+    }
+    
+    private void paintThumbnail(int i) {
+        //display rect on the detected faces
+            Icon iconTemp = jLabel26.getIcon();
+            
+            BufferedImage Temp = new BufferedImage(600, 400, BufferedImage.TYPE_INT_ARGB);
+            Graphics2D gTemp = Temp.createGraphics();
+            iconTemp.paintIcon(null, gTemp, 0, 0);
+            
+            //finding point of the rectangle
+            int width = Integer.parseInt(list.get(i).getWidth());
+            int height = Integer.parseInt(list.get(i).getHeight());
+            int imageWidth = Integer.parseInt(list.get(i).getImageWidth());
+            int imageHeight = Integer.parseInt(list.get(i).getImageLength());
+            String filePath = list.get(i).getFileName();
+            Image image = new ImageIcon(filePath).getImage();
+            System.out.println(image.getWidth(rootPane));
+            System.out.println(image.getHeight(rootPane));
+            System.out.println(width);
+            System.out.println(height);
+            gTemp.drawRect((width - imageWidth / 2) * 600 / image.getWidth(rootPane),
+                    (height - imageHeight / 2) * 400 / image.getHeight(rootPane),
+                    imageWidth * 600 / image.getWidth(rootPane),
+                    imageHeight * 400 / image.getHeight(rootPane));
+            jLabel26.setIcon(new ImageIcon(Temp));
+            gTemp.dispose();
     }
 
     public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map) {
