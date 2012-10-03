@@ -23,7 +23,7 @@ import myclass.Relationship;
 public class WriteRdf {
 
     public static void writerdf(String filename, String fname,
-            String lname, String x, String y, String phone, String info) {
+            String lname, String width, String height, String imageWidth, String imageHeight, String phone, String info) {
 
         // create an empty Model
         Model model = ModelFactory.createDefaultModel();
@@ -46,7 +46,7 @@ public class WriteRdf {
 
             root.addProperty(RDF.type, FOAF.Image);
             root.addProperty(FOAF.thumbnail, model.createResource().addProperty(FOAF.thumbnail,
-                    model.createResource().addProperty(EXIF.height, x).addProperty(EXIF.width, y).addProperty(EXIF.imageLength, "30").addProperty(EXIF.imageWidth, "20")).addProperty(FOAF.phone, phone).addProperty(FOAF.surname, lname).addProperty(FOAF.name, fname));
+                    model.createResource().addProperty(EXIF.height, height).addProperty(EXIF.width, width).addProperty(EXIF.imageLength, imageHeight).addProperty(EXIF.imageWidth, imageWidth)).addProperty(FOAF.phone, phone).addProperty(FOAF.surname, lname).addProperty(FOAF.name, fname));
 
 
 
@@ -68,8 +68,8 @@ public class WriteRdf {
             Resource root = model.getResource("http://something.com");
 
             root.addProperty(RDF.type, FOAF.Image);
-            root.addProperty(FOAF.thumbnail, model.createResource().addProperty(FOAF.thumbnail,
-                    model.createResource().addProperty(EXIF.height, x).addProperty(EXIF.width, y).addProperty(EXIF.imageLength, "30").addProperty(EXIF.imageWidth, "20")).addProperty(FOAF.surname, lname).addProperty(FOAF.name, fname));
+root.addProperty(FOAF.thumbnail, model.createResource().addProperty(FOAF.thumbnail,
+                    model.createResource().addProperty(EXIF.height, height).addProperty(EXIF.width, width).addProperty(EXIF.imageLength, imageHeight).addProperty(EXIF.imageWidth, imageWidth)).addProperty(FOAF.phone, phone).addProperty(FOAF.surname, lname).addProperty(FOAF.name, fname));
 
 
 
