@@ -71,7 +71,7 @@ public class SparqlQuery {
                 String height = soln.get("h").toString();
                 String width = soln.get("w").toString();
                 String filename = new File(path).getName();
-                searchList.add(new SearchPersonClass(filename, imageWidth, imageLength, height, width));
+                searchList.add(new SearchPersonClass(filename, imageWidth, imageLength, height, width, name));
             }
         } catch (Exception ex) {
             System.out.println(ex);
@@ -143,7 +143,7 @@ public class SparqlQuery {
                     String width = soln.get("w").toString();
                     String filename = "imagedb" + File.separator + changeFileExt(new File(path).getName());
                     if (!imageLength.isEmpty()) {
-                        searchList.add(new SearchPersonClass(filename, imageWidth, imageLength, height, width));
+                        searchList.add(new SearchPersonClass(filename, imageWidth, imageLength, height, width, personName));
                     }
                     qe.close();
                 }
@@ -319,7 +319,7 @@ public class SparqlQuery {
             
             
             if (qRelation.contentEquals(relation)) {
-                list.add(new SearchPersonClass(personName,"","","",""));
+                list.add(new SearchPersonClass(personName,"","","","",""));
                 System.out.println(user + " is " + relation + " " + personName);
             }
             i++;
@@ -408,6 +408,39 @@ public class SparqlQuery {
     
     }
     
+    public static String LocationExtractor( String path) throws FileNotFoundException{
+         //open the rdf
+       
+        File rdf = new File(path);
+        Model model;
+        InputStream in = new FileInputStream(rdf);
+        model = ModelFactory.createMemModelMaker().createModel(null);
+        model.read(in, null);
+        
+        String queryString =
+                "PREFIX foaf: <http://xmlns.com/foaf/0.1/> "
+                + "PREFIX EXIF: <http://www.w3.org/2003/12/exif/ns#> "
+                + "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> "
+                + "PREFIX relation: <http://purl.org/vocab/relationship/> "
+                + "PREFIX Vcard: <http://www.w3.org/2001/vcard-rdf/3.0#>"
+                + "SELECT ?location "
+                + "WHERE { "
+                + "?node Vcard:Locality ?location . }";
+        Query query = QueryFactory.create(queryString);
+        QueryExecution qe = QueryExecutionFactory.create(query, model);
+        ResultSet result = qe.execSelect();
+        
+        String location = null;
+        while(result.hasNext()){
+            QuerySolution qs = result.nextSolution();
+            location = qs.get("location").toString();
+        }
+        
+        qe.close();
+        return location;
+    
+    }
+    
     private static String changeFileExt(String str) {
         String string[];
         string = str.split(".rdf");
@@ -423,5 +456,7 @@ public class SparqlQuery {
 //        relateToPerson("imagedb/rdf/susan/susan.rdf", "susan", "closeFriendOf");
 //        String relation = findRelation(pathToDirectory,"saru","susan");
 //        System.out.println(relation);
+        
+        System.out.println( LocationExtractor("rdf/date1.rdf"));
     }
 }
