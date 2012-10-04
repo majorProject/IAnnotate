@@ -14,13 +14,15 @@ public class SearchPersonClass {
     private String imageLength;
     private String height;
     private String width;
+    private String personName;
 
-    public SearchPersonClass(String fN, String iW, String iL, String h, String w) {
+    public SearchPersonClass(String fN, String iW, String iL, String h, String w, String name) {
         this.fileName = fN;
         this.imageWidth = iW;
         this.imageLength = iL;
         this.height = h;
         this.width = w;
+        this.personName = name;
     }
 
     public String getFileName() {
@@ -41,6 +43,10 @@ public class SearchPersonClass {
 
     public String getImageWidth() {
         return imageWidth;
+    }
+    
+    public String getpersonName() {
+        return personName;
     }
     
 }
