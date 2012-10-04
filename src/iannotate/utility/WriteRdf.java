@@ -539,7 +539,7 @@ root.addProperty(FOAF.thumbnail, model.createResource().addProperty(FOAF.thumbna
 
             //root.addProperty(VCARD.Locality, "aa");
             
-            root.addProperty(EXIF.imageDescription, info).addProperty(VCARD.Locality, "kirtipur").addProperty(EXIF.date,"2012-02-02");
+            root.addProperty(EXIF.imageDescription, info);
 
 
             // write the RDF model to the console as RDF/XML

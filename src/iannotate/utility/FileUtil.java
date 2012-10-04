@@ -59,6 +59,13 @@ public class FileUtil {
         fs.close();
         return strContent.toString().trim();
     }
+    
+    private static String changeFileExtJPGToRDF(String str) {
+        String string[];
+        string = str.split(".");
+        string[0] = string[0] + ".rdf";
+        return string[0];
+    }
 // for testing
     public static void main(String[] args) throws FileNotFoundException, IOException {
         //copyfile("D:\\Temp\\test.html", "D:\\test.html");
