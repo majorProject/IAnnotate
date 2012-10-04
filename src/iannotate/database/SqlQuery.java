@@ -49,7 +49,7 @@ public class SqlQuery implements DbInterface {
     
      //method insert
     @Override
-    public boolean insertInto( String userName, String passWord, String sex, double contact, String address, String dob ) throws SQLException{
+    public boolean insertInto( String userName, String passWord, String sex, double contact, String address, String dob, String personName ) throws SQLException{
        PreparedStatement insertUser = connection.prepareStatement(
             "INSERT INTO user( username, password )" +
             "VALUES( ?, ? )");
@@ -68,13 +68,14 @@ public class SqlQuery implements DbInterface {
 
        int userId = fetch(userName).getInt(1);
        PreparedStatement insertPerson =  connection.prepareStatement(
-               "INSERT INTO person( sex , contact, address, dob, user_id) " +
-               "VALUES ( ?, ?, ?, ?, ? ) ");
+               "INSERT INTO person( sex , contact, address, dob, user_id, person_name) " +
+               "VALUES ( ?, ?, ?, ?, ?, ? ) ");
        insertPerson.setString( 1, sex );
        insertPerson.setDouble( 2, contact );
        insertPerson.setString( 3, address );
        insertPerson.setString( 4, dob );
        insertPerson.setInt(5, userId);
+       insertPerson.setString(6,personName);
      
      boolean r2 = insertPerson.execute();
      return r2;
