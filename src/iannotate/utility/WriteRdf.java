@@ -499,7 +499,7 @@ root.addProperty(FOAF.thumbnail, model.createResource().addProperty(FOAF.thumbna
         
     }
 
-    public static void writerdfD(String filename, String info, String date) {
+    public static void writerdfD(String filename, String info, String location) {
         // create an empty Model
         Model model = ModelFactory.createDefaultModel();
 
@@ -519,7 +519,7 @@ root.addProperty(FOAF.thumbnail, model.createResource().addProperty(FOAF.thumbna
             // create a contributor
             Resource root = model.createResource("http://something.com");
 
-            root.addProperty(EXIF.imageDescription, info).addProperty(EXIF.date, date);
+            root.addProperty(EXIF.imageDescription, info).addProperty(VCARD.Locality, location);
 
             // write the RDF model to the console as RDF/XML
             model.write(System.out, "RDF/XML-ABBREV");
@@ -539,7 +539,7 @@ root.addProperty(FOAF.thumbnail, model.createResource().addProperty(FOAF.thumbna
 
             //root.addProperty(VCARD.Locality, "aa");
             
-            root.addProperty(EXIF.imageDescription, info);
+            root.addProperty(EXIF.imageDescription, info).addProperty(VCARD.Locality, location);
 
 
             // write the RDF model to the console as RDF/XML
@@ -555,7 +555,7 @@ root.addProperty(FOAF.thumbnail, model.createResource().addProperty(FOAF.thumbna
 
     public static void main(String[] args) {
         //writerdf("rdf/test2.rdf", "rajan", "maharjan", "60", "100", "info");
-        writerdfR("imagedb/rdf/user/abc.rdf","abc", "xyz", "friendOf");
-//        writerdfD("rdf/date1.rdf","Description about the image and the something about the something","01-02-2011");
+//        writerdfR("imagedb/rdf/user/abc.rdf","abc", "xyz", "friendOf");
+        writerdfD("rdf/date1.rdf","Description about the image and the something about the something","kathmandu");
     }
 }
