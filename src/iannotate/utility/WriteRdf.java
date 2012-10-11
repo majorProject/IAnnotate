@@ -192,6 +192,9 @@ root.addProperty(FOAF.thumbnail, model.createResource().addProperty(FOAF.thumbna
                     root.addProperty(Relationship.siblingOf, name);
 //                    rootSecond.addProperty(Relationship.siblingOf, username);
                     break;
+                case "parentOf":
+                    root.addProperty(Relationship.parentOf, name);
+                    break;
             }
 
             // write the RDF model to the console as RDF/XML
@@ -280,6 +283,8 @@ root.addProperty(FOAF.thumbnail, model.createResource().addProperty(FOAF.thumbna
                 case "siblingOf":
                     root.addProperty(Relationship.siblingOf, name);
                     break;
+                case "parentOf":
+                    root.addProperty(Relationship.parentOf, name);
 
 
             }
@@ -387,6 +392,8 @@ root.addProperty(FOAF.thumbnail, model.createResource().addProperty(FOAF.thumbna
 //                    root.addProperty(Relationship.siblingOf, name);
                     rootSecond.addProperty(Relationship.siblingOf, username);
                     break;
+                case "parentOf":
+                    rootSecond.addProperty(Relationship.childOf, username);
             }
 
             // write the RDF model to the console as RDF/XML
@@ -484,6 +491,8 @@ root.addProperty(FOAF.thumbnail, model.createResource().addProperty(FOAF.thumbna
 //                    root.addProperty(Relationship.siblingOf, name);
                     rootSecond.addProperty(Relationship.siblingOf, username);
                     break;
+                case "parentOf":
+                    rootSecond.addProperty(Relationship.childOf, username);
             }
 
             // write the RDF model to the console as RDF/XML
@@ -556,6 +565,6 @@ root.addProperty(FOAF.thumbnail, model.createResource().addProperty(FOAF.thumbna
     public static void main(String[] args) {
         //writerdf("rdf/test2.rdf", "rajan", "maharjan", "60", "100", "info");
 //        writerdfR("imagedb/rdf/user/abc.rdf","abc", "xyz", "friendOf");
-        writerdfD("rdf/date1.rdf","Description about the image and the something about the something","kathmandu");
+//        writerdfD("rdf/date1.rdf","Description about the image and the something about the something","kathmandu");
     }
 }
